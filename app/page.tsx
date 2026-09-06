@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import Link from "next/link";
 
 export default function Home() {
   const [destinationUrl, setDestinationUrl] = useState("");
@@ -81,14 +80,6 @@ export default function Home() {
           </a>
         </div>
       )}
-      <div className="flex gap-4 text-sm text-gray-500">
-        <Link href="/stats" className="underline">
-          Check link stats
-        </Link>
-        <Link href="/blog" className="underline">
-          Blog
-        </Link>
-      </div>
     </main>
   );
 }

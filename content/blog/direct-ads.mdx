@@ -1,0 +1,58 @@
+---
+title: "How to Actually Prove Your Print Ads and Direct Mail Are Working"
+description: "A unique short link per print piece turns 'we think the postcard worked' into a real number - here's how to set it up correctly."
+date: "2026-09-07"
+tags: ["guide", "how-to"]
+---
+
+Most teams track digital campaigns down to the click and then treat print and direct mail as a black box. A postcard goes out, a flyer gets handed out at a trade show, and the only signal that comes back is "sales felt a little better that month." That's not because print doesn't work - direct mail actually converts well. It's because most print pieces don't have a clean way to report back.
+
+The fix isn't complicated. Give every physical piece its own short, trackable link (with a QR code for the ones people will scan instead of type), and you get the same click-level visibility on paper that you already have on a landing page.
+
+## Direct mail is worth measuring properly
+
+According to the ANA's 2026 Response Rate Report, the average direct mail response rate is **4.4%**, compared to **0.12%** for email - roughly 36x higher. House lists (existing customers) run even higher, in the 5–9% range. Digital channels like paid search and display ads land well below 1%.
+
+That's a channel worth measuring accurately, not writing off because it's harder to instrument than a UTM-tagged email link.
+
+## Why "mention this ad" and vanity URLs don't work
+
+The usual workarounds all leak data:
+
+- **"Mention this flyer for 10% off"** relies on staff remembering to log it, and most won't.
+- **A generic vanity URL** (like `yoursite.com/promo`) printed on five different pieces tells you the promo worked, not which piece drove it.
+- **Sending everything to your homepage** gets you a vague bump in traffic with no way to attribute it to the mailer.
+
+A dedicated short link per piece solves all three: it's easy to type or scan, and every scan or click is unambiguously tied to one specific placement.
+
+## The setup
+
+**1. One short link per piece, not per campaign.** If you're running a postcard, a magazine insert, and a trade show flyer for the same spring promo, that's three separate short links, not one. The campaign groups them; the individual link is what tells you which physical piece actually performed.
+
+A naming convention that scales:
+
+```
+squish.to/spring-postcard
+squish.to/spring-magazine-insert
+squish.to/spring-tradeshow-flyer
+```
+
+If you're also running UTM parameters underneath (useful once the link lands on your site and you want it to show up correctly in GA or your ad platforms), keep `utm_medium` consistent (`print`) and vary `utm_content` by placement - that's what lets you compare pieces side by side later instead of just campaign-vs-campaign.
+
+**2. Point it at a dedicated landing page, not your homepage.** A landing page built for that specific offer gives you a cleaner conversion signal (did they actually take the action the piece promised?) instead of just "traffic showed up." It also means you're not trying to explain a spike in general homepage traffic after the fact.
+
+**3. Add a QR code for anything people will scan rather than type.** Postcards, posters, packaging, and trade show signage all do better with a scannable code than a URL someone has to type by hand and gets wrong. Generate it at print resolution - not a low-res web export - and leave clear white space around it so it scans reliably once it's actually reduced to postcard size. `[TBD - confirm: does squish.to generate QR codes directly from a short link, or is this a manual step for now?]`
+
+**4. Test before the print run goes out.** Print a proof, scan it on two or three different phones, and confirm it lands on the right page and shows up in your link dashboard. Catching a typo or a broken redirect on a proof costs nothing; catching it after 10,000 postcards are mailed is a very different conversation.
+
+**5. Read the results the same way you would a digital campaign.** Once responses start coming in, compare pieces by clicks/scans and, if you're tracking through to a sale or signup, by cost-per-conversion - mail cost divided by tracked conversions for that specific link. This is where having one link per placement pays off: you can finally say "the postcard outperformed the insert by 3x" instead of guessing.
+
+## The mistake that ruins all of this
+
+Reusing one link across multiple print pieces. It's tempting - it's one less link to create - but it collapses your data back down to "print worked, somewhat," which is exactly the black box you were trying to get out of. The extra thirty seconds it takes to create a separate link per placement is the entire point of doing this.
+
+## Make it a habit, not a one-off
+
+The value compounds once this becomes routine rather than a one-time experiment: after a few campaigns, you'll have real data on which print formats and placements actually earn their spot in the budget, instead of renewing the same media buys on instinct.
+
+If you're setting this up for the first time, start small - pick your next single print piece, give it its own link and landing page, and see what the data tells you before you scale it across a full campaign.

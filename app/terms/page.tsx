@@ -1,4 +1,7 @@
-export const metadata = { title: "Terms of Service | squish.to" };
+export const metadata = {
+  title: "Terms of Service | squish.to",
+  alternates: { canonical: "/terms" },
+};
 
 export default function Terms() {
   return (

@@ -18,12 +18,13 @@ export async function generateMetadata({
   return {
     title: `${post.title} | squish.to Blog`,
     description: post.description,
+    alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
       publishedTime: post.date,
-      images: post.ogImage ? [post.ogImage] : undefined,
+      images: [post.ogImage ?? "/opengraph-image"],
     },
   };
 }

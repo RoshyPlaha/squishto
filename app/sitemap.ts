@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { posts } from "#site/content";
+import { SITE_URL } from "@/lib/site";
 
-const BASE_URL = "https://squish.to";
+const BASE_URL = SITE_URL;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/blog", "/stats", "/about", "/privacy", "/terms"].map(

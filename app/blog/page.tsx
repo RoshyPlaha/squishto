@@ -4,6 +4,7 @@ import { posts } from "#site/content";
 export const metadata = {
   title: "Blog | squish.to",
   description: "Updates, guides, and notes from the squish.to team.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogIndex() {

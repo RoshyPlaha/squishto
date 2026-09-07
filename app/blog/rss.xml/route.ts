@@ -1,6 +1,7 @@
 import { posts } from "#site/content";
+import { SITE_URL } from "@/lib/site";
 
-const BASE_URL = "https://squish.to";
+const BASE_URL = SITE_URL;
 
 function escapeXml(value: string): string {
   return value

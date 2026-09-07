@@ -1,4 +1,7 @@
-export const metadata = { title: "Privacy Policy | squish.to" };
+export const metadata = {
+  title: "Privacy Policy | squish.to",
+  alternates: { canonical: "/privacy" },
+};
 
 export default function Privacy() {
   return (

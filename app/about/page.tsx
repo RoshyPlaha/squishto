@@ -1,4 +1,7 @@
-export const metadata = { title: "About | squish.to" };
+export const metadata = {
+  title: "About | squish.to",
+  alternates: { canonical: "/about" },
+};
 
 export default function About() {
   return (

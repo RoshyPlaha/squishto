@@ -9,13 +9,9 @@ type Stats = {
 };
 
 function extractShortCode(input: string): string {
-  const trimmed = input.trim();
-  try {
-    const url = new URL(trimmed);
-    return url.pathname.replace(/^\//, "");
-  } catch {
-    return trimmed.replace(/^\//, "");
-  }
+  const trimmed = input.trim().replace(/\/+$/, "");
+  const segments = trimmed.split("/").filter(Boolean);
+  return segments[segments.length - 1] ?? "";
 }
 
 export default function StatsPage() {

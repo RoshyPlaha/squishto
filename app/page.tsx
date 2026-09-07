@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [destinationUrl, setDestinationUrl] = useState("");
@@ -42,7 +43,9 @@ export default function Home() {
     <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 p-8">
       <div>
         <h1 className="text-3xl font-semibold">squish.to</h1>
-        <p className="text-gray-600">Make your links as small as possible.</p>
+        <p className="text-gray-600">
+          Make your links as small as possible. Track when they are opened.
+        </p>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input
@@ -78,6 +81,12 @@ export default function Home() {
           >
             squish.to/{result}
           </a>
+          <p className="mt-2 text-sm text-gray-500">
+            Want to see how many times it&apos;s been opened?{" "}
+            <Link href="/stats" className="underline">
+              Check its stats on /stats
+            </Link>
+          </p>
         </div>
       )}
     </main>

@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { posts } from "#site/content";
+import { BlogFilter } from "@/components/blog-filter";
 
 export const metadata = {
   title: "Blog | squish.to",
@@ -12,22 +12,26 @@ export default function BlogIndex() {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 
+  const today = new Date().toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
   return (
-    <main className="mx-auto flex max-w-2xl flex-col gap-8 p-8">
-      <h1 className="text-3xl font-semibold">Blog</h1>
-      <ul className="flex flex-col gap-6">
-        {sorted.map((post) => (
-          <li key={post.slug}>
-            <Link href={`/blog/${post.slug}`} className="text-xl font-medium underline">
-              {post.title}
-            </Link>
-            <p className="text-gray-600">{post.description}</p>
-            <p className="text-sm text-gray-400">
-              {new Date(post.date).toLocaleDateString()}
-            </p>
-          </li>
-        ))}
-      </ul>
+    <main className="mx-auto flex max-w-[1280px] flex-col gap-[10px] px-[10px] pb-[10px] md:gap-4 md:px-4 md:pb-4">
+      <div className="rounded-[22px] bg-lime p-[26px_20px] text-ink md:rounded-[26px] md:p-[36px_40px_30px]">
+        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+          <h1 className="m-0 origin-bottom-left scale-x-90 pb-[0.1em] font-display text-6xl leading-[0.8] uppercase md:text-[132px]">
+            Blog
+          </h1>
+          <span className="font-display text-lg uppercase md:mb-[18px] md:text-[26px]">
+            {today}
+          </span>
+        </div>
+      </div>
+
+      <BlogFilter posts={sorted} />
     </main>
   );
 }

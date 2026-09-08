@@ -9,8 +9,7 @@ export const metadata: Metadata = {
 
 export default function StatsPage() {
   return (
-    <main className="mx-auto flex max-w-md flex-col gap-6 p-8">
-      <h1 className="text-2xl font-semibold">Check link stats</h1>
+    <main className="mx-auto flex max-w-[1280px] flex-col gap-[10px] px-[10px] pb-[10px] md:gap-4 md:px-4 md:pb-4">
       <StatsForm />
     </main>
   );

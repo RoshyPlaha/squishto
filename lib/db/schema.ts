@@ -29,4 +29,5 @@ export const clicks = pgTable("clicks", {
     .defaultNow(),
   referrer: text("referrer"),
   userAgent: text("user_agent"),
+  country: text("country"),
 });

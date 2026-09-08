@@ -1,4 +1,5 @@
 import { defineConfig, defineCollection, s } from "velite";
+import { BLOG_CATEGORIES } from "./lib/blog-categories";
 
 const posts = defineCollection({
   name: "Post",
@@ -8,6 +9,7 @@ const posts = defineCollection({
       title: s.string(),
       description: s.string(),
       date: s.isodate(),
+      category: s.enum(BLOG_CATEGORIES).default("Product"),
       tags: s.array(s.string()).optional(),
       ogImage: s.string().optional(),
       slug: s.path(),

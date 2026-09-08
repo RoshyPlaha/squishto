@@ -25,6 +25,7 @@ export async function GET(
       linkId: link.id,
       referrer: request.headers.get("referer"),
       userAgent: request.headers.get("user-agent"),
+      country: request.headers.get("x-vercel-ip-country"),
     }),
   );
 

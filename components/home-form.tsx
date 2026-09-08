@@ -85,7 +85,7 @@ export function HomeForm() {
     const shortLink = `squish.to/${result.shortCode}`;
     return (
       <>
-        <div className="flex flex-col gap-4 rounded-[22px] bg-lime p-[26px_20px] text-ink md:rounded-[26px] md:p-10">
+        <div className="flex flex-col gap-4 overflow-hidden rounded-[22px] bg-lime p-[26px_20px] text-ink md:rounded-[26px] md:p-10">
           <span className="font-mono text-xs tracking-wide uppercase md:text-xs">
             Squished · {result.destinationUrl.length} chars → {shortLink.length}
           </span>
@@ -142,7 +142,7 @@ export function HomeForm() {
 
   return (
     <>
-      <div className="rounded-[22px] bg-lime p-[22px_20px_24px] text-ink md:rounded-[26px] md:p-[44px_40px_34px]">
+      <div className="overflow-hidden rounded-[22px] bg-lime p-[22px_20px_24px] text-ink md:rounded-[26px] md:p-[44px_40px_34px]">
         <div className="flex items-end justify-between gap-5">
           <h1 className="m-0 origin-bottom-left scale-x-90 pb-[0.13em] font-display text-[clamp(4rem,1.3rem+19vw,16.75rem)] leading-[0.76] uppercase">
             Squish

@@ -1,13 +1,13 @@
 ---
 title: "Do You Actually Need Deep Linking, or Just a Smarter Short Link?"
-description: "Branch, Adjust, and Airbridge all want to sell you an SDK. Most links don't need one — here's how to tell which tier you're actually in."
+description: "Branch, Adjust, and Airbridge all want to sell you an SDK. Most links don't need one - here's how to tell which tier you're actually in."
 date: "2026-09-08"
 category: "Marketing"
 ---
 
 ## The pitch you've probably gotten
 
-Someone on your team wants a link that "just works" — click it on iPhone, land in the app; click it on Android, land in the app; no app yet, land somewhere sensible. Reasonable ask.
+Someone on your team wants a link that "just works" - click it on iPhone, land in the app; click it on Android, land in the app; no app yet, land somewhere sensible. Reasonable ask.
 
 Then a sales call happens, and suddenly you're looking at a deep-linking platform quote with install attribution, cohort analysis, and a five-figure annual number attached to it.
 
@@ -17,16 +17,16 @@ Before that conversation goes any further, it's worth knowing there are three di
 
 ## The three tiers, honestly
 
-**Tier 1 — a link that goes to one place.**
+**Tier 1 - a link that goes to one place.**
 A normal short link. Click it, land on a page. This is most of what a business actually sends: social bios, print QR codes, newsletter links, "read more" buttons.
 
-**Tier 2 — a link that reads the device.**
-Same click, different destination depending on whether it's iOS, Android, or desktop — iPhone users to the App Store, Android users to Google Play, everyone else to the web. This is server-side redirect logic, not app code. No SDK, no app release required.
+**Tier 2 - a link that reads the device.**
+Same click, different destination depending on whether it's iOS, Android, or desktop - iPhone users to the App Store, Android users to Google Play, everyone else to the web. This is server-side redirect logic, not app code. No SDK, no app release required.
 
-**Tier 3 — a link that survives the install.**
-This is what Branch, Adjust, and Airbridge actually do that the others can't: someone without your app clicks a link, goes to the store, installs, opens the app for the first time — and lands on the *specific screen the original link pointed to*, with attribution data about which campaign sent them. That's deferred deep linking, and it genuinely requires an SDK in your app plus a platform behind it.
+**Tier 3 - a link that survives the install.**
+This is what Branch, Adjust, and Airbridge actually do that the others can't: someone without your app clicks a link, goes to the store, installs, opens the app for the first time - and lands on the *specific screen the original link pointed to*, with attribution data about which campaign sent them. That's deferred deep linking, and it genuinely requires an SDK in your app plus a platform behind it.
 
-Two things worth knowing about tier 3 before you buy it: Apple's Universal Links and Android's App Links — the "click a link, open the app" behavior when the app is *already installed* — are native OS features. They need a verification file on your domain and some app configuration, not a third-party SDK ([Apple's own docs confirm this](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content)). The SDK earns its keep specifically for the *pre-install* case and for attribution reporting — not for basic "open the app if it's there."
+Two things worth knowing about tier 3 before you buy it: Apple's Universal Links and Android's App Links - the "click a link, open the app" behavior when the app is *already installed* - are native OS features. They need a verification file on your domain and some app configuration, not a third-party SDK ([Apple's own docs confirm this](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content)). The SDK earns its keep specifically for the *pre-install* case and for attribution reporting - not for basic "open the app if it's there."
 
 And that pre-install case is not cheap. Branch's own published pricing bands run from roughly $15,000/year for smaller apps up to $150,000–$250,000+/year at scale, with a median buyer paying around $55,000/year ([Vendr's pricing data](https://www.vendr.com/marketplace/branch)). Adjust and Airbridge are quoted similarly. That's a reasonable price for what it does. It's a bad price for a link that was only ever going to tier 1.
 
@@ -34,20 +34,20 @@ And that pre-install case is not cheap. Branch's own published pricing bands run
 
 Before any vendor call, answer these in order and stop at the first "no":
 
-1. **Is everyone clicking this link already using your app, or fine landing on a normal web page?** If yes — you need tier 1. A short link. That's the whole requirement.
-2. **Do you specifically need iOS clicks to land in the App Store and Android clicks to land in Google Play, from one shared link?** If yes and nothing else — that's tier 2, device-based redirect. Still no SDK.
-3. **Do people who don't have your app yet need to land on a specific in-app screen — not just the app's home screen — the first time they open it after installing?** Only a genuine "yes" here is tier 3. That's deferred deep linking, and it's the only tier that requires an SDK, an app release, and a recurring platform bill.
+1. **Is everyone clicking this link already using your app, or fine landing on a normal web page?** If yes - you need tier 1. A short link. That's the whole requirement.
+2. **Do you specifically need iOS clicks to land in the App Store and Android clicks to land in Google Play, from one shared link?** If yes and nothing else - that's tier 2, device-based redirect. Still no SDK.
+3. **Do people who don't have your app yet need to land on a specific in-app screen - not just the app's home screen - the first time they open it after installing?** Only a genuine "yes" here is tier 3. That's deferred deep linking, and it's the only tier that requires an SDK, an app release, and a recurring platform bill.
 
-Most day-to-day marketing links — bio links, print codes, email CTAs, partner referrals to your existing site — stop at question one. The campaigns that genuinely need tier 3 tend to be paid app-install acquisition and multi-step referral programs, where the entire point is converting someone who's never opened the app before.
+Most day-to-day marketing links - bio links, print codes, email CTAs, partner referrals to your existing site - stop at question one. The campaigns that genuinely need tier 3 tend to be paid app-install acquisition and multi-step referral programs, where the entire point is converting someone who's never opened the app before.
 
 ## Where this goes wrong
 
-The expensive mistake isn't buying a deep-linking platform. It's buying one for a use case that never needed deferred routing in the first place — running a full attribution SDK for a link inside a newsletter, sent to subscribers who already have the app installed and were always going to land on the home screen anyway. That's tier 1 traffic wearing a tier 3 price tag.
+The expensive mistake isn't buying a deep-linking platform. It's buying one for a use case that never needed deferred routing in the first place - running a full attribution SDK for a link inside a newsletter, sent to subscribers who already have the app installed and were always going to land on the home screen anyway. That's tier 1 traffic wearing a tier 3 price tag.
 
-The cheaper mistake, and the one that's easier to walk into, is assuming a plain short link handles device-based routing on its own. It doesn't, unless the tool explicitly does server-side device detection — a link that isn't built for it will send an Android user straight to an App Store page for an app they can't install.
+The cheaper mistake, and the one that's easier to walk into, is assuming a plain short link handles device-based routing on its own. It doesn't, unless the tool explicitly does server-side device detection - a link that isn't built for it will send an Android user straight to an App Store page for an app they can't install.
 
 ## Start at the bottom of the stack
 
-Work up from tier 1, not down from tier 3. If a plain, trackable short link covers the click — and for most non-acquisition marketing links, it does — that's the whole solution: no SDK, no app release, no vendor contract.
+Work up from tier 1, not down from tier 3. If a plain, trackable short link covers the click - and for most non-acquisition marketing links, it does - that's the whole solution: no SDK, no app release, no vendor contract.
 
 If your link only needs to land in one place and you want a fast, readable one to send: that's what we're for. [Squish a link](https://squish.to).

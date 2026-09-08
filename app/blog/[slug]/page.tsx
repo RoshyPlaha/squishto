@@ -60,7 +60,7 @@ export default async function BlogPost({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="flex flex-col gap-3.5 rounded-[22px] bg-lime p-[26px_20px] text-ink md:rounded-[26px] md:p-[36px_40px]">
+      <div className="flex flex-col gap-3.5 overflow-hidden rounded-[22px] bg-lime p-[26px_20px] text-ink md:rounded-[26px] md:p-[36px_40px]">
         <span className="font-mono text-xs tracking-wide uppercase">
           {post.category} · {dateLabel} · {minutes} MIN
         </span>

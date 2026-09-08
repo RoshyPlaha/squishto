@@ -107,7 +107,7 @@ export function StatsForm() {
 
   return (
     <>
-      <div className="flex flex-col items-start justify-between gap-6 rounded-[22px] bg-lime p-[26px_20px] text-ink md:flex-row md:items-end md:rounded-[26px] md:p-[36px_40px_30px]">
+      <div className="flex flex-col items-start justify-between gap-6 overflow-hidden rounded-[22px] bg-lime p-[26px_20px] text-ink md:flex-row md:items-end md:rounded-[26px] md:p-[36px_40px_30px]">
         <h1 className="m-0 origin-bottom-left scale-x-90 pb-[0.1em] font-display text-6xl leading-[0.8] uppercase md:text-[132px]">
           Stats
         </h1>

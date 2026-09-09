@@ -52,19 +52,27 @@ function formatShortTime(iso: string): string {
   return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
 }
 
-export function StatsForm() {
-  const [input, setInput] = useState("");
-  const [stats, setStats] = useState<Stats | null>(null);
+type StatsFormProps = {
+  initialInput?: string;
+  initialSearched?: boolean;
+  initialStats?: Stats | null;
+};
+
+export function StatsForm({
+  initialInput = "",
+  initialSearched = false,
+  initialStats = null,
+}: StatsFormProps) {
+  const [input, setInput] = useState(initialInput);
+  const [stats, setStats] = useState<Stats | null>(initialStats);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
+  const [searched, setSearched] = useState(initialSearched);
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  async function runLookup(shortCode: string) {
     setError(null);
     setStats(null);
     setSearched(true);
-    const shortCode = extractShortCode(input);
     if (!shortCode) {
       setError("Enter a short link or code");
       return;
@@ -81,6 +89,11 @@ export function StatsForm() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    runLookup(extractShortCode(input));
   }
 
   const maxDaily = stats

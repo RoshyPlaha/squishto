@@ -2,6 +2,7 @@
 
 import { useRef, useState, FormEvent } from "react";
 import Link from "next/link";
+import { Toast } from "@/components/toast";
 
 type Result = {
   shortCode: string;
@@ -17,44 +18,7 @@ export function HomeForm() {
   const [copied, setCopied] = useState(false);
   const copyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/links", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          destinationUrl,
-          customCode: customCode || undefined,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error ?? "Something went wrong");
-        return;
-      }
-
-      setResult({ shortCode: data.shortCode, destinationUrl: data.destinationUrl });
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  function reset() {
-    setResult(null);
-    setDestinationUrl("");
-    setCustomCode("");
-    setError(null);
-  }
-
-  async function handleCopy() {
-    if (!result) return;
-    const link = `https://squish.to/${result.shortCode}`;
+  async function copyToClipboard(link: string) {
     try {
       if (navigator.clipboard) {
         await navigator.clipboard.writeText(link);
@@ -81,6 +45,47 @@ export function HomeForm() {
     copyTimeout.current = setTimeout(() => setCopied(false), 1600);
   }
 
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/links", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          destinationUrl,
+          customCode: customCode || undefined,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error ?? "Something went wrong");
+        return;
+      }
+
+      setResult({ shortCode: data.shortCode, destinationUrl: data.destinationUrl });
+      await copyToClipboard(`https://squish.to/${data.shortCode}`);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function reset() {
+    setResult(null);
+    setDestinationUrl("");
+    setCustomCode("");
+    setError(null);
+  }
+
+  function handleCopy() {
+    if (!result) return;
+    return copyToClipboard(`https://squish.to/${result.shortCode}`);
+  }
+
   if (result) {
     const shortLink = `squish.to/${result.shortCode}`;
     return (
@@ -101,7 +106,7 @@ export function HomeForm() {
               {copied ? "Copied" : "Copy link"}
             </button>
             <Link
-              href="/stats"
+              href={`/stats?code=${result.shortCode}`}
               className="flex min-h-[52px] cursor-pointer items-center rounded-full border-[1.5px] border-ink px-[30px] py-4 text-base font-semibold text-ink no-underline hover:bg-ink/10"
             >
               View stats
@@ -136,6 +141,7 @@ export function HomeForm() {
             </button>
           </div>
         </div>
+        <Toast show={copied} message="Copied squish.to link to clipboard" />
       </>
     );
   }

@@ -1,0 +1,43 @@
+---
+title: "What Does a URL Shortener Actually Log? Squish.to's Full Answer"
+description: "A plain-language breakdown of exactly what squish.to records when you create a short link and when someone clicks it - no account required, no guesswork."
+date: "2026-09-09"
+category: "Engineering"
+tags: ["security", "product-update"]
+---
+
+Most "URL shortener privacy" pages online are either vague marketing copy ("we respect your privacy!") or a wall of legal boilerplate that never actually says what's collected. So here's the plain version, specific to squish.to: what gets stored when you make a link & what gets stored when someone clicks it.
+
+## What happens when you create a link
+
+Two things get stored:
+
+- **The destination URL** - the long link you're pointing to. That's the whole point of the redirect, so it has to be kept.
+- **A hashed version of your IP address** - not the raw IP. Squish.to's [privacy policy](https://www.squish.to/privacy) states it keeps "a hashed (not raw) form of the creating IP address for abuse prevention." Hashing turns the IP into a one-way fingerprint: useful for spotting abuse patterns (like one source spinning up hundreds of spam links), but not something that gets reversed back into your actual address for everyday use.
+
+Notably: **you don't need an account to do any of this.** No email, no login, no profile tied to the link. That's a deliberate design choice, not an oversight - it's the same reason squish.to works as a [tier-1, no-SDK short link](https://www.squish.to/blog/deep-linking-vs-smart-short-link) rather than a full identity-tied platform.
+
+## What happens when someone clicks it
+
+When a click comes in, four fields get stored, and they're not hidden - they're what powers the [stats page](https://www.squish.to/stats) you see for your own links:
+
+- **Timestamp** - when the click happened.
+- **Referrer** - which site or app sent the click, if the browser provided one.
+- **User agent** - the general browser/device string (e.g., "Chrome on Android"), not a fingerprinted device ID.
+- **Country** - a coarse, two-letter country code derived from the request's geolocation header. This is *not* your IP address, and it's not stored alongside one - it's a single derived field, discarded down to country-level precision on the way in.
+
+Worth understanding: "referrer" here doesn't mean squish.to sees everything about where you were. Since Chrome 85 (2020), browsers default to a `strict-origin-when-cross-origin` referrer policy - meaning a click into a squish.to link typically hands over just the origin (like `https://example.com/`), not the full path or query string of the page you clicked from. That's a browser-level privacy default, not something squish.to has to configure.
+
+## The part most shortener policies bury: analytics
+
+Squish.to itself doesn't sell or share your link data with anyone. But the *website* you're reading this on runs Google Analytics, the same as most sites do, and that's worth being upfront about rather than glossing over: Google Analytics sets its own cookies in your browser and collects its own visit data, governed by [Google's privacy policy](https://policies.google.com/privacy) - separately from, and in addition to, the link data described above. If you're auditing squish.to for a "no third parties, no cookies" checklist, that's the one honest exception to flag.
+
+## Why the "hashed, not raw" distinction actually matters
+
+This isn't just semantics. Under EU law, the CJEU's 2016 *Breyer v Germany* ruling established that even a **dynamic** IP address can count as personal data if it's realistically possible to link it back to a person - which is exactly why "we don't store raw IPs" is a meaningfully different (and more defensible) claim than "we store IPs." Hashing for abuse prevention is a common, reasonable middle ground: it lets a service catch bad actors without keeping a permanent, reversible record of everyone else's address.
+
+## The takeaway
+
+If you're choosing a link shortener and privacy is part of the decision, don't just look for the word "private" on the homepage - ask three questions: What's collected at creation? What's collected at click-time? And is any of it reversible? For squish.to, right now, the honest answer is: a hashed creation-time IP, and four non-identity-linked fields (timestamp, referrer, user agent, country) at click-time, no account required, plus Google Analytics running on the marketing site itself.
+
+Want to see exactly what that looks like for a real link? [Shorten one](https://www.squish.to) and check its [stats page](https://www.squish.to/stats) - it's the same data described here, nothing more.

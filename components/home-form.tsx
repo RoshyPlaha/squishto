@@ -202,7 +202,7 @@ export function HomeForm() {
         </form>
         <div className="flex items-center rounded-[22px] bg-surface p-5 md:rounded-[26px] md:p-8">
           <p className="m-0 text-sm leading-relaxed text-text-muted text-wrap-pretty md:text-[17px] md:leading-[1.6]">
-            squish.to is a free URL shortener with custom slugs — pick your
+            squish.to is a free URL shortener with custom slugs - pick your
             own ending, like squish.to/summer-sale, instead of a random
             string. Every link comes with built-in click tracking, so you
             always know when and how often it&apos;s been opened. No account

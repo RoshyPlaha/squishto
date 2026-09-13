@@ -1,0 +1,42 @@
+---
+title: "How to Build a Short Link You Can Actually Say Out Loud"
+description: "A design checklist for short link slugs that survive being heard instead of read - for podcast ads, radio spots, conference talks, and elevator pitches."
+date: "2026-09-13"
+category: "Marketing"
+tags: ["short links", "podcast advertising", "marketing"]
+---
+
+Most advice about picking a link slug assumes someone is going to *see* it - in a tweet, a bio, an email. But a huge amount of link-sharing still happens the old-fashioned way: a podcast host reads it off a script, a radio spot repeats it twice before the jingle, someone hands you their card and says the address out loud instead of texting it. In all of those moments, your link has to survive a trip through someone's ears before it ever reaches their keyboard.
+
+That's a different design problem than "does this look clean in a tweet," and it's oddly underserved. Podcast-advertising sites like Acast write well about the *delivery* side - read the URL twice, slow down on the CTA. Shortener guides write about slug design for branding and click-through. Almost nobody sits at the intersection: how do you design the slug itself so it survives being spoken, misheard, and typed back in by a stranger who only gets one shot at it?
+
+## The three-part test
+
+Before you lock in a custom slug for anything audio-first - a podcast read, a radio buy, a talk, a voicemail script - run it through three checks: **say it, spell it, type it.**
+
+**Say it.** Read the full link out loud, at normal speaking speed, the way a host actually would. Two things go wrong here most often. First, awkward sound: consonant clusters or rhymes that make a host stumble mid-read are worse than they look on the page. Second, and sneakier - if you've dropped the hyphen to keep things short, check whether the words accidentally merge into something else entirely when spoken with no visual gap between them. This is a well-documented hazard in domain naming: *Experts Exchange*, a real tech Q&A site, became a long-running joke because `expertsexchange.com` reads aloud - and even reads on the page - as "expert sex change." *Pen Island* has the same problem. A hyphen would have fixed both instantly, which is worth remembering the next time generic advice tells you to always strip them out.
+
+**Spell it.** Imagine the listener didn't catch it the first time and is now asking "how do you spell that?" - which, for anything heard rather than read, happens constantly. This is where letter-and-number ambiguity does real damage: lowercase L, the number 1, and capital I all sound identical or look near-identical once someone's typing from memory. Zero and the letter O cause the same confusion. Numbers compound it further, because a listener has to guess whether "two" means the digit `2`, the word "to," or the word "too" - three different keystrokes from one sound. This isn't a fringe concern; entire professions built formal systems around exactly this problem. Call centers, aviation, and the military all use the NATO phonetic alphabet (Alpha, Bravo, Charlie...) specifically because letters and numbers are unreliable when spoken and misheard over a phone line or radio. If an industry built a whole alphabet to solve this, it's worth ten seconds of thought on your slug.
+
+**Type it.** Last, picture the listener now typing what they heard into a phone keyboard, probably while driving or walking. Does the slug need a shift key, a symbol, or an underscore that isn't obviously "the thing that looks like a dash"? Is it a plural where the singular would also resolve, or vice versa - another point where someone typing from memory can quietly get it wrong and land on a 404 with no idea why.
+
+## Reconciling the "no dashes, no numbers" advice
+
+If you've read podcast-advertising guidance before, you've likely seen the standard line: avoid dashes and numbers in a vanity URL because they're "distracting" and hard to remember. That's a reasonable default, but treated as an absolute rule it can backfire, as the Experts Exchange example shows - the dash isn't the enemy, ambiguity is. The better version of the rule: default to a single short, common, spellable word if one fits (`squish.to/roadtrip`), and only reach for a hyphen when the alternative is two words that could plausibly merge into something else, misspell into a different real word, or become harder - not easier - to say cleanly. Numbers deserve the same nuance: skip a bare digit if it could be misheard as a spelled-out word (`4` vs. "for" vs. "four"), but a number that's unambiguous in context and short to say ("squish.to/top10") usually isn't the actual problem.
+
+## Building it on squish.to
+
+This is exactly what a custom slug is for. Left on its own, a shortener's auto-generated code is the worst-case scenario for anything spoken - a random string is, by construction, packed with exactly the ambiguous characters this whole test exists to avoid. Squish.to lets you pick your own ending instead (`squish.to/summer-sale`, or whatever fits your campaign) rather than a random six-character string, which means the entire "say it, spell it, type it" test is something you can actually act on before the link ever goes near a script.
+
+A couple of concrete constraints worth knowing before you draft candidates: a custom slug on squish.to can use letters, numbers, and hyphens - no underscores - and slugs are case-sensitive, so "RoadTrip" and "roadtrip" are two different links. For anything you're about to read out loud, that argues for sticking to lowercase, hyphen-if-needed, letters-and-numbers-only candidates anyway, which is exactly what the three-part test already points you toward.
+
+A workflow that holds up:
+
+1. Draft two or three candidate words tied to the campaign, host, or offer - plain dictionary words beat abbreviations or brand-speak every time, because a listener can guess a real word's spelling even if they mis-hear a syllable.
+2. Run each candidate through the three-part test above, out loud, ideally read by someone other than the person who wrote it.
+3. Set the slug as the custom ending on your squish.to link rather than accepting the random default.
+4. Before it goes live anywhere audio-first, do the real test: read it to someone on a phone call - not in the same room, no screen in view - and have them type back what they heard. If they land on the right link, it's ready for the podcast read, the radio spot, or the conference stage.
+
+That last step is the one thing every guide to *writing* a good ad script skips, because it isn't a scripting problem - it's a design problem, solved before the ad is ever recorded.
+
+*If you're also sending short links out through print or direct mail, the offline-attribution setup is a related read: [How to Actually Prove Your Print Ads and Direct Mail Are Working](/blog/direct-ads).*

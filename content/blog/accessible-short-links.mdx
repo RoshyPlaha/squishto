@@ -1,0 +1,45 @@
+---
+title: "The Accessible Way to Shorten a Link: Why Random Slugs Fail Screen Reader Users"
+description: "Screen reader users often navigate a page by pulling up a flat list of every link on it. A random short-link slug reads as noise in that list — a descriptive one doesn't. Here's how to shorten links so both work."
+date: "2026-09-14"
+category: "Marketing"
+tags: ["accessibility", "short links"]
+---
+
+Most advice about link text focuses on the sentence around it: don't write "click here," give the link words that describe where it goes. That's good advice. It's also incomplete, because a lot of the time there is no sentence around it.
+
+Screen reader users frequently jump straight to a list of every link on a page — a dedicated navigation mode, pulled up on demand, that shows just the link text with none of the surrounding paragraph. It's one of the most common ways screen reader users get around a page, according to WebAIM's long-running Screen Reader User Survey, and "links or buttons whose purpose isn't clear" has been one of the survey's most-named problem areas for years.
+
+In that list, context disappears. `squish.to/return-policy` still tells you exactly what it is. `squish.to/x7bQ2` tells you nothing — it's just six characters of noise sitting in a list of forty other links.
+
+## This isn't an edge case, it's a named requirement
+
+WCAG's Success Criterion 2.4.4 (Link Purpose, In Context) is often summarized as "don't use ambiguous link text," but the actual standard is about whether the *purpose* of a link can be determined — and accessibility guidance on hypertext specifically calls out vague phrases like "click here" or "more" as the failure mode. A random slug is the same failure in a different costume: it isn't vague *language*, it's an *absence* of language. Either way, the person landing on that link-list view has nothing to go on.
+
+Worth being precise about the gap here: general accessibility resources cover descriptive link text broadly, and a handful of university accessibility offices have specifically flagged shortened URLs as worth a second look. But it's genuinely hard to find a URL-shortener company writing about this as its own topic. Most of the industry's accessibility content is about screen-reader-friendly *websites* — not about the shortener's own output.
+
+## The good news: you already have the fix
+
+This isn't a "here's a new problem, go solve it" post. If you're already using squish.to's custom-slug feature — picking `squish.to/summer-sale` instead of letting it hand you a random string — you've been solving this the whole time, probably without thinking about it in accessibility terms at all. A slug written for humans to read is, by definition, a slug a screen reader can announce meaningfully. The two goals point the same direction.
+
+So the practical shift is small: keep doing what you're doing, on purpose, everywhere it matters — not just on the one link you happened to customize for branding.
+
+## The actual design constraint
+
+A slug has to do two things that pull slightly against each other: stay short, and carry meaning on its own, with zero surrounding context. In practice that lands around 2–4 words, lowercase, hyphen-separated:
+
+- `squish.to/black-friday-sale` — not `squish.to/bf25promo`
+- `squish.to/webinar-signup` — not `squish.to/w1`
+- `squish.to/return-policy` — not a random string
+
+That's the same naming discipline that matters anywhere you're naming something for another human to scan at a glance — lowercase, hyphenated, unambiguous — just applied to the slug itself instead of a campaign parameter or a filename. If you've already got a shared naming convention for anything else at your org, extending it to slugs is a five-minute addition, not a new system.
+
+One tension worth naming directly: it's tempting to trim a slug down to save characters, and dropping hyphens can look cleaner. But be careful — the same word-merge problem [we've written about](/blog/short-links-you-can-say-out-loud) for spoken slugs (`expertsexchange.com` reading as something else entirely) shows up here too. A screen reader announces `blacksale` as one word, not two. The hyphen isn't just a style choice; it's doing real work for both spoken and assistive-technology contexts.
+
+## Two constraints worth knowing
+
+Before treating the pattern above as fully actionable: squish.to's custom slugs run 3–30 characters, using letters, numbers, and hyphens — no underscores — which comfortably fits the 2–4-word pattern with room to spare. And a slug can't be edited after the link is created: squish.to links are create-only, with no accounts and no edit step, so it's worth getting the slug right before sharing it anywhere, especially once it's the kind of link that ends up read aloud in a screen reader's link list.
+
+## The takeaway
+
+A descriptive slug isn't an accessibility add-on bolted onto link shortening — it's the same feature already sitting inside squish.to's custom-slug tool, pointed at a use case that doesn't usually get named out loud. If you're customizing slugs for branding already, you're most of the way there. The remaining step is making it a habit rather than a one-off.

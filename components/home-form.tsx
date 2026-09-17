@@ -2,7 +2,11 @@
 
 import { useRef, useState, FormEvent } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import { Toast } from "@/components/toast";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+const TURNSTILE_TOKEN_TIMEOUT_MS = 5000;
 
 type Result = {
   shortCode: string;
@@ -17,6 +21,38 @@ export function HomeForm() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const copyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Turnstile's invisible widgets appear to be single-use: once a token is
+  // produced Cloudflare tears the widget down internally, so re-executing or
+  // resetting the same widget id logs "Cannot find Widget". Simplest correct
+  // fix: render a fresh, disposable widget per submission instead of reusing one.
+  async function getTurnstileToken(): Promise<string> {
+    if (!TURNSTILE_SITE_KEY || !window.turnstile) return "";
+
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+
+    try {
+      return await new Promise<string>((resolve) => {
+        const timeout = setTimeout(() => resolve(""), TURNSTILE_TOKEN_TIMEOUT_MS);
+        window.turnstile!.render(container, {
+          sitekey: TURNSTILE_SITE_KEY,
+          action: "create_link",
+          size: "invisible",
+          callback: (token: string) => {
+            clearTimeout(timeout);
+            resolve(token);
+          },
+        });
+      });
+    } finally {
+      // Delay removal slightly — Cloudflare's script does some of its own
+      // cleanup on the widget just after the token callback fires, and
+      // removing the container immediately races that (logs a harmless
+      // "Cannot find Widget" warning if we win the race).
+      setTimeout(() => container.remove(), 2000);
+    }
+  }
 
   async function copyToClipboard(link: string) {
     try {
@@ -51,12 +87,15 @@ export function HomeForm() {
     setLoading(true);
 
     try {
+      const turnstileToken = await getTurnstileToken();
+
       const res = await fetch("/api/links", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           destinationUrl,
           customCode: customCode || undefined,
+          turnstileToken,
         }),
       });
 
@@ -148,6 +187,12 @@ export function HomeForm() {
 
   return (
     <>
+      {TURNSTILE_SITE_KEY && (
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          strategy="afterInteractive"
+        />
+      )}
       <div className="overflow-hidden rounded-[22px] bg-lime p-[22px_20px_24px] text-ink md:rounded-[26px] md:p-[44px_40px_34px]">
         <div className="flex items-end justify-between gap-5">
           <h1 className="m-0 origin-bottom-left scale-x-90 pb-[0.13em] font-display text-[clamp(4rem,1.3rem+19vw,16.75rem)] leading-[0.76] uppercase">

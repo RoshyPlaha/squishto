@@ -19,6 +19,7 @@ export const createLinkSchema = z.object({
       }
     }, "Only http(s) URLs are allowed"),
   customCode: customCodeSchema.optional(),
+  turnstileToken: z.string(),
 });
 
 export type CreateLinkInput = z.infer<typeof createLinkSchema>;

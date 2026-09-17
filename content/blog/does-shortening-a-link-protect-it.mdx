@@ -1,0 +1,35 @@
+---
+title: "Does Shortening a Link Protect a Sensitive URL? Here's What Actually Happens"
+description: "A precise, no-hype look at what happens to a sensitive link - a reset link, a signed download, a meeting invite with a code in it - once it's wrapped in a short link, and what a short link doesn't fix."
+date: "2026-09-17"
+category: "Engineering"
+tags: ["security", "guide"]
+---
+
+A surprising number of "normal" links carry something sensitive in them without looking like it. A password-reset email. A pre-signed download link to a contract. A calendar invite with a dial-in code baked into the query string. A one-time sign-in ("magic") link. None of these look dangerous - they're just long, ugly URLs - but each one is effectively a bearer token: whoever has the link can use it.
+
+Those links get pasted into Slack, forwarded in email threads, dropped into support tickets, and screenshotted more than people realize. So it's a fair question: does running one through a short link actually protect it, or is that just security theater?
+
+The honest answer is: partly, and it's worth knowing exactly which part.
+
+## The three ways a sensitive link actually gets exposed
+
+**1. Automated prefetching.** This is the one people don't expect. Email security scanners, corporate "safe links" tools, and chat-app link-preview ("unfurl") bots don't wait for a human to click - they fetch the URL themselves, automatically, usually within seconds of it landing in an inbox or channel. That's normally harmless. But if the link is a single-use magic link or password-reset token, the scanner's fetch *is* the click - the token gets consumed before the real recipient ever sees it, and their login or reset silently fails. This is a documented, recurring problem in institutional environments (universities, hospitals, large enterprises) with aggressive email scanning - see the [Supabase discussion on the issue](https://github.com/orgs/supabase/discussions/41618), where the fix wasn't a short link at all, but redesigning the flow so the token sits in a URL fragment (`#confirm=...`) that scanners never fetch, and only gets used after an explicit human click.
+
+**2. Referrer leakage.** When you navigate away from a page, the browser can tell the next site which page you came from, via the `Referer` header. If your sensitive URL had a token in its query string and referrer leakage were unrestricted, that token could end up in a stranger's server logs. The good news: this is mostly already fixed at the browser level. Since 2020, Chrome (and most other major browsers) default to a `strict-origin-when-cross-origin` policy - [Chrome's own announcement is explicit about it](https://developer.chrome.com/blog/referrer-policy-new-chrome-default): cross-origin requests only ever get the bare origin (`https://example.com`), never the path or query string. The full URL is only sent as a referrer for same-origin navigation, where it isn't leaving the site anyway.
+
+**3. Casual, incidental exposure.** No fancy mechanism here - just the mundane fact that a raw, token-bearing URL sitting in a Slack message is now searchable in Slack, backed up wherever Slack backs up messages, visible in a screenshot, and readable by anyone glancing at a shared screen during a call.
+
+## What shortening actually does about each
+
+For #3, a short link genuinely helps, directly and completely: `squish.to/a1b2c3` is what ends up in the chat log, the ticket, and the screenshot - not the real, sensitive URL. Anyone who didn't click it learns nothing from looking at it. That's a real reduction in exposure, and it's the main practical benefit.
+
+For #1, it *can* help, but only conditionally - and this is where we don't want to oversell it. If a scanner or unfurl bot fetches the short link and simply follows the redirect (which is common, since bots usually want to reach the real page to generate an accurate preview), it still reaches - and can still consume - the sensitive URL behind it. To be specific about squish.to itself: a squish.to link is an immediate server-side redirect straight to the destination URL - there's no interstitial "click to continue" page, and no separate preview metadata served to bots instead of the real destination. That means a scanner or unfurl bot that follows the redirect reaches the sensitive URL exactly as if a human had clicked it. Don't treat a short link as a substitute for designing single-use tokens to survive prefetching in the first place (the fragment-based approach above is the real fix for that).
+
+For #2, shortening doesn't add much on top of what browsers already do by default. The origin-only cross-origin policy was already protecting you before the link was ever shortened.
+
+## The practical takeaway
+
+Use a short link over a raw sensitive URL when you're sharing it somewhere that gets logged, searched, or screenshotted - which is most places. It's a real, easy improvement to your everyday paper trail. But don't let it stand in for how the sensitive link itself is built: single-use tokens still need a short expiry and, ideally, a design that isn't consumed by an automated fetch. Shortening reduces *ambient* exposure; it doesn't replace *token* design.
+
+If you're curious what squish.to itself keeps track of when a link gets clicked - including referrer data - [we've written up the full, specific answer here](/blog/what-does-url-shortener-log). And if you want to try wrapping a link yourself, [squish.to](https://squish.to) doesn't require an account to get started.

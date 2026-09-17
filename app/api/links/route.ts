@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createLinkSchema } from "@/lib/validation";
 import { isReservedWord } from "@/lib/reserved-words";
 import { isUrlUnsafe } from "@/lib/safe-browsing";
+import { isLikelyBot } from "@/lib/turnstile";
 import { createLink } from "@/lib/db/queries";
 import { getRequestIp, hashIp } from "@/lib/ip";
 
@@ -16,7 +17,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { destinationUrl, customCode } = parsed.data;
+  const { destinationUrl, customCode, turnstileToken } = parsed.data;
+
+  if (await isLikelyBot(turnstileToken)) {
+    return NextResponse.json(
+      { error: "Verification failed, please try again" },
+      { status: 400 },
+    );
+  }
 
   if (customCode && isReservedWord(customCode)) {
     return NextResponse.json(

@@ -28,6 +28,18 @@ export default function Privacy() {
         </a>
         .
       </p>
+      <p className="mt-4 text-gray-600">
+        squish.to uses Cloudflare Turnstile to help prevent automated abuse
+        when a link is created. Turnstile may briefly communicate with
+        Cloudflare as part of that check, as described in{" "}
+        <a
+          href="https://www.cloudflare.com/privacypolicy/"
+          className="underline"
+        >
+          Cloudflare&apos;s privacy policy
+        </a>
+        .
+      </p>
     </main>
   );
 }

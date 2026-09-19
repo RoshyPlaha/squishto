@@ -1,0 +1,27 @@
+---
+title: "Keeping squish.to Spam-Free — Without Making You Click a Puzzle"
+description: "squish.to now has invisible bot protection on link creation. No traffic lights, no crosswalks, no checkbox — here's what changed and why."
+date: "2026-09-19"
+category: "Product"
+tags: ["product-update"]
+---
+
+squish.to is free and doesn't ask for an account — paste a URL, get a link. That's exactly what makes it useful, and it's also exactly the kind of thing bots like to abuse: no login to create, no friction to script around, easy to mass-produce spam or phishing links with.
+
+So we've added a quiet layer of protection to link creation, using [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/).
+
+## What that actually means for you
+
+Nothing, most likely. Turnstile isn't the old "select all the images with a traffic light" kind of CAPTCHA — for the overwhelming majority of real visitors, it runs invisibly in the background and never shows anything at all. No checkbox to tick, no puzzle to solve, no extra step between pasting your URL and getting your short link.
+
+It only ever asks a real person to do something if your traffic looks unusual enough to warrant a closer look — which is rare, and not something typical use of squish.to should ever trigger.
+
+## Why we picked this over the classic CAPTCHA
+
+Because the whole point of squish.to is being fast and frictionless. Adding a visible puzzle to every single link creation would fix the abuse problem by making the product worse for everyone using it honestly, which isn't a trade we wanted to make. Turnstile checks are designed to stay invisible for genuine use and only step up when something actually looks automated — protection without a tax on the people it's not meant for.
+
+## Nothing else changes
+
+Link creation still works exactly the same: no account, no login, no extra fields to fill in. We've updated our [privacy policy](/privacy) to reflect this, in the same spirit as everything else we've documented there — plainly, and with nothing left unsaid.
+
+Go ahead and [squish a link](https://www.squish.to) — you shouldn't notice anything different at all.

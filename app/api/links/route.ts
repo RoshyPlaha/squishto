@@ -42,8 +42,14 @@ export async function POST(request: NextRequest) {
 
   const ip = getRequestIp(request);
   const creatorIpHash = ip ? hashIp(ip) : undefined;
+  const creatorCountry = request.headers.get("x-vercel-ip-country");
 
-  const link = await createLink({ destinationUrl, customCode, creatorIpHash });
+  const link = await createLink({
+    destinationUrl,
+    customCode,
+    creatorIpHash,
+    creatorCountry,
+  });
 
   if (!link) {
     return NextResponse.json(

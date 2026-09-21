@@ -15,6 +15,7 @@ export const links = pgTable("links", {
     .notNull()
     .defaultNow(),
   creatorIpHash: text("creator_ip_hash"),
+  creatorCountry: text("creator_country"),
   isCustom: boolean("is_custom").notNull().default(false),
   clickCount: integer("click_count").notNull().default(0),
 });

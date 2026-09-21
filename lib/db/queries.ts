@@ -19,8 +19,9 @@ export async function createLink(params: {
   destinationUrl: string;
   customCode?: string;
   creatorIpHash?: string;
+  creatorCountry?: string | null;
 }) {
-  const { destinationUrl, customCode, creatorIpHash } = params;
+  const { destinationUrl, customCode, creatorIpHash, creatorCountry } = params;
 
   if (customCode) {
     const [row] = await db
@@ -30,6 +31,7 @@ export async function createLink(params: {
         destinationUrl,
         isCustom: true,
         creatorIpHash,
+        creatorCountry,
       })
       .onConflictDoNothing({ target: links.shortCode })
       .returning();
@@ -46,6 +48,7 @@ export async function createLink(params: {
         destinationUrl,
         isCustom: false,
         creatorIpHash,
+        creatorCountry,
       })
       .onConflictDoNothing({ target: links.shortCode })
       .returning();
@@ -145,5 +148,30 @@ export async function getLinkStats(shortCode: string) {
     busiestDay,
     dailyCounts,
     recentOpens,
+  };
+}
+
+const ADMIN_PAGE_SIZE = 50;
+
+export async function getAllLinks(page: number) {
+  const safePage = Math.max(1, page);
+  const offset = (safePage - 1) * ADMIN_PAGE_SIZE;
+
+  const [rows, [{ count }]] = await Promise.all([
+    db
+      .select()
+      .from(links)
+      .orderBy(desc(links.createdAt))
+      .limit(ADMIN_PAGE_SIZE)
+      .offset(offset),
+    db.select({ count: sql<number>`count(*)::int` }).from(links),
+  ]);
+
+  return {
+    links: rows,
+    page: safePage,
+    pageSize: ADMIN_PAGE_SIZE,
+    totalCount: count,
+    totalPages: Math.max(1, Math.ceil(count / ADMIN_PAGE_SIZE)),
   };
 }

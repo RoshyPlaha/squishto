@@ -1,0 +1,39 @@
+---
+title: "How to Shorten a Microsoft Teams Meeting Link (Even After the 2026 Update)"
+description: "Microsoft shortened Teams meeting URLs in January 2026 and now shows them as plain text in your invites - but they're still not something you can read aloud or text a coworker. Here's a cleaner way to share one."
+date: "2026-09-21"
+category: "How to"
+tags: ["how-to", "guide"]
+---
+
+If you've noticed your Microsoft Teams meeting invites look messier than they used to, you're not imagining it. In January 2026, Microsoft finished rolling out a change that shows the meeting link itself, in plain text, right in the invite - instead of hiding it behind a clean "Join the meeting now" button. So even though Microsoft also shortened the underlying URL format around the same time, the net effect for a lot of people is the opposite of what it sounds like: you now *see* a long link where you used to see a short label. Here's what actually changed, and a simple way to shorten a Microsoft Teams meeting link yourself so it's something you can actually text, print, or read out loud.
+
+## What Microsoft actually changed
+
+Per Microsoft's own Message Center update (MC772556), Teams moved from meeting URLs shaped like `teams.microsoft.com/l/meetup-join/19%3ameeting_...` - a long string carrying your tenant ID, organizer ID, and conversation ID - to a shorter format: `teams.microsoft.com/meet/<meeting_id>?p=<hashed_passcode>`. Microsoft's stated reasons were usability and security: shorter links, and less identifying information exposed in the URL itself.
+
+The rollout reached General Availability worldwide in January 2026 (GCC High and DoD environments followed in February). Alongside it, invitations started displaying that link as visible text instead of a "Join the meeting now" hyperlink - which is the part people have actually been noticing and asking about.
+
+Whether this display change applies to every meeting type (scheduled meetings and ad-hoc "Meet Now" meetings alike) or just one isn't fully consistent across sources describing the rollout - so if you're troubleshooting a specific invite, check your own Teams admin settings rather than assuming.
+
+## Why the "shorter" link still isn't short enough to share
+
+Here's the catch: "shorter" is relative. The new format trims out tenant and conversation identifiers, but what's left is still a machine-generated meeting ID plus a hashed passcode - not something anyone is going to read aloud on a call, retype from a whiteboard, or recognize at a glance in a text thread. Paste one into a Slack DM or a text message to a client and it still wraps across two or three lines and looks, frankly, a little suspicious.
+
+That's a fine trade-off for a calendar invite, where you're clicking, not reading. It's a worse one for anywhere you're sharing the link outside the invite itself - a text to someone joining from their phone, a printed agenda, a one-line email to an external partner who isn't in your calendar system.
+
+## The fix: shorten it yourself before you send it
+
+If you're sharing a Teams link somewhere other than the original calendar invite, run it through [squish.to](https://squish.to) first and give it a slug you'd actually want to read out loud: `squish.to/tuesday-standup` instead of a 60-character string with a hash in it. It takes about ten seconds:
+
+1. Copy the meeting link from Teams (the "Copy meeting link" option in the meeting details).
+2. Paste it into squish.to and pick your own ending instead of a random one - something like `squish.to/team-standup` or `squish.to/client-kickoff`.
+3. Share that instead - over text, on a printed agenda, or read out loud on a phone call.
+
+No account required, and every link comes with click tracking built in, so if you're the one setting up a recurring external meeting, you can also see whether anyone's actually clicked before the call starts.
+
+One honest caveat: Teams meeting links expire - 60 days after the meeting for scheduled meetings, and much sooner for ad-hoc "Meet Now" links. A squish.to slug just redirects to whatever URL you gave it, so it won't outlive the Teams link underneath it. Create a fresh one per meeting rather than trying to reuse the same slug for a recurring series with a rotating link.
+
+If you're building a slug you'll actually say out loud on a call - "go to squish dot to, slash tuesday, dash standup" - it's worth applying the same design test we cover in [how to build a short link you can say out loud](/blog/short-links-you-can-say-out-loud): avoid characters that are ambiguous when spoken, and watch for words that accidentally merge into something else when the dashes disappear.
+
+For reference, squish.to custom slugs run 3-30 characters, using letters, numbers, and hyphens - no underscores - and they're case-sensitive, so keep candidates lowercase to avoid any ambiguity when you're reading one aloud.

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getAllLinks } from "@/lib/db/queries";
+import { DeleteLinkForm } from "@/components/delete-link-form";
 
 export const metadata: Metadata = {
   title: "Admin",
@@ -33,6 +34,7 @@ export default async function AdminPage({
   const { page: pageParam } = await searchParams;
   const page = Math.max(1, parseInt(pageParam ?? "1", 10) || 1);
   const { links, totalCount, totalPages } = await getAllLinks(page);
+  const redirectTo = `/admin/${token}${page > 1 ? `?page=${page}` : ""}`;
 
   return (
     <main className="mx-auto flex max-w-[1280px] flex-col gap-4 p-4">
@@ -62,6 +64,9 @@ export default async function AdminPage({
               <th className="p-4 font-mono text-xs tracking-wide uppercase">
                 Custom
               </th>
+              <th className="p-4 font-mono text-xs tracking-wide uppercase">
+                {""}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -88,11 +93,14 @@ export default async function AdminPage({
                 <td className="p-4 text-text-muted">
                   {link.isCustom ? "Yes" : "No"}
                 </td>
+                <td className="p-4">
+                  <DeleteLinkForm id={link.id} redirectTo={redirectTo} />
+                </td>
               </tr>
             ))}
             {links.length === 0 && (
               <tr>
-                <td colSpan={6} className="p-4 text-text-dim">
+                <td colSpan={7} className="p-4 text-text-dim">
                   No links yet.
                 </td>
               </tr>

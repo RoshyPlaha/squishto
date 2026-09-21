@@ -24,7 +24,7 @@ export const clicks = pgTable("clicks", {
   id: serial("id").primaryKey(),
   linkId: integer("link_id")
     .notNull()
-    .references(() => links.id),
+    .references(() => links.id, { onDelete: "cascade" }),
   clickedAt: timestamp("clicked_at", { withTimezone: true })
     .notNull()
     .defaultNow(),

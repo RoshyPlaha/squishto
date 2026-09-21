@@ -175,3 +175,7 @@ export async function getAllLinks(page: number) {
     totalPages: Math.max(1, Math.ceil(count / ADMIN_PAGE_SIZE)),
   };
 }
+
+export async function deleteLink(id: number) {
+  await db.delete(links).where(eq(links.id, id));
+}

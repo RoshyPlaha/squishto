@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HomeForm } from "@/components/home-form";
+import { StatsPreview } from "@/components/stats-preview";
 
 const title = "squish.to — make your links as small as possible";
 const description =
@@ -54,6 +55,8 @@ export default function Home() {
           </div>
         ))}
       </div>
+
+      <StatsPreview />
 
       <div className="flex items-center gap-6 px-[26px] pt-3.5 pb-1.5">
         <span className="font-mono text-xs tracking-wide text-text-dim">

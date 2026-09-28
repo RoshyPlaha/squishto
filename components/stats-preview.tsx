@@ -18,7 +18,7 @@ const KPIS = [
 
 export function StatsPreview() {
   return (
-    <div className="flex flex-col gap-7 rounded-[22px] bg-surface p-5 md:gap-8 md:rounded-[26px] md:p-10">
+    <div className="flex flex-col gap-7 rounded-[22px] border border-lime bg-surface p-5 md:gap-8 md:rounded-[26px] md:p-10">
       <div className="flex max-w-[60ch] flex-col gap-2.5">
         <h2 className="m-0 font-display text-3xl leading-none tracking-tight uppercase md:text-[48px]">
           See exactly who&apos;s clicking

@@ -20,14 +20,11 @@ export function StatsPreview() {
   return (
     <div className="flex flex-col gap-7 rounded-[22px] bg-surface p-5 md:gap-8 md:rounded-[26px] md:p-10">
       <div className="flex max-w-[60ch] flex-col gap-2.5">
-        <span className="font-mono text-[11px] tracking-wide text-lime uppercase">
-          Example · not your real data
-        </span>
         <h2 className="m-0 font-display text-3xl leading-none tracking-tight uppercase md:text-[48px]">
           See exactly who&apos;s clicking
         </h2>
         <p className="m-0 text-sm leading-relaxed text-text-muted md:text-base">
-          Every squish.to link comes with a stats page like this one — no
+          Every squish.to link comes with a stats page like this one - no
           dashboard, no login, just the code you already made.
         </p>
       </div>
@@ -97,7 +94,7 @@ export function StatsPreview() {
 
       <div className="flex flex-wrap items-center justify-between gap-4">
         <p className="m-0 text-sm text-text-faint">
-          This is what you&apos;ll see the moment someone opens your link — no
+          This is what you&apos;ll see the moment someone opens your link - no
           setup required.
         </p>
         <a

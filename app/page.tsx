@@ -3,7 +3,7 @@ import Link from "next/link";
 import { HomeForm } from "@/components/home-form";
 import { StatsPreview } from "@/components/stats-preview";
 
-const title = "squish.to — make your links as small as possible";
+const title = "squish.to - make your links as small as possible";
 const description =
   "A free URL shortener with custom endpoints and click stats. No account required.";
 

@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "squish.to — make your links as small as possible",
+  title: "squish.to - make your links as small as possible",
   description:
     "A free URL shortener with custom endpoints and click stats. No account required.",
   openGraph: {

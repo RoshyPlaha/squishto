@@ -1,0 +1,49 @@
+---
+title: "How to Shorten a YouTube Timestamp Link (So It Actually Looks Shareable)"
+description: "YouTube's own timestamp links are longer and messier than they look - here's how to build one properly and turn it into something you can actually text, print, or say out loud."
+date: "2026-09-25"
+category: "How to"
+tags: ["how-to", "guide"]
+---
+
+You watch a video, something happens at the 2:35 mark, and you want to send exactly that moment to someone - not the whole 40-minute video with a "skip to 2:35" instruction attached. YouTube can do this. The problem is that a real **YouTube timestamp link** looks like garbage by the time you're done making one, and most guides to it stop at "here's the parameter" without dealing with that.
+
+## How to actually make one
+
+On desktop, pause the video where you want the link to start, right-click the player, and choose **"Copy video URL at current time."** YouTube hands you something like:
+
+```
+https://youtu.be/hkfMnGXlaRY?t=142
+```
+
+That `t=142` is seconds from the start - 2 minutes, 22 seconds in this case. You can also click **Share → Start at**, which gives you an editable time field if you want to fine-tune it instead of trusting where you happened to pause.
+
+On mobile, tap **Share** under the video, toggle the **"Start at [time]"** option, and copy the link. Same format comes out the other end.
+
+A couple of format details worth knowing: the long-form URL (`https://youtu.be/hkfMnGXlaRY?t=142`) and the short-form one (`youtu.be/ID?t=142`) both work, and YouTube accepts the timestamp as either plain seconds (`t=142`) or compound notation (`t=2m22s`, `t=1h05m30s`) - handy if you're eyeballing a time from a video description instead of counting seconds yourself. If you're embedding the video on your own site rather than linking out, the parameter changes to `start=` instead of `t=`, which trips people up more often than it should.
+
+## Why the link YouTube gives you still isn't good enough
+
+Two problems, and neither is really about the `t=` part.
+
+First, since 2023, YouTube's share button has been quietly appending a second parameter - `si=` - to links people share, tied to the account that shared them. It's a per-share identifier, not a video identifier: share the same clip twice and you'll get two different `si=` values. It doesn't affect view counts or change what the video does; it just lets YouTube trace a click back to the specific share that produced it. Stack that on top of a timestamp and a link that started as "skip to 2:35" turns into something like:
+
+```
+https://youtu.be/dQw4w9WgXcQ?si=xK9pQrT2vLmNw4Bz&t=142
+```
+
+Whether the mobile share sheet always attaches `si=` to a timestamped link specifically, or only to plain share links, isn't something sources fully agree on - it's added broadly via the share button, but the timestamp case specifically isn't nailed down anywhere consistent, so don't be surprised either way.
+
+Second - and this is the part that actually matters when you're the one sending it - that string is unreadable. You can't read it over a call, you can't put it on a slide without it wrapping to two lines, and if you're pasting it into a text field that trims special characters, there's a real chance the `?` and `&` break something. None of that is YouTube's fault, exactly. It just wasn't built to be spoken or typed by a person; it was built to be clicked.
+
+## Give it a slug instead
+
+This is the same fix as texting someone driving directions or reading a link over the phone: don't send the raw parameter string, send a short link with a name on it. Drop the timestamped URL into [squish.to](https://squish.to) and give it a slug that describes the moment instead of the seconds - `squish.to/watch-this-part`, `squish.to/the-good-bit`, `squish.to/2min-in`, whatever actually means something to the person receiving it. It's free, doesn't require an account, and the destination is still the exact same timestamped video underneath - you're just putting a name on it instead of a query string.
+
+This matters most in exactly the situations where a raw YouTube link struggles: reading a link out loud on a podcast or in a meeting, printing it in a handout or slide deck, or texting it to someone who's going to have to type it on a TV remote instead of tapping it. If you haven't already, the [how to build a link you can say out loud](/blog/short-links-you-can-say-out-loud) post covers the actual design rules for picking a slug that survives being spoken or handwritten - the same rules apply whether you're linking to a whole video or one specific moment in it.
+
+## The short version
+
+Right-click the video (or use Share → Start at) to get a `youtu.be/ID?t=seconds` link. Expect a `si=` tracking parameter to ride along with it if it came from the share button - harmless, but it's most of why the link looks so messy. If you're going to send that link anywhere a person has to read, retype, or say it out loud, run it through squish.to first and give it a name instead of a number.
+
+For reference, squish.to custom slugs run 3–30 characters, using letters, numbers, and hyphens - no underscores - and they're case-sensitive, so stick to lowercase to avoid any ambiguity.

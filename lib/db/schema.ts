@@ -18,6 +18,7 @@ export const links = pgTable("links", {
   creatorCountry: text("creator_country"),
   isCustom: boolean("is_custom").notNull().default(false),
   clickCount: integer("click_count").notNull().default(0),
+  expiresAt: timestamp("expires_at", { withTimezone: true }),
 });
 
 export const clicks = pgTable("clicks", {

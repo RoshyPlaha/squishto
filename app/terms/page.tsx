@@ -12,6 +12,13 @@ export default function Terms() {
         create links to malicious, illegal, or abusive content. Links found to
         violate this may be removed without notice.
       </p>
+      <p className="mt-4 text-gray-600">
+        The same applies to file uploads: do not upload malicious, illegal,
+        infringing, or abusive files. Uploaded files found to violate this
+        may be removed without notice, and uploading is subject to the same
+        reservation that squish.to is provided as-is, with no guarantee of
+        availability.
+      </p>
     </main>
   );
 }

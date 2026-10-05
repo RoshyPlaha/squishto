@@ -3,6 +3,7 @@ import { after } from "next/server";
 import { notFound } from "next/navigation";
 import { isReservedWord } from "@/lib/reserved-words";
 import { getLinkByShortCode, recordClick } from "@/lib/db/queries";
+import { PENDING_UPLOAD_DESTINATION } from "@/lib/blob";
 
 export async function GET(
   request: NextRequest,
@@ -18,6 +19,15 @@ export async function GET(
 
   if (!link) {
     notFound();
+  }
+
+  if (link.destinationUrl === PENDING_UPLOAD_DESTINATION) {
+    // Reserved for a file upload that hasn't finished yet — this window is
+    // normally sub-second, so a plain retry almost always works.
+    return new NextResponse("Upload still in progress, try again in a moment.", {
+      status: 503,
+      headers: { "Retry-After": "2" },
+    });
   }
 
   after(() =>

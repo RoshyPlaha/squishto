@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { QrCode } from "@/components/qr-code";
 
 type DailyCount = { date: string; count: number };
 type RecentOpen = { clickedAt: string; source: string; country: string | null };
@@ -168,20 +169,31 @@ export function StatsForm({
 
       {stats && (
         <>
-          <div className="grid grid-cols-2 gap-[10px] md:grid-cols-4 md:gap-4">
-            {kpis.map((kpi) => (
-              <div
-                key={kpi.label}
-                className="flex flex-col gap-1.5 rounded-[22px] bg-surface p-[20px] md:rounded-[26px] md:p-[26px_28px]"
-              >
-                <span className="font-mono text-[11px] tracking-wide text-text-dim uppercase">
-                  {kpi.label}
-                </span>
-                <span className="font-display text-3xl leading-none md:text-[46px]">
-                  {kpi.value}
-                </span>
-              </div>
-            ))}
+          <div className="flex flex-col gap-[10px] md:flex-row md:gap-4">
+            <div className="grid flex-1 grid-cols-2 gap-[10px] md:grid-cols-4 md:gap-4">
+              {kpis.map((kpi) => (
+                <div
+                  key={kpi.label}
+                  className="flex flex-col gap-1.5 rounded-[22px] bg-surface p-[20px] md:rounded-[26px] md:p-[26px_28px]"
+                >
+                  <span className="font-mono text-[11px] tracking-wide text-text-dim uppercase">
+                    {kpi.label}
+                  </span>
+                  <span className="font-display text-3xl leading-none md:text-[46px]">
+                    {kpi.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-col gap-1.5 rounded-[22px] bg-surface p-[20px] md:w-[160px] md:rounded-[26px] md:p-[20px]">
+              <span className="font-mono text-[11px] tracking-wide text-text-dim uppercase">
+                QR code
+              </span>
+              <QrCode
+                value={`https://squish.to/${stats.shortCode}`}
+                filename={stats.shortCode}
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-[10px] md:grid-cols-[1.4fr_1fr] md:gap-4">

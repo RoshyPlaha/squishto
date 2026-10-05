@@ -4,6 +4,7 @@ import { useRef, useState, FormEvent } from "react";
 import Link from "next/link";
 import Script from "next/script";
 import { Toast } from "@/components/toast";
+import { QrCode } from "@/components/qr-code";
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 const TURNSTILE_TOKEN_TIMEOUT_MS = 5000;
@@ -153,7 +154,7 @@ export function HomeForm() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-[10px] md:grid-cols-[1.4fr_1fr_1fr] md:gap-4">
+        <div className="grid grid-cols-1 gap-[10px] md:grid-cols-[1.2fr_0.8fr_0.8fr_auto] md:gap-4">
           <div className="flex flex-col gap-1.5 rounded-[22px] bg-surface p-[22px] md:rounded-[26px] md:p-7">
             <span className="font-mono text-[11px] tracking-wide text-text-dim uppercase">
               Destination
@@ -179,6 +180,15 @@ export function HomeForm() {
               Squish another
             </button>
           </div>
+          <div className="flex flex-col gap-1.5 rounded-[22px] bg-surface p-[22px] md:w-[160px] md:rounded-[26px] md:p-5">
+            <span className="font-mono text-[11px] tracking-wide text-text-dim uppercase">
+              QR code
+            </span>
+            <QrCode
+              value={`https://squish.to/${result.shortCode}`}
+              filename={result.shortCode}
+            />
+          </div>
         </div>
         <Toast show={copied} message="Copied squish.to link to clipboard" />
       </>
@@ -203,7 +213,7 @@ export function HomeForm() {
           </span>
         </div>
         <p className="mt-1 max-w-[24ch] text-[25px] leading-[1.12] font-semibold tracking-tight text-wrap-pretty md:mt-0 md:text-[40px] md:leading-[1.08]">
-          Make your links as small as possible. Track when they are opened.
+          Make your links as small as possible. Generate a QR code. Track when they are opened.
         </p>
       </div>
 

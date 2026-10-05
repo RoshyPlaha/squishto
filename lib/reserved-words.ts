@@ -15,6 +15,7 @@ export const RESERVED_WORDS = new Set([
   "help",
   "support",
   "stats",
+  "upload",
   "sitemap.xml",
   "robots.txt",
   "favicon.ico",

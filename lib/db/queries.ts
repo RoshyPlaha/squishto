@@ -1,7 +1,9 @@
-import { and, desc, eq, gte, sql } from "drizzle-orm";
+import { and, desc, eq, gte, isNotNull, lte, sql } from "drizzle-orm";
+import { del } from "@vercel/blob";
 import { db } from "./client";
 import { links, clicks } from "./schema";
 import { generateShortCode } from "../short-code";
+import { PENDING_UPLOAD_DESTINATION, isBlobUrl } from "../blob";
 
 const DAILY_WINDOW_DAYS = 14;
 const RECENT_OPENS_LIMIT = 6;
@@ -15,7 +17,12 @@ export async function getLinkByShortCode(shortCode: string) {
   return rows[0] ?? null;
 }
 
-export async function createLink(params: {
+export async function getLinkById(id: number) {
+  const rows = await db.select().from(links).where(eq(links.id, id)).limit(1);
+  return rows[0] ?? null;
+}
+
+async function insertLinkRow(params: {
   destinationUrl: string;
   customCode?: string;
   creatorIpHash?: string;
@@ -57,6 +64,44 @@ export async function createLink(params: {
   }
 
   throw new Error("Failed to generate a unique short code after several attempts");
+}
+
+export async function createLink(params: {
+  destinationUrl: string;
+  customCode?: string;
+  creatorIpHash?: string;
+  creatorCountry?: string | null;
+}) {
+  return insertLinkRow(params);
+}
+
+/** Reserves a short code for a file upload before the file itself has
+ * finished uploading, so the client can know its link immediately and so
+ * there's no collision race with the eventual finalize step. */
+export async function reserveFileLinkCode(params: {
+  customCode?: string;
+  creatorIpHash?: string;
+  creatorCountry?: string | null;
+}) {
+  return insertLinkRow({ ...params, destinationUrl: PENDING_UPLOAD_DESTINATION });
+}
+
+export async function finalizeFileLink(params: {
+  id: number;
+  blobUrl: string;
+  expiresAt: Date;
+}) {
+  await db
+    .update(links)
+    .set({ destinationUrl: params.blobUrl, expiresAt: params.expiresAt })
+    .where(eq(links.id, params.id));
+}
+
+export async function getExpiredFileLinks() {
+  return db
+    .select()
+    .from(links)
+    .where(and(isNotNull(links.expiresAt), lte(links.expiresAt, new Date())));
 }
 
 export async function recordClick(params: {
@@ -177,5 +222,15 @@ export async function getAllLinks(page: number) {
 }
 
 export async function deleteLink(id: number) {
+  const [row] = await db.select().from(links).where(eq(links.id, id)).limit(1);
+
+  if (row && isBlobUrl(row.destinationUrl)) {
+    await del(row.destinationUrl).catch(() => {
+      // Best-effort — don't block the DB delete on a Blob API hiccup. Worst
+      // case is an orphaned file the cleanup cron won't catch (it only looks
+      // at expiry), which is an acceptable tradeoff for keeping this simple.
+    });
+  }
+
   await db.delete(links).where(eq(links.id, id));
 }

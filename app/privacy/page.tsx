@@ -40,6 +40,13 @@ export default function Privacy() {
         </a>
         .
       </p>
+      <p className="mt-4 text-gray-600">
+        squish.to also lets you upload a file (images or PDF, up to 10MB) and
+        get a short link to it. Uploaded files are stored using Vercel Blob
+        storage and are automatically deleted 30 days after upload. Treat
+        file links the same as regular links: anyone with the link or its QR
+        code can access the file.
+      </p>
     </main>
   );
 }

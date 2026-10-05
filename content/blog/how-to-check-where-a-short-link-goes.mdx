@@ -1,0 +1,65 @@
+---
+title: "How to Check Where a Short Link Goes Before You Click"
+description: "Four quick, safe ways to check where a short link goes before you click it, plus what a trustworthy short link looks like."
+date: "2026-10-02"
+category: "Marketing"
+tags: ["security", "guide", "how-to"]
+---
+
+# How to Check Where a Short Link Goes Before You Click
+
+You can check where a short link goes without opening it. Hover over it on desktop, long-press it on mobile, paste it into a URL expander, or ask a command-line tool for its redirect. Any of these shows you the real destination first, and none of them takes more than a few seconds.
+
+Short links are everywhere because they are handy: texts, posters, podcasts, email signatures. A short link hides the destination by design, which is the whole point of a tidy link, so it's a good habit to peek before you tap. Here's how.
+
+## 1. Hover over it (desktop)
+
+Move your cursor over a link without clicking. Most browsers show the real address in the bottom-left corner of the window. If the link is plain text pasted into a chat, this may only show the short link itself, so move on to method 3.
+
+## 2. Long-press it (mobile)
+
+On a phone, press and hold the link. iOS and Android both show a preview menu with the address, and you can pick "Copy" instead of "Open". Copying is useful because it sets you up for the next step.
+
+## 3. Paste it into a URL expander
+
+A URL expander follows the redirect for you and reports the final destination, so your own browser never loads the page. Several free ones exist, and many also run the destination through a safety database. A few shorteners also build in a peek: Bitly links are commonly checked by adding a `+` to the end, and TinyURL offers a `preview.` subdomain. Check each service's current help page, since these features change.
+
+Be aware that some short links do not offer any built-in preview. X's `t.co` links, for example, have no official one, so an expander is the way to go.
+
+## 4. Ask for the redirect header (the nerdy one)
+
+A short link is just a server saying "go over there instead." You can read that instruction directly without visiting the page. In a terminal:
+
+```bash
+curl -sI https://squish.to/your-link | grep -i location
+```
+
+The `Location:` line is the destination. A squish.to link answers with a plain 307 redirect straight to the destination, with no ad page or interstitial in between, so what you see in that header is exactly where a browser would land. Nothing is hidden behind it.
+
+## What a trustworthy short link looks like
+
+You don't need to be paranoid. Most short links you meet are perfectly friendly: a restaurant menu, a podcast offer, a sign-up sheet. A few quick signals help you tell the difference:
+
+- **Context fits.** A short link on a poster for a local event is normal. A short link in a message claiming to be your bank is not, because banks and payment services send you to their own domain.
+- **You expected it.** A link you asked for, or one from someone you know and trust, is a good sign. A surprise link with a deadline is worth a pause.
+- **The slug is readable.** Links like `squish.to/summer-menu` tell you what to expect. A readable name is not proof of safety, but it is a nice sign that a person chose it on purpose.
+- **The destination makes sense.** After expanding, check that the domain matches what you expected. Look at the part right before the first single slash, because that is the real site.
+
+If something feels off, don't open it. Visit the site you trust directly instead of using the link.
+
+## Why this is easy to do at squish.to
+
+We built squish.to to be a fun, simple way to share links, and part of that is being open about how it behaves. A link is a direct redirect, there is no account to sign up for, and link creation is protected by an invisible bot check (see [how we keep squish.to spam-free without puzzles](/blog/bot-protection-without-puzzles)) so people are not mass-producing junk links. You can also read exactly [what a squish.to link records when it's clicked](/blog/what-does-url-shortener-log).
+
+Want a short link people feel comfortable clicking? [Make one at squish.to](https://squish.to) and pick a readable name.
+
+## FAQ
+
+**Can I see where a short link goes without clicking?**
+Yes. Hover over it, long-press it on a phone, paste it into a URL expander, or read its redirect with `curl -sI`.
+
+**Are short links safe?**
+A short link is only a redirect, so its safety depends on where it points. Check the destination the same way you would any link.
+
+**What does a URL expander do?**
+It follows a short link's redirect on its own server and shows you the final address, so your browser never visits the page.

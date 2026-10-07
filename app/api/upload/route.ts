@@ -44,7 +44,12 @@ export async function POST(request: NextRequest) {
         const expiresAt = new Date();
         expiresAt.setUTCDate(expiresAt.getUTCDate() + FILE_EXPIRY_DAYS);
 
-        await finalizeFileLink({ id: linkId, blobUrl: blob.url, expiresAt });
+        await finalizeFileLink({
+          id: linkId,
+          blobUrl: blob.url,
+          expiresAt,
+          contentType: blob.contentType,
+        });
       },
     });
 

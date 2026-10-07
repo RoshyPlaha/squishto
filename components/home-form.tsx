@@ -5,9 +5,9 @@ import Link from "next/link";
 import Script from "next/script";
 import { Toast } from "@/components/toast";
 import { QrCode } from "@/components/qr-code";
+import { getTurnstileToken } from "@/lib/turnstile-client";
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
-const TURNSTILE_TOKEN_TIMEOUT_MS = 5000;
 
 type Result = {
   shortCode: string;
@@ -22,38 +22,6 @@ export function HomeForm() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const copyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // Turnstile's invisible widgets appear to be single-use: once a token is
-  // produced Cloudflare tears the widget down internally, so re-executing or
-  // resetting the same widget id logs "Cannot find Widget". Simplest correct
-  // fix: render a fresh, disposable widget per submission instead of reusing one.
-  async function getTurnstileToken(): Promise<string> {
-    if (!TURNSTILE_SITE_KEY || !window.turnstile) return "";
-
-    const container = document.createElement("div");
-    document.body.appendChild(container);
-
-    try {
-      return await new Promise<string>((resolve) => {
-        const timeout = setTimeout(() => resolve(""), TURNSTILE_TOKEN_TIMEOUT_MS);
-        window.turnstile!.render(container, {
-          sitekey: TURNSTILE_SITE_KEY,
-          action: "create_link",
-          size: "invisible",
-          callback: (token: string) => {
-            clearTimeout(timeout);
-            resolve(token);
-          },
-        });
-      });
-    } finally {
-      // Delay removal slightly — Cloudflare's script does some of its own
-      // cleanup on the widget just after the token callback fires, and
-      // removing the container immediately races that (logs a harmless
-      // "Cannot find Widget" warning if we win the race).
-      setTimeout(() => container.remove(), 2000);
-    }
-  }
 
   async function copyToClipboard(link: string) {
     try {
@@ -88,7 +56,10 @@ export function HomeForm() {
     setLoading(true);
 
     try {
-      const turnstileToken = await getTurnstileToken();
+      const turnstileToken = await getTurnstileToken(
+        TURNSTILE_SITE_KEY,
+        "create_link",
+      );
 
       const res = await fetch("/api/links", {
         method: "POST",

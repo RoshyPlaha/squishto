@@ -90,10 +90,15 @@ export async function finalizeFileLink(params: {
   id: number;
   blobUrl: string;
   expiresAt: Date;
+  contentType: string;
 }) {
   await db
     .update(links)
-    .set({ destinationUrl: params.blobUrl, expiresAt: params.expiresAt })
+    .set({
+      destinationUrl: params.blobUrl,
+      expiresAt: params.expiresAt,
+      contentType: params.contentType,
+    })
     .where(eq(links.id, params.id));
 }
 

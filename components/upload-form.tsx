@@ -2,39 +2,11 @@
 
 import { useRef, useState, FormEvent } from "react";
 import { upload } from "@vercel/blob/client";
-import Script from "next/script";
 import { QrCode } from "@/components/qr-code";
 import { Toast } from "@/components/toast";
 import { MAX_FILE_SIZE_BYTES, ALLOWED_CONTENT_TYPES, FILE_EXPIRY_DAYS } from "@/lib/upload-config";
 
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
-const TURNSTILE_TOKEN_TIMEOUT_MS = 5000;
-
 type Result = { shortCode: string; fileName: string };
-
-async function getTurnstileToken(): Promise<string> {
-  if (!TURNSTILE_SITE_KEY || !window.turnstile) return "";
-
-  const container = document.createElement("div");
-  document.body.appendChild(container);
-
-  try {
-    return await new Promise<string>((resolve) => {
-      const timeout = setTimeout(() => resolve(""), TURNSTILE_TOKEN_TIMEOUT_MS);
-      window.turnstile!.render(container, {
-        sitekey: TURNSTILE_SITE_KEY,
-        action: "upload_file",
-        size: "invisible",
-        callback: (token: string) => {
-          clearTimeout(timeout);
-          resolve(token);
-        },
-      });
-    });
-  } finally {
-    setTimeout(() => container.remove(), 2000);
-  }
-}
 
 export function UploadForm() {
   const [file, setFile] = useState<File | null>(null);
@@ -86,19 +58,17 @@ export function UploadForm() {
       return;
     }
     if (!ALLOWED_CONTENT_TYPES.includes(file.type)) {
-      setError("That file type isn't supported — images or PDF only");
+      setError("That file type isn't supported — images, PDF, or HTML only");
       return;
     }
 
     setLoading(true);
 
     try {
-      const turnstileToken = await getTurnstileToken();
-
       const reserveRes = await fetch("/api/upload/reserve", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customCode: customCode || undefined, turnstileToken }),
+        body: JSON.stringify({ customCode: customCode || undefined }),
       });
       const reserveData = await reserveRes.json();
 
@@ -182,12 +152,6 @@ export function UploadForm() {
 
   return (
     <>
-      {TURNSTILE_SITE_KEY && (
-        <Script
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-          strategy="afterInteractive"
-        />
-      )}
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-3 rounded-[22px] bg-surface p-5 md:rounded-[26px] md:p-8"
@@ -196,7 +160,7 @@ export function UploadForm() {
           ref={fileInputRef}
           type="file"
           required
-          accept={ALLOWED_CONTENT_TYPES.join(",")}
+          accept={[...ALLOWED_CONTENT_TYPES, ".html"].join(",")}
           onChange={(e) => setFile(e.target.files?.[0] ?? null)}
           className="w-full rounded-2xl border border-border-input bg-page px-[22px] py-5 text-base text-text file:mr-4 file:rounded-full file:border-0 file:bg-lime file:px-4 file:py-2 file:font-semibold file:text-ink"
         />
@@ -222,8 +186,10 @@ export function UploadForm() {
         </button>
         {error && <p className="text-red-400">{error}</p>}
         <p className="m-0 text-xs text-text-faint">
-          Images or PDF, up to {MAX_FILE_SIZE_BYTES / 1024 / 1024}MB. Links expire after{" "}
-          {FILE_EXPIRY_DAYS} days.
+          Images, PDF, or a single HTML file, up to {MAX_FILE_SIZE_BYTES / 1024 / 1024}MB.
+          HTML pages render at your link, but scripts are blocked and relative
+          file paths won&apos;t resolve — keep it self-contained. Links expire
+          after {FILE_EXPIRY_DAYS} days.
         </p>
       </form>
     </>

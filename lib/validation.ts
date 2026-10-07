@@ -26,5 +26,4 @@ export type CreateLinkInput = z.infer<typeof createLinkSchema>;
 
 export const reserveUploadSchema = z.object({
   customCode: customCodeSchema.optional(),
-  turnstileToken: z.string(),
 });

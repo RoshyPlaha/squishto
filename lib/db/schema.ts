@@ -19,6 +19,7 @@ export const links = pgTable("links", {
   isCustom: boolean("is_custom").notNull().default(false),
   clickCount: integer("click_count").notNull().default(0),
   expiresAt: timestamp("expires_at", { withTimezone: true }),
+  contentType: text("content_type"),
 });
 
 export const clicks = pgTable("clicks", {

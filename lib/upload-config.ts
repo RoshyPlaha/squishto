@@ -5,5 +5,6 @@ export const ALLOWED_CONTENT_TYPES = [
   "image/webp",
   "image/gif",
   "application/pdf",
+  "text/html",
 ];
 export const FILE_EXPIRY_DAYS = 30;

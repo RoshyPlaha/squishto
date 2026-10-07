@@ -68,6 +68,9 @@ export default async function AdminPage({
                 Expires
               </th>
               <th className="p-4 font-mono text-xs tracking-wide uppercase">
+                Type
+              </th>
+              <th className="p-4 font-mono text-xs tracking-wide uppercase">
                 {""}
               </th>
             </tr>
@@ -99,6 +102,11 @@ export default async function AdminPage({
                 <td className="p-4 whitespace-nowrap text-text-muted">
                   {link.expiresAt ? formatDate(link.expiresAt) : "—"}
                 </td>
+                <td className="p-4 text-text-muted">
+                  {link.contentType === "text/html"
+                    ? "Hosted page"
+                    : link.contentType ?? "—"}
+                </td>
                 <td className="p-4">
                   <DeleteLinkForm id={link.id} redirectTo={redirectTo} />
                 </td>
@@ -106,7 +114,7 @@ export default async function AdminPage({
             ))}
             {links.length === 0 && (
               <tr>
-                <td colSpan={8} className="p-4 text-text-dim">
+                <td colSpan={9} className="p-4 text-text-dim">
                   No links yet.
                 </td>
               </tr>

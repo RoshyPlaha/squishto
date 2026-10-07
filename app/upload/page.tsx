@@ -3,7 +3,7 @@ import { UploadForm } from "@/components/upload-form";
 
 const title = "Upload a file | squish.to";
 const description =
-  "Upload a file and get a short, shareable link with a QR code. No account required.";
+  "Upload a file or an HTML page and get a short, shareable link with a QR code. No account required.";
 
 export const metadata: Metadata = {
   title,
@@ -20,8 +20,9 @@ export default function UploadPage() {
           Upload a file
         </h1>
         <p className="m-0 text-sm text-text-muted md:text-base">
-          Get a short link and a QR code for any image or PDF. No account
-          needed — links expire automatically after 30 days.
+          Get a short link and a QR code for any image, PDF, or HTML page -
+          HTML renders right at your link. No account needed - links expire
+          automatically after 30 days.
         </p>
       </div>
       <UploadForm />

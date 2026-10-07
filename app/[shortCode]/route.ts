@@ -39,5 +39,26 @@ export async function GET(
     }),
   );
 
+  if (link.contentType === "text/html") {
+    // Vercel Blob forces Content-Disposition: attachment for text/html (to
+    // stop exactly this kind of hosting abuse), so a redirect would just
+    // download the file instead of rendering it. Fetch it ourselves and
+    // re-serve it under our own headers instead — crucially with a CSP that
+    // blocks script execution, since this is anonymous, unauthenticated
+    // upload hosting arbitrary HTML under our own domain.
+    const blobRes = await fetch(link.destinationUrl);
+    if (!blobRes.ok) notFound();
+    const html = await blobRes.text();
+
+    return new NextResponse(html, {
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Content-Security-Policy":
+          "script-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';",
+        "X-Content-Type-Options": "nosniff",
+      },
+    });
+  }
+
   return NextResponse.redirect(link.destinationUrl, { status: 307 });
 }

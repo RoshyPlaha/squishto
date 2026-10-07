@@ -2,6 +2,7 @@
 
 import { useRef, useState, FormEvent } from "react";
 import { upload } from "@vercel/blob/client";
+import Link from "next/link";
 import { QrCode } from "@/components/qr-code";
 import { Toast } from "@/components/toast";
 import { MAX_FILE_SIZE_BYTES, ALLOWED_CONTENT_TYPES, FILE_EXPIRY_DAYS } from "@/lib/upload-config";
@@ -121,6 +122,12 @@ export function UploadForm() {
             >
               {copied ? "Copied" : "Copy link"}
             </button>
+            <Link
+              href={`/stats?code=${result.shortCode}`}
+              className="flex min-h-[52px] cursor-pointer items-center rounded-full border-[1.5px] border-ink px-[30px] py-4 text-base font-semibold text-ink no-underline hover:bg-ink/10"
+            >
+              View stats
+            </Link>
           </div>
         </div>
 

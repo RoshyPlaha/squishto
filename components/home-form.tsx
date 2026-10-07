@@ -184,7 +184,7 @@ export function HomeForm() {
           </span>
         </div>
         <p className="mt-1 max-w-[24ch] text-[25px] leading-[1.12] font-semibold tracking-tight text-wrap-pretty md:mt-0 md:text-[40px] md:leading-[1.08]">
-          Make your links as small as possible. Generate a QR code. Track when they are opened.
+          Upload any file or URL. Make links as small as possible. Track when they are opened.
         </p>
       </div>
 

@@ -32,7 +32,7 @@ export function BlogFilter({ posts }: { posts: Post[] }) {
               className={
                 "cursor-pointer rounded-full px-[22px] py-[11px] text-sm font-medium " +
                 (isActive
-                  ? "bg-ink text-lime font-semibold"
+                  ? "bg-ink text-brand font-semibold"
                   : "bg-ink/[0.09] text-ink")
               }
             >
@@ -60,7 +60,7 @@ export function BlogFilter({ posts }: { posts: Post[] }) {
                     }
                   : {
                       backgroundImage:
-                        "repeating-linear-gradient(135deg, #17181C 0 10px, #1F2126 10px 20px)",
+                        "repeating-linear-gradient(135deg, var(--color-surface-2) 0 10px, var(--color-page) 10px 20px)",
                     }
               }
             >
@@ -71,7 +71,7 @@ export function BlogFilter({ posts }: { posts: Post[] }) {
               )}
             </div>
             <div className="flex flex-col gap-2.5 px-6">
-              <span className="font-mono text-[11px] tracking-wide text-lime uppercase">
+              <span className="font-mono text-[11px] tracking-wide text-accent-strong uppercase">
                 {post.category}
               </span>
               <span className="text-xl leading-snug font-bold tracking-tight md:text-2xl">

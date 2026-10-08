@@ -50,14 +50,14 @@ export function Header() {
           <button
             type="button"
             onClick={focusUrlInput}
-            className="hidden rounded-full bg-lime px-6 py-3 text-[15px] font-semibold text-ink no-underline hover:bg-lime-hover md:inline-block"
+            className="hidden rounded-full bg-brand px-6 py-3 text-[15px] font-semibold text-ink no-underline hover:bg-brand-hover md:inline-block"
           >
             Squish a link
           </button>
         ) : (
           <Link
             href="/"
-            className="hidden rounded-full bg-lime px-6 py-3 text-[15px] font-semibold text-ink no-underline hover:bg-lime-hover md:inline-block"
+            className="hidden rounded-full bg-brand px-6 py-3 text-[15px] font-semibold text-ink no-underline hover:bg-brand-hover md:inline-block"
           >
             Squish a link
           </Link>

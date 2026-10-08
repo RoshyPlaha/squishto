@@ -60,7 +60,7 @@ export default async function BlogPost({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="flex flex-col gap-3.5 overflow-hidden rounded-[22px] bg-lime p-[26px_20px] text-ink md:rounded-[26px] md:p-[36px_40px]">
+      <div className="flex flex-col gap-3.5 overflow-hidden rounded-[22px] bg-brand p-[26px_20px] text-ink md:rounded-[26px] md:p-[36px_40px]">
         <span className="font-mono text-xs tracking-wide uppercase">
           {post.category} · {dateLabel} · {minutes} MIN
         </span>
@@ -82,7 +82,7 @@ export default async function BlogPost({
           </span>
           <Link
             href="/"
-            className="rounded-full bg-lime px-5 py-3.5 text-center font-display text-xl text-ink uppercase no-underline hover:bg-lime-hover"
+            className="rounded-full bg-brand px-5 py-3.5 text-center font-display text-xl text-ink uppercase no-underline hover:bg-brand-hover"
           >
             Squish a link
           </Link>

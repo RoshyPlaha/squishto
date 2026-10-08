@@ -43,7 +43,7 @@ export default function Home() {
             key={step.n}
             className="flex flex-col gap-2.5 rounded-[22px] bg-surface p-[20px] md:rounded-[26px] md:p-[30px]"
           >
-            <span className="font-display text-3xl leading-none text-lime md:text-[44px]">
+            <span className="font-display text-3xl leading-none text-accent md:text-[44px]">
               {step.n}
             </span>
             <span className="text-lg font-bold tracking-tight md:text-xl">
@@ -59,8 +59,8 @@ export default function Home() {
       <StatsPreview />
 
       <div className="flex items-center gap-6 px-[26px] pt-3.5 pb-1.5">
-        <span className="font-mono text-xs tracking-wide text-text-dim">
-          SQUISH.TO
+        <span className="text-xs tracking-wide text-text-dim">
+          squish.to, for your marketing needs
         </span>
         <div className="flex-1" />
         <Link href="/stats" className="text-sm text-text-dim">

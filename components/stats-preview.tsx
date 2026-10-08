@@ -18,7 +18,7 @@ const KPIS = [
 
 export function StatsPreview() {
   return (
-    <div className="flex flex-col gap-7 rounded-[22px] border border-lime bg-surface p-5 md:gap-8 md:rounded-[26px] md:p-10">
+    <div className="flex flex-col gap-7 rounded-[22px] border border-brand bg-surface p-5 md:gap-8 md:rounded-[26px] md:p-10">
       <div className="flex max-w-[60ch] flex-col gap-2.5">
         <h2 className="m-0 font-display text-3xl leading-none tracking-tight uppercase md:text-[48px]">
           See exactly who&apos;s clicking
@@ -31,7 +31,7 @@ export function StatsPreview() {
 
       <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border-input bg-page px-[18px] py-2.5 font-mono text-xs text-text-dim">
         showing stats for{" "}
-        <span className="font-medium text-lime">squish.to/summer-sale</span>
+        <span className="font-medium text-accent-strong">squish.to/summer-sale</span>
       </div>
 
       <div className="grid grid-cols-2 gap-[10px] md:grid-cols-4 md:gap-4">
@@ -61,7 +61,7 @@ export function StatsPreview() {
                 key={i}
                 className={
                   "flex-1 rounded-md " +
-                  (height >= PEAK_THRESHOLD ? "bg-lime" : "bg-lime-dim")
+                  (height >= PEAK_THRESHOLD ? "bg-brand" : "bg-accent-soft")
                 }
                 style={{ height: `${height}%` }}
               />
@@ -82,7 +82,7 @@ export function StatsPreview() {
               key={i}
               className="flex items-baseline gap-3.5 border-t border-border py-3 first:border-t-0 first:pt-0"
             >
-              <span className="w-[84px] shrink-0 font-mono text-xs text-lime">
+              <span className="w-[84px] shrink-0 font-mono text-xs text-accent-strong">
                 {open.time}
               </span>
               <span className="flex-1 text-sm">{open.source}</span>
@@ -99,7 +99,7 @@ export function StatsPreview() {
         </p>
         <a
           href="#url-input"
-          className="rounded-full bg-lime px-6 py-3 font-display text-lg text-ink uppercase no-underline hover:bg-lime-hover"
+          className="rounded-full bg-brand px-6 py-3 font-display text-lg text-ink uppercase no-underline hover:bg-brand-hover"
         >
           Squish a link
         </a>

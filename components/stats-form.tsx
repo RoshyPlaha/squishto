@@ -121,7 +121,7 @@ export function StatsForm({
 
   return (
     <>
-      <div className="flex flex-col items-start justify-between gap-6 overflow-hidden rounded-[22px] bg-lime p-[26px_20px] text-ink md:flex-row md:items-end md:rounded-[26px] md:p-[36px_40px_30px]">
+      <div className="flex flex-col items-start justify-between gap-6 overflow-hidden rounded-[22px] bg-brand p-[26px_20px] text-ink md:flex-row md:items-end md:rounded-[26px] md:p-[36px_40px_30px]">
         <h1 className="m-0 origin-bottom-left scale-x-90 pb-[0.1em] font-display text-6xl leading-[0.8] uppercase md:text-[132px]">
           Stats
         </h1>
@@ -129,7 +129,7 @@ export function StatsForm({
           onSubmit={handleSubmit}
           className="flex flex-wrap items-center gap-2.5"
         >
-          <div className="flex items-center gap-2 rounded-full bg-ink px-5">
+          <div className="flex items-center gap-2 rounded-full bg-surface px-5">
             <span className="text-sm text-text-faint md:text-base">
               squish.to/
             </span>
@@ -144,7 +144,7 @@ export function StatsForm({
           <button
             type="submit"
             disabled={loading}
-            className="min-h-[52px] cursor-pointer rounded-full bg-ink px-6 text-base font-semibold text-lime hover:bg-surface-2 disabled:opacity-50"
+            className="min-h-[52px] cursor-pointer rounded-full bg-ink px-6 text-base font-semibold text-brand hover:bg-ink-hover disabled:opacity-50"
           >
             {loading ? "Looking up..." : "Look up"}
           </button>
@@ -209,8 +209,8 @@ export function StatsForm({
                     className={
                       "flex-1 rounded-md " +
                       (d.count >= peakThreshold && d.count > 0
-                        ? "bg-lime"
-                        : "bg-lime-dim")
+                        ? "bg-brand"
+                        : "bg-accent-soft")
                     }
                     style={{
                       height: `${Math.max(4, (d.count / maxDaily) * 100)}%`,
@@ -245,7 +245,7 @@ export function StatsForm({
                   key={i}
                   className="flex items-baseline gap-3.5 border-t border-border py-3"
                 >
-                  <span className="w-[88px] shrink-0 font-mono text-xs text-lime md:w-24 md:text-[13px]">
+                  <span className="w-[88px] shrink-0 font-mono text-xs text-accent-strong md:w-24 md:text-[13px]">
                     {formatShortTime(open.clickedAt)}
                   </span>
                   <span className="flex-1 text-sm md:text-[15px]">

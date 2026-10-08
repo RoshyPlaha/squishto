@@ -1,20 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-page: #0b0b0c;
-  --color-surface: #121316;
-  --color-surface-2: #1b1d22;
-  --color-border: #26282d;
-  --color-border-input: #33363c;
-  --color-border-strong: #4a4e57;
-  --color-lime: #c8e60f;
-  --color-lime-hover: #daf43c;
-  --color-lime-dim: #2e3520;
-  --color-ink: #0b0b0c;
-  --color-text: #f2f2ef;
-  --color-text-muted: #b9bcc2;
-  --color-text-dim: #8a8d94;
-  --color-text-faint: #6c7078;
+  --color-page: #f6f5f0;
+  --color-surface: #ffffff;
+  --color-surface-2: #efede6;
+  --color-border: #e4e2da;
+  --color-border-input: #d6d3c9;
+  --color-border-strong: #b8b5aa;
+  --color-brand: #ff6f7d;
+  --color-brand-hover: #f55a69;
+  --color-accent: #1e8a6e;
+  --color-accent-strong: #156b55;
+  --color-accent-soft: #d3f0e5;
+  --color-ink: #111114;
+  --color-ink-hover: #2a2b31;
+  --color-text: #111114;
+  --color-text-muted: #45474e;
+  --color-text-dim: #6b6e76;
+  --color-text-faint: #8d9098;
 
   --font-display: var(--font-anton), Impact, sans-serif;
   --font-body: var(--font-archivo), Helvetica, Arial, sans-serif;
@@ -61,7 +64,7 @@ body {
   margin-bottom: 8px;
 }
 .article-body a {
-  color: var(--color-lime);
+  color: var(--color-accent-strong);
 }
 .article-body code {
   background: var(--color-page);

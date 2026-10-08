@@ -101,7 +101,7 @@ export function HomeForm() {
     const shortLink = `squish.to/${result.shortCode}`;
     return (
       <>
-        <div className="flex flex-col gap-4 overflow-hidden rounded-[22px] bg-lime p-[26px_20px] text-ink md:rounded-[26px] md:p-10">
+        <div className="flex flex-col gap-4 overflow-hidden rounded-[22px] bg-brand p-[26px_20px] text-ink md:rounded-[26px] md:p-10">
           <span className="font-mono text-xs tracking-wide uppercase md:text-xs">
             Squished · {result.destinationUrl.length} chars → {shortLink.length}
           </span>
@@ -112,7 +112,7 @@ export function HomeForm() {
             <button
               type="button"
               onClick={handleCopy}
-              className="min-h-[52px] cursor-pointer rounded-full bg-ink px-[30px] py-4 text-base font-semibold text-lime hover:bg-surface-2"
+              className="min-h-[52px] cursor-pointer rounded-full bg-ink px-[30px] py-4 text-base font-semibold text-brand hover:bg-ink-hover"
             >
               {copied ? "Copied" : "Copy link"}
             </button>
@@ -146,7 +146,7 @@ export function HomeForm() {
             <button
               type="button"
               onClick={reset}
-              className="cursor-pointer rounded-full bg-lime px-5 py-3 text-center font-display text-lg text-ink uppercase hover:bg-lime-hover"
+              className="cursor-pointer rounded-full bg-brand px-5 py-3 text-center font-display text-lg text-ink uppercase hover:bg-brand-hover"
             >
               Squish another
             </button>
@@ -174,7 +174,7 @@ export function HomeForm() {
           strategy="afterInteractive"
         />
       )}
-      <div className="overflow-hidden rounded-[22px] bg-lime p-[22px_20px_24px] text-ink md:rounded-[26px] md:p-[44px_40px_34px]">
+      <div className="overflow-hidden rounded-[22px] bg-brand p-[22px_20px_24px] text-ink md:rounded-[26px] md:p-[44px_40px_34px]">
         <div className="flex items-end justify-between gap-5">
           <h1 className="m-0 origin-bottom-left scale-x-90 pb-[0.13em] font-display text-[clamp(4rem,1.3rem+19vw,16.75rem)] leading-[0.76] uppercase">
             Squish
@@ -200,7 +200,7 @@ export function HomeForm() {
             value={destinationUrl}
             onChange={(e) => setDestinationUrl(e.target.value)}
             placeholder="https://example.com/your-long-url"
-            className="w-full rounded-2xl border border-border-input bg-page px-[22px] py-5 text-base text-text placeholder:text-text-faint focus:outline-2 focus:outline-lime focus:outline-offset-2 md:text-lg"
+            className="w-full rounded-2xl border border-border-input bg-page px-[22px] py-5 text-base text-text placeholder:text-text-faint focus:outline-2 focus:outline-brand focus:outline-offset-2 md:text-lg"
           />
           <div className="flex items-center gap-2.5 rounded-2xl border border-border-input bg-page px-[22px]">
             <span className="text-base text-text-faint md:text-lg">
@@ -220,7 +220,7 @@ export function HomeForm() {
           <button
             type="submit"
             disabled={loading}
-            className="min-h-[56px] cursor-pointer rounded-full bg-lime py-4 font-display text-2xl tracking-wide text-ink uppercase hover:bg-lime-hover disabled:opacity-50 md:min-h-[60px] md:text-[26px]"
+            className="min-h-[56px] cursor-pointer rounded-full bg-brand py-4 font-display text-2xl tracking-wide text-ink uppercase hover:bg-brand-hover disabled:opacity-50 md:min-h-[60px] md:text-[26px]"
           >
             {loading ? "Squishing..." : "Squish it"}
           </button>
@@ -229,8 +229,11 @@ export function HomeForm() {
         <div className="flex items-center rounded-[22px] bg-surface p-5 md:rounded-[26px] md:p-8">
           <p className="m-0 text-sm leading-relaxed text-text-muted text-wrap-pretty md:text-[17px] md:leading-[1.6]">
             squish.to is a free URL shortener with custom slugs - pick your
-            own ending, like squish.to/summer-sale, instead of a random
-            string. Every link comes with built-in click tracking, so you
+            own ending, like{" "}
+            <span className="font-semibold text-brand">
+              squish.to/summer-sale
+            </span>
+            , instead of a random string. Every link comes with built-in click tracking, so you
             always know when and how often it&apos;s been opened. No account
             required: just your marketing companion for cleaner, trackable
             links.

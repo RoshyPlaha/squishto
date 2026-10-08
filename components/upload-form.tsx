@@ -107,7 +107,7 @@ export function UploadForm() {
     const shortLink = `squish.to/${result.shortCode}`;
     return (
       <>
-        <div className="flex flex-col gap-4 overflow-hidden rounded-[22px] bg-lime p-[26px_20px] text-ink md:rounded-[26px] md:p-10">
+        <div className="flex flex-col gap-4 overflow-hidden rounded-[22px] bg-brand p-[26px_20px] text-ink md:rounded-[26px] md:p-10">
           <span className="font-mono text-xs tracking-wide uppercase">
             {result.fileName} &middot; expires in {FILE_EXPIRY_DAYS} days
           </span>
@@ -118,7 +118,7 @@ export function UploadForm() {
             <button
               type="button"
               onClick={() => copyToClipboard(`https://squish.to/${result.shortCode}`)}
-              className="min-h-[52px] cursor-pointer rounded-full bg-ink px-[30px] py-4 text-base font-semibold text-lime hover:bg-surface-2"
+              className="min-h-[52px] cursor-pointer rounded-full bg-ink px-[30px] py-4 text-base font-semibold text-brand hover:bg-ink-hover"
             >
               {copied ? "Copied" : "Copy link"}
             </button>
@@ -137,7 +137,7 @@ export function UploadForm() {
             <button
               type="button"
               onClick={reset}
-              className="w-fit cursor-pointer rounded-full bg-lime px-5 py-3 text-center font-display text-lg text-ink uppercase hover:bg-lime-hover"
+              className="w-fit cursor-pointer rounded-full bg-brand px-5 py-3 text-center font-display text-lg text-ink uppercase hover:bg-brand-hover"
             >
               Upload another
             </button>
@@ -169,7 +169,7 @@ export function UploadForm() {
           required
           accept={[...ALLOWED_CONTENT_TYPES, ".html"].join(",")}
           onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-          className="w-full rounded-2xl border border-border-input bg-page px-[22px] py-5 text-base text-text file:mr-4 file:rounded-full file:border-0 file:bg-lime file:px-4 file:py-2 file:font-semibold file:text-ink"
+          className="w-full rounded-2xl border border-border-input bg-page px-[22px] py-5 text-base text-text file:mr-4 file:rounded-full file:border-0 file:bg-brand file:px-4 file:py-2 file:font-semibold file:text-ink"
         />
         <div className="flex items-center gap-2.5 rounded-2xl border border-border-input bg-page px-[22px]">
           <span className="text-base text-text-faint md:text-lg">squish.to/</span>
@@ -187,7 +187,7 @@ export function UploadForm() {
         <button
           type="submit"
           disabled={loading}
-          className="min-h-[56px] cursor-pointer rounded-full bg-lime py-4 font-display text-2xl tracking-wide text-ink uppercase hover:bg-lime-hover disabled:opacity-50 md:min-h-[60px] md:text-[26px]"
+          className="min-h-[56px] cursor-pointer rounded-full bg-brand py-4 font-display text-2xl tracking-wide text-ink uppercase hover:bg-brand-hover disabled:opacity-50 md:min-h-[60px] md:text-[26px]"
         >
           {loading ? "Uploading..." : "Upload it"}
         </button>

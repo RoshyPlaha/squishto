@@ -3,6 +3,8 @@ import Link from "next/link";
 import { posts } from "#site/content";
 import { MDXContent } from "@/components/mdx-content";
 import { readingTimeMinutes } from "@/lib/reading-time";
+import { extractFaq } from "@/lib/faq-schema";
+import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
@@ -40,12 +42,34 @@ export default async function BlogPost({
   const post = posts.find((p) => p.slug === slug);
   if (!post) notFound();
 
+  const url = `${SITE_URL}/blog/${post.slug}`;
+  const faq = extractFaq(post.raw);
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    datePublished: post.date,
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.description,
+        datePublished: post.date,
+        url,
+        mainEntityOfPage: url,
+        author: { "@type": "Organization", name: "squish.to", url: SITE_URL },
+        publisher: { "@type": "Organization", name: "squish.to", url: SITE_URL },
+      },
+      ...(faq.length > 0
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: faq.map(({ question, answer }) => ({
+                "@type": "Question",
+                name: question,
+                acceptedAnswer: { "@type": "Answer", text: answer },
+              })),
+            },
+          ]
+        : []),
+    ],
   };
 
   const dateLabel = new Date(post.date)

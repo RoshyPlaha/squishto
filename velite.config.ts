@@ -13,6 +13,7 @@ const posts = defineCollection({
       tags: s.array(s.string()).optional(),
       ogImage: s.string().optional(),
       slug: s.path(),
+      raw: s.raw(),
       content: s.mdx(),
     })
     .transform((data) => ({

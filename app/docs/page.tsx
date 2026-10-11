@@ -134,7 +134,7 @@ export default function DocsPage() {
         </p>
         <p className="m-0 text-base text-text-muted">
           There&apos;s no Cloudflare Turnstile check on this endpoint, unlike
-          the web form — Turnstile needs a browser to solve a challenge in,
+          the web form - Turnstile needs a browser to solve a challenge in,
           which an API caller doesn&apos;t have. The rate limit is the gate
           instead.
         </p>
@@ -160,7 +160,7 @@ export default function DocsPage() {
             <tr>
               <td className="py-2 pr-3 font-mono text-text-dim">429</td>
               <td className="py-2 text-text-muted">
-                Rate limit exceeded — check <span className="font-mono">Retry-After</span>.
+                Rate limit exceeded - check <span className="font-mono">Retry-After</span>.
               </td>
             </tr>
           </tbody>
@@ -170,7 +170,7 @@ export default function DocsPage() {
       <Card>
         <SectionHeading>Analytics</SectionHeading>
         <p className="m-0 text-base text-text-muted">
-          This API only creates links — it doesn&apos;t return clicks or
+          This API only creates links - it doesn&apos;t return clicks or
           stats. That stays on the dashboard: open{" "}
           <Link href="/stats" className="underline">
             squish.to/stats

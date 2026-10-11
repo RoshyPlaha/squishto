@@ -5,6 +5,7 @@ import {
   timestamp,
   boolean,
   integer,
+  index,
 } from "drizzle-orm/pg-core";
 
 export const links = pgTable("links", {
@@ -34,3 +35,15 @@ export const clicks = pgTable("clicks", {
   userAgent: text("user_agent"),
   country: text("country"),
 });
+
+export const rateLimitHits = pgTable(
+  "rate_limit_hits",
+  {
+    id: serial("id").primaryKey(),
+    ipHash: text("ip_hash").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [index("rate_limit_hits_ip_hash_idx").on(table.ipHash, table.createdAt)],
+);

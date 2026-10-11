@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getExpiredFileLinks, deleteLink } from "@/lib/db/queries";
+import {
+  getExpiredFileLinks,
+  deleteLink,
+  cleanupOldRateLimitHits,
+} from "@/lib/db/queries";
 
 export async function GET(request: NextRequest) {
   const secret = process.env.CRON_SECRET;
@@ -16,6 +20,10 @@ export async function GET(request: NextRequest) {
     // destination points at one, then removes the row (clicks cascade).
     await deleteLink(link.id);
   }
+
+  // Piggyback the rate-limit hit log's prune onto this existing daily cron
+  // rather than scheduling a second one just for housekeeping.
+  await cleanupOldRateLimitHits();
 
   return NextResponse.json({ deleted: expired.length });
 }

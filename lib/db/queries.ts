@@ -1,7 +1,7 @@
 import { and, desc, eq, gte, isNotNull, lte, sql } from "drizzle-orm";
 import { del } from "@vercel/blob";
 import { db } from "./client";
-import { links, clicks } from "./schema";
+import { links, clicks, rateLimitHits } from "./schema";
 import { generateShortCode } from "../short-code";
 import { PENDING_UPLOAD_DESTINATION, isBlobUrl } from "../blob";
 
@@ -224,6 +224,24 @@ export async function getAllLinks(page: number) {
     totalCount: count,
     totalPages: Math.max(1, Math.ceil(count / ADMIN_PAGE_SIZE)),
   };
+}
+
+export async function recordRateLimitHit(ipHash: string) {
+  await db.insert(rateLimitHits).values({ ipHash });
+}
+
+export async function countRecentHits(ipHash: string, sinceMinutesAgo: number) {
+  const since = new Date(Date.now() - sinceMinutesAgo * 60 * 1000);
+  const [{ count }] = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(rateLimitHits)
+    .where(and(eq(rateLimitHits.ipHash, ipHash), gte(rateLimitHits.createdAt, since)));
+  return count;
+}
+
+export async function cleanupOldRateLimitHits() {
+  const cutoff = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000);
+  await db.delete(rateLimitHits).where(lte(rateLimitHits.createdAt, cutoff));
 }
 
 export async function deleteLink(id: number) {

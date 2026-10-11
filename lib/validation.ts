@@ -6,18 +6,20 @@ export const customCodeSchema = z
   .max(30)
   .regex(/^[a-zA-Z0-9-]+$/, "Only letters, numbers, and hyphens are allowed");
 
+export const urlSchema = z
+  .string()
+  .url()
+  .refine((value) => {
+    try {
+      const protocol = new URL(value).protocol;
+      return protocol === "http:" || protocol === "https:";
+    } catch {
+      return false;
+    }
+  }, "Only http(s) URLs are allowed");
+
 export const createLinkSchema = z.object({
-  destinationUrl: z
-    .string()
-    .url()
-    .refine((value) => {
-      try {
-        const protocol = new URL(value).protocol;
-        return protocol === "http:" || protocol === "https:";
-      } catch {
-        return false;
-      }
-    }, "Only http(s) URLs are allowed"),
+  destinationUrl: urlSchema,
   customCode: customCodeSchema.optional(),
   turnstileToken: z.string(),
 });
@@ -27,3 +29,10 @@ export type CreateLinkInput = z.infer<typeof createLinkSchema>;
 export const reserveUploadSchema = z.object({
   customCode: customCodeSchema.optional(),
 });
+
+export const apiCreateLinkSchema = z.object({
+  destinationUrl: urlSchema,
+  customCode: customCodeSchema.optional(),
+});
+
+export type ApiCreateLinkInput = z.infer<typeof apiCreateLinkSchema>;

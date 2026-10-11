@@ -1,0 +1,94 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "squish.to API",
+    "version": "1.0.0",
+    "description": "Create short links on squish.to programmatically. Free, no account or API key required. Rate limited per IP: 5 requests/minute, 100/day.",
+    "contact": { "url": "https://www.squish.to" }
+  },
+  "servers": [{ "url": "https://www.squish.to" }],
+  "paths": {
+    "/api/v1/links": {
+      "post": {
+        "operationId": "createShortLink",
+        "summary": "Create a short link",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["destinationUrl"],
+                "properties": {
+                  "destinationUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The http(s) URL to shorten."
+                  },
+                  "customCode": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 30,
+                    "pattern": "^[a-zA-Z0-9-]+$",
+                    "description": "Optional custom short code. Letters, numbers, and hyphens only. If omitted, a random code is generated."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Link created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "shortCode": { "type": "string" },
+                    "shortUrl": { "type": "string", "format": "uri" },
+                    "destinationUrl": { "type": "string", "format": "uri" },
+                    "createdAt": { "type": "string", "format": "date-time" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input, reserved custom code, or URL flagged as unsafe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": { "error": { "type": "string" } }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Custom code already taken",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": { "error": { "type": "string" } }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded (5/minute, 100/day per IP). A Retry-After header (seconds) is included.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": { "error": { "type": "string" } }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

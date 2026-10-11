@@ -11,11 +11,13 @@
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
+    "@modelcontextprotocol/server": "^2.3.1",
     "@neondatabase/serverless": "^1.1.0",
     "@next/third-parties": "^16.3.4",
     "@vercel/blob": "^2.8.0",
     "@vercel/functions": "^3.9.5",
     "drizzle-orm": "^0.45.2",
+    "mcp-handler": "^2.1.1",
     "nanoid": "^5.1.16",
     "next": "^16.3.8",
     "qrcode": "^1.5.4",

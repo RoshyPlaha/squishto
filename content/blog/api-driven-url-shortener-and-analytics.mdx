@@ -1,0 +1,72 @@
+---
+title: "An API-Driven URL Shortener: Create Links With One Request"
+description: "squish.to now has a public API for creating short links - no account, no API key. Here's how it works, the rate limits, and why analytics still lives on the dashboard."
+date: "2026-10-11"
+category: "Engineering"
+tags: ["api", "product-update"]
+---
+
+Up to now, making a squish.to link meant opening the site and pasting a URL into a form. That's fine for a one-off, but it breaks down the moment you want to shorten a link from a script, a CI step, or anything that isn't a human in a browser. So squish.to now has a public API for exactly that.
+
+## The endpoint
+
+```
+POST https://www.squish.to/api/v1/links
+```
+
+No account, no API key, no signup flow to sit through first. Send a URL, get a short link back.
+
+Here's the whole thing, start to finish:
+
+```bash
+curl -X POST https://www.squish.to/api/v1/links \
+  -H "Content-Type: application/json" \
+  -d '{"destinationUrl": "https://example.com/a-very-long-url-nobody-wants-to-type"}'
+```
+
+```json
+{
+  "shortCode": "aB3dE9",
+  "shortUrl": "https://squish.to/aB3dE9",
+  "destinationUrl": "https://example.com/a-very-long-url-nobody-wants-to-type",
+  "createdAt": "2026-10-11T09:14:02.000Z"
+}
+```
+
+That's it. It's one request, a link back in the response, nothing to configure beforehand. Drop it into a deploy script to post a short link to Slack when a build finishes, generate one per customer record from a backend job, or wire it into whatever internal tool keeps needing to paste long URLs into short text fields. It behaves exactly like the web form, just without a browser in the loop.
+
+Want a custom ending instead of a random code? Add `customCode`:
+
+```bash
+curl -X POST https://www.squish.to/api/v1/links \
+  -H "Content-Type: application/json" \
+  -d '{"destinationUrl": "https://example.com/pricing", "customCode": "pricing-2026"}'
+```
+
+`customCode` takes letters, numbers, and hyphens, 3 to 30 characters. If it's already taken, you get back a `409`.
+
+## The limits
+
+This endpoint is rate limited per IP address: **5 requests a minute, 100 a day**. If you go over, you get a `429` with a `Retry-After` header telling you how many seconds to wait.
+
+Worth explaining why this looks different from the web form: the form is protected by Cloudflare Turnstile, a bot-check that runs in a real browser. An API has no browser and no human to click through a challenge, so Turnstile simply doesn't apply here. Therefore rate limiting is the gate instead. Five a minute is enough for real automation (a script creating a handful of links, a webhook firing occasionally) without leaving the endpoint open to being hammered.
+
+Other error cases you might hit:
+
+- `400` - the URL is invalid, the custom code is reserved, or the URL got flagged as unsafe by Google Safe Browsing
+- `409` - the custom code you asked for is already taken
+- `429` - rate limit exceeded, check `Retry-After`
+
+## What the API doesn't do: analytics
+
+Analytics stays exactly where it already is: open [squish.to/stats](https://www.squish.to/stats) and enter your short code to see total opens, the last 7 days, a 14-day chart, and your most recent opens with country and referrer. If you're creating links through the API as part of an automated flow, that dashboard is still the place a human checks how they're doing - no separate reporting API to learn, just the one you already know from the web.
+
+This endpoint creates links. It doesn't return clicks, referrers, or any of the stats you'd see on a link's dashboard page - that's deliberate, not a gap we haven't gotten to. Keeping the API surface to "create a link" keeps it small, predictable, and unlikely to change shape under you later.
+
+## Machine-readable spec
+
+If you'd rather point a tool at this than read prose, there's an OpenAPI description at [squish.to/openapi.json](https://www.squish.to/openapi.json) - import it into Postman, Insomnia, or whatever generates a client for you.
+
+## Try it
+
+No account, no key, no setup - just `POST` a URL and get a link back. Full details are in the spec above; everything else about squish.to (the web form, the dashboard, QR codes, file uploads) works exactly as it did before.

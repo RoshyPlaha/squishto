@@ -1,0 +1,90 @@
+---
+title: "Share a Claude or ChatGPT Artifact as a Link (and See When It's Opened)"
+description: "Turn a Claude artifact or ChatGPT page into a plain link you control, with view stats and a 30-day expiry. Here is how, and what to check first."
+date: "2026-10-12"
+category: "Marketing"
+tags: ["how-to", "guide", "product-update"]
+---
+
+# Share a Claude or ChatGPT Artifact as a Link (and See When It's Opened)
+
+To share a Claude or ChatGPT artifact as a link, download or copy its HTML, save it as a `.html` file, and upload it at [squish.to/upload](/upload). You get a short link that opens the page in any browser, with no account needed to view it. Your stats page then shows how many times the link was opened, and when. It works best for static pages like one-pagers, proposals and recaps.
+
+Below: why you might want this instead of the built-in share button, the exact steps, and the one thing to check before you upload.
+
+## Why not just use the share button?
+
+Both tools have their own sharing, and for many cases it is fine. A few things are worth knowing, though.
+
+- **Claude** lets you share an artifact with anyone who has the link, and Anthropic's [sharing help page](https://support.claude.com/en/articles/9547008) describes access levels such as "Can view" and "Can edit". Published legacy chat artifacts open without a Claude account, but for other artifacts everyone needs one. The page does not describe view counts, and it says you cannot publish an artifact again once you unpublish it.
+- **ChatGPT** gives you a share link to the conversation. That is a chat transcript, not a standalone page you can send to a prospect as a clean one-pager.
+
+If you want a simple link, a view count, and a page that disappears on a schedule you know about, hosting the HTML yourself is a neat alternative. Sharing rules change often, so check each tool's current help page for its latest options.
+
+## How to share an artifact as a link on squish.to
+
+1. **Get the HTML.** In Claude, open the artifact and use its copy or download option. In ChatGPT, ask: "Give me the complete page as a single self-contained HTML file."
+2. **Save it as a `.html` file.** Paste the code into a plain text editor and save it, for example as `acme-recap.html`.
+3. **Upload it.** Go to [squish.to/upload](/upload), pick the file, and optionally choose a custom link name such as `acme-recap` (letters, numbers and hyphens, 3 to 30 characters).
+4. **Copy and send the link.** You get a short link like `squish.to/acme-recap` and a QR code.
+5. **Check the stats.** Click **View stats**, or visit squish.to/stats and enter your link name.
+
+Files can be up to 10MB, and they stay live for 30 days.
+
+## Check this first: scripts are switched off
+
+This is the one that catches people out. squish.to serves uploaded HTML as a static page with scripts blocked. Plain HTML and CSS look exactly as designed. But many artifacts, especially interactive ones built as small apps with buttons, calculators or charts, rely on JavaScript, and those parts will not run.
+
+The fix is simple. Ask your AI tool for what you actually want to send:
+
+> "Rebuild this as a single static HTML file with inline CSS and no JavaScript. Keep it mobile friendly and end with one clear call to action."
+
+That gives you a page that looks the same for every recipient and loads fast on a phone.
+
+## What the stats show
+
+For each link you can see:
+
+- Total opens
+- Opens in the last 7 days, and your busiest day
+- A 14-day chart of daily opens
+- Recent opens, each with the time, the country, and the source (for example LinkedIn, WhatsApp or Direct)
+
+Two honest notes. First, stats are per link, not per person, so the simplest habit is **one upload per recipient** (`acme-recap`, `globex-recap`). Second, link previews and email security scanners can load a link automatically, which can add an open no human made. An open a second or two after you hit send is often a preview, while a later one is more likely a person. For the full picture of what is recorded, see [what a URL shortener actually logs](/blog/what-does-url-shortener-log).
+
+## When this is a good fit
+
+- A **sales one-pager or recap** the AI wrote for one prospect
+- A **proposal summary** you want to send as a link
+- A **meeting follow-up** you want to know was read
+- A **quick mockup** you want a client to glance at
+
+If your content is a PDF or an image rather than HTML, the same flow works. See [how to send a PDF proposal as a link](/blog/send-pdf-proposal-as-link-see-when-opened), or read the original walkthrough on [hosting AI-generated HTML and tracking views](/blog/host-ai-generated-html-track-views).
+
+## Keep in mind: it expires
+
+Uploaded files are removed after 30 days, and when a file expires its link and stats are removed with it. If you want to keep the numbers, note them down before then. If the deal runs long, upload the file again and send the new link.
+
+## Try it
+
+Upload your first artifact at [squish.to/upload](/upload). It takes under a minute.
+
+## FAQ
+
+**How do I share a Claude artifact as a link?**
+Copy or download the artifact's HTML, save it as a `.html` file, and upload it at squish.to/upload. Share the short link you get back. Viewers need no account.
+
+**Can I share a ChatGPT page as a link?**
+ChatGPT's built-in share link points to the conversation. To send just the page, ask ChatGPT for a single self-contained HTML file, save it, and upload it to squish.to.
+
+**Can I see who opened my link?**
+You can see how many times it was opened, when, the source, and the country. Stats are per link rather than per person, so use one upload per recipient.
+
+**Will my interactive artifact still work?**
+Static content will. Scripts are blocked on hosted HTML, so buttons, calculators and live charts will not run. Ask your AI tool for a static version.
+
+**How long does the link last?**
+30 days. After that the file, its link and its stats are removed.
+
+**Do I need an account?**
+No. You can upload, share and view stats without signing up.

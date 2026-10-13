@@ -66,7 +66,7 @@ export function BlogFilter({ posts }: { posts: Post[] }) {
             >
               {!post.ogImage && (
                 <span className="font-mono text-[11px] text-text-faint">
-                  image · 3:2
+                  
                 </span>
               )}
             </div>

@@ -1,0 +1,85 @@
+---
+title: "A URL Shortener MCP Server for Claude and ChatGPT (No API Key, No Account)"
+description: "squish.to has a remote MCP server, so Claude, ChatGPT and other AI tools can create short links for you. Here is the URL, how to connect it, and the limits."
+date: "2026-10-13"
+category: "Marketing"
+tags: ["how-to", "product-update"]
+---
+
+squish.to runs a free URL shortener MCP server at `https://www.squish.to/api/mcp`. Add that URL as a remote MCP server or custom connector in an AI tool that supports MCP, and the assistant can create short links for you on request. There is no API key, no account and no OAuth step to set up. It exposes one tool, `create_short_link`.
+
+## What you can do with it
+
+Ask your assistant things like:
+
+- "Shorten this link for my LinkedIn post."
+- "Make me a short link to our pricing page that ends in `pricing-2026`."
+- "Here are five docs links. Give me a short link for each one so I can paste them into a table."
+
+The assistant calls the tool, squish.to creates the link, and the reply comes back inline: the short URL and the page it points to. No tab switching, no copy and paste into a form. It is the same link you would get from the [squish.to form](https://www.squish.to), including the QR code and the stats page.
+
+## The tool
+
+There is one tool, `create_short_link`, with two inputs:
+
+| Input | Required | What it does |
+| --- | --- | --- |
+| `url` | Yes | The http(s) URL to shorten |
+| `customCode` | No | Letters, numbers and hyphens, 3 to 30 characters. A random code is generated if you leave it out. |
+
+A successful call returns a line like `Created https://squish.to/pricing-2026 -> https://example.com/pricing`. If something goes wrong, the tool returns a plain message the assistant can read back to you: the code is reserved, the code is already taken, the URL was flagged as unsafe, or you hit the rate limit.
+
+## How to connect it
+
+The exact menus change as these products update, so check each tool's own docs for the current steps. The shape is the same everywhere:
+
+1. **Claude Code.** Add it as a remote HTTP server: `claude mcp add --transport http squish https://www.squish.to/api/mcp`. Then run `/mcp` in a session to check that it connected.
+2. **Claude on the web or desktop.** Open the connectors settings, choose to add a custom connector, and paste `https://www.squish.to/api/mcp`. Custom connectors may depend on your plan.
+3. **ChatGPT.** Add a custom connector in the connectors settings and paste the same URL. This may require developer mode or a paid plan, depending on your account.
+4. **Anything else that speaks MCP.** Point it at the same URL as a remote (HTTP) server.
+
+Because the server is remote, the connection comes from your AI provider's cloud to squish.to. A local-only MCP setup is not needed.
+
+If you have never set up an MCP connector before, test with a throwaway link first: ask the assistant to shorten `https://example.com` and check that the reply contains a squish.to link.
+
+## Limits and what it does not do
+
+Honest list, so there are no surprises:
+
+- **Rate limit.** The same limit as the REST API: 5 requests a minute and 100 a day, counted per IP address. When you connect from a chat product, requests may come from the provider's servers rather than your own machine, so heavy shared use can hit the limit sooner than you expect. If a call fails with a rate limit message, wait a minute and ask again.
+- **Safety check.** URLs are checked against Google Safe Browsing before a link is created. Flagged URLs are refused.
+- **Links only.** The MCP tool creates short links. It does not upload files and it does not return stats. To see opens, open `squish.to/stats`, enter the short code, and you will see total opens, the last 7 days, the busiest day, a 14-day chart and recent opens with source and country.
+- **No Turnstile.** The web form uses a bot check that needs a browser. MCP has no browser, so the rate limit is the gate instead. Our post on the [API](/blog/api-driven-url-shortener-and-analytics) explains the reasoning.
+
+## When this is handy
+
+- **Writing with an assistant.** You are drafting a post, email or deck with an AI tool and want clean links without leaving the conversation.
+- **Batch jobs.** You paste a list of long URLs and ask for a short link for each.
+- **Agents and automations.** An agent that builds a report or sends a message can create the short links it needs as part of the same run.
+- **Readable codes.** You ask for a specific custom ending, such as `spring-sale`, so the link is easy to say out loud or print.
+
+If your workflow is code rather than chat, the plain [REST API](/docs) does the same job with one POST request.
+
+## Try it
+
+Add `https://www.squish.to/api/mcp` to your assistant, ask it to shorten a link, then paste the code into [squish.to/stats](https://www.squish.to/stats) to watch the first opens arrive. If you only want a link right now, the [squish.to home page](https://www.squish.to) is still the fastest way.
+
+## FAQ
+
+**What is the squish.to MCP server URL?**
+`https://www.squish.to/api/mcp`. It is a remote MCP server. You add it by URL in an MCP-capable client, with no API key or account.
+
+**Does the squish.to MCP server need an API key?**
+No. It is free and open, protected by a rate limit of 5 requests a minute and 100 a day per IP address.
+
+**What can the MCP tool do?**
+It has one tool, `create_short_link`. It takes a URL and an optional custom code and returns a squish.to short link.
+
+**Can the assistant read my link stats through MCP?**
+Not today. The tool only creates links. Stats live at `squish.to/stats`, where you enter the short code.
+
+**Can I upload a file through MCP?**
+No. File uploads, such as HTML, PDF and images, are done on the squish.to upload page, not through the MCP tool.
+
+**Which AI tools work with it?**
+Any client that supports remote MCP servers over HTTP, including Claude Code and the custom connector features in Claude and ChatGPT. Check your tool's docs for the current setup steps.

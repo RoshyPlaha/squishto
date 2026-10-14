@@ -21,8 +21,8 @@ export default function UploadPage() {
         </h1>
         <p className="m-0 text-sm text-text-muted md:text-base">
           Get a short link and a QR code for any image, PDF, or HTML page -
-          HTML renders right at your link. No account needed - links expire
-          automatically after 30 days.
+          HTML pages run JavaScript, served from a separate file.squish.to
+          link. No account needed - links expire automatically after 30 days.
         </p>
       </div>
       <UploadForm />

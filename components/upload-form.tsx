@@ -6,8 +6,13 @@ import Link from "next/link";
 import { QrCode } from "@/components/qr-code";
 import { Toast } from "@/components/toast";
 import { MAX_FILE_SIZE_BYTES, ALLOWED_CONTENT_TYPES, FILE_EXPIRY_DAYS } from "@/lib/upload-config";
+import { FILE_HOST } from "@/lib/blob";
 
-type Result = { shortCode: string; fileName: string };
+type Result = { shortCode: string; fileName: string; isHtml: boolean };
+
+function shareUrl(shortCode: string, isHtml: boolean) {
+  return `https://${isHtml ? FILE_HOST : "squish.to"}/${shortCode}`;
+}
 
 export function UploadForm() {
   const [file, setFile] = useState<File | null>(null);
@@ -86,8 +91,9 @@ export function UploadForm() {
         clientPayload: JSON.stringify({ linkId }),
       });
 
-      setResult({ shortCode, fileName: file.name });
-      await copyToClipboard(`https://squish.to/${shortCode}`);
+      const isHtml = file.type === "text/html";
+      setResult({ shortCode, fileName: file.name, isHtml });
+      await copyToClipboard(shareUrl(shortCode, isHtml));
     } catch {
       setError("Upload failed, please try again");
     } finally {
@@ -104,7 +110,7 @@ export function UploadForm() {
   }
 
   if (result) {
-    const shortLink = `squish.to/${result.shortCode}`;
+    const shortLink = shareUrl(result.shortCode, result.isHtml).replace("https://", "");
     return (
       <>
         <div className="flex flex-col gap-4 overflow-hidden rounded-[22px] bg-brand p-[26px_20px] text-ink md:rounded-[26px] md:p-10">
@@ -117,7 +123,7 @@ export function UploadForm() {
           <div className="flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={() => copyToClipboard(`https://squish.to/${result.shortCode}`)}
+              onClick={() => copyToClipboard(shareUrl(result.shortCode, result.isHtml))}
               className="min-h-[52px] cursor-pointer rounded-full bg-ink px-[30px] py-4 text-base font-semibold text-brand hover:bg-ink-hover"
             >
               {copied ? "Copied" : "Copy link"}
@@ -147,12 +153,12 @@ export function UploadForm() {
               QR code
             </span>
             <QrCode
-              value={`https://squish.to/${result.shortCode}`}
+              value={shareUrl(result.shortCode, result.isHtml)}
               filename={result.shortCode}
             />
           </div>
         </div>
-        <Toast show={copied} message="Copied squish.to link to clipboard" />
+        <Toast show={copied} message="Copied link to clipboard" />
       </>
     );
   }
@@ -194,9 +200,10 @@ export function UploadForm() {
         {error && <p className="text-red-400">{error}</p>}
         <p className="m-0 text-xs text-text-faint">
           Images, PDF, or a single HTML file, up to {MAX_FILE_SIZE_BYTES / 1024 / 1024}MB.
-          HTML pages render at your link, but scripts are blocked and relative
-          file paths won&apos;t resolve — keep it self-contained. Links expire
-          after {FILE_EXPIRY_DAYS} days.
+          HTML pages run JavaScript and render at a {FILE_HOST} link, kept
+          separate from squish.to itself - relative file paths won&apos;t
+          resolve, so keep it self-contained. Links expire after{" "}
+          {FILE_EXPIRY_DAYS} days.
         </p>
       </form>
     </>

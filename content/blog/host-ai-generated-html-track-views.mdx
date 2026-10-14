@@ -22,7 +22,7 @@ A link fixes that. The prospect taps it, the page loads like a normal website, a
 
 1. **Save the HTML as a file.** Copy the code from your AI tool into a plain text editor and save it with a `.html` ending, for example `acme-one-pager.html`. Many AI tools also have a download or export button for this.
 2. **Open [squish.to/upload](/upload).** Pick your file and, if you like, choose a custom name for the link, such as `acme-intro`. Custom names use letters, numbers and hyphens, from 3 to 30 characters.
-3. **Upload and copy the link.** You get a short link like `squish.to/acme-intro`, copied to your clipboard, plus a QR code.
+3. **Upload and copy the link.** You get a short link like `file.squish.to/acme-intro`, copied to your clipboard, plus a QR code. HTML pages are served from `file.squish.to` rather than `squish.to` itself, kept separate so the page can run JavaScript safely.
 4. **Send it.** Put it in an email, a LinkedIn message, a calendar invite or a text.
 
 The file limit is 10MB, and HTML files stay live for 30 days. That suits the usual life of a sales one-pager: you send it, the deal moves, and you replace it.
@@ -52,12 +52,12 @@ For the full list of what a squish.to link records, see [what a URL shortener ac
 
 A few details help your page look right the first time:
 
-- **Scripts do not run.** squish.to serves uploaded HTML as a static page, so JavaScript is switched off. Tell your AI tool to produce plain HTML and CSS with inline styles, with no scripts, and it will look exactly the way you designed it.
+- **JavaScript works.** Hosted pages run on `file.squish.to`, so scripts execute normally - interactive elements, animations, anything your AI tool adds will work as designed.
 - **Use hosted images or inline them.** If your page includes a logo or product shot, link to an image that is already online, or embed it in the file, and keep the whole file under 10MB.
 - **Plan for the 30 days.** If a deal runs long, upload again and send the new link.
 - **Add a clear call to action.** A one-pager works best with one next step, such as "Book a call" with a link to your calendar.
 
-A handy prompt for your AI tool: "Create a single self-contained HTML file with inline CSS and no JavaScript. It should be a one-page summary for [prospect] covering [problem], [our solution], and [next step]. Keep it mobile friendly."
+A handy prompt for your AI tool: "Create a single self-contained HTML file with inline CSS. It should be a one-page summary for [prospect] covering [problem], [our solution], and [next step]. Keep it mobile friendly."
 
 ## A QR code for in-person follow-ups
 
@@ -79,7 +79,7 @@ Yes. Open the stats page for your link to see total opens, opens in the last 7 d
 No. You upload the file and get your link and stats page without signing up.
 
 **Does JavaScript work on the hosted page?**
-No. Uploaded HTML is served as a static page with scripts turned off, so use plain HTML and CSS.
+Yes. Hosted HTML runs on `file.squish.to`, separate from squish.to itself, and JavaScript executes normally there.
 
 **How long does the page stay online?**
 Uploaded files stay live for 30 days.

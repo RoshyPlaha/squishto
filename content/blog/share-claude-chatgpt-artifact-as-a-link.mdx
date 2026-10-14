@@ -26,20 +26,20 @@ If you want a simple link, a view count, and a page that disappears on a schedul
 1. **Get the HTML.** In Claude, open the artifact and use its copy or download option. In ChatGPT, ask: "Give me the complete page as a single self-contained HTML file."
 2. **Save it as a `.html` file.** Paste the code into a plain text editor and save it, for example as `acme-recap.html`.
 3. **Upload it.** Go to [squish.to/upload](/upload), pick the file, and optionally choose a custom link name such as `acme-recap` (letters, numbers and hyphens, 3 to 30 characters).
-4. **Copy and send the link.** You get a short link like `squish.to/acme-recap` and a QR code.
+4. **Copy and send the link.** You get a link like `file.squish.to/acme-recap` and a QR code. HTML pages are served from `file.squish.to` rather than `squish.to` itself, so the page can run JavaScript safely, isolated from the rest of the site.
 5. **Check the stats.** Click **View stats**, or visit squish.to/stats and enter your link name.
 
 Files can be up to 10MB, and they stay live for 30 days.
 
-## Check this first: scripts are switched off
+## Good news: interactive artifacts work too
 
-This is the one that catches people out. squish.to serves uploaded HTML as a static page with scripts blocked. Plain HTML and CSS look exactly as designed. But many artifacts, especially interactive ones built as small apps with buttons, calculators or charts, rely on JavaScript, and those parts will not run.
+Hosted HTML runs on `file.squish.to`, so JavaScript executes normally - buttons, calculators, live charts, and small interactive apps work the same as they did inside Claude or ChatGPT. There's no need to strip scripts out or ask your AI tool for a static-only rebuild first; upload the artifact as it is.
 
-The fix is simple. Ask your AI tool for what you actually want to send:
+If you'd still rather send a simpler, guaranteed-fast-loading page - say, for a one-pager where interactivity isn't the point - you can always ask your AI tool for a plain version:
 
-> "Rebuild this as a single static HTML file with inline CSS and no JavaScript. Keep it mobile friendly and end with one clear call to action."
+> "Rebuild this as a single static HTML file with inline CSS. Keep it mobile friendly and end with one clear call to action."
 
-That gives you a page that looks the same for every recipient and loads fast on a phone.
+Either way works; the static version just loads a touch faster and has nothing to go wrong on an unusual device.
 
 ## What the stats show
 
@@ -81,7 +81,7 @@ ChatGPT's built-in share link points to the conversation. To send just the page,
 You can see how many times it was opened, when, the source, and the country. Stats are per link rather than per person, so use one upload per recipient.
 
 **Will my interactive artifact still work?**
-Static content will. Scripts are blocked on hosted HTML, so buttons, calculators and live charts will not run. Ask your AI tool for a static version.
+Yes. Hosted HTML runs on `file.squish.to` with JavaScript enabled, so buttons, calculators and live charts work the same as in Claude or ChatGPT.
 
 **How long does the link last?**
 30 days. After that the file, its link and its stats are removed.

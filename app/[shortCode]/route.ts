@@ -3,7 +3,7 @@ import { after } from "next/server";
 import { notFound } from "next/navigation";
 import { isReservedWord } from "@/lib/reserved-words";
 import { getLinkByShortCode, recordClick } from "@/lib/db/queries";
-import { PENDING_UPLOAD_DESTINATION } from "@/lib/blob";
+import { PENDING_UPLOAD_DESTINATION, FILE_HOST } from "@/lib/blob";
 
 export async function GET(
   request: NextRequest,
@@ -40,12 +40,25 @@ export async function GET(
   );
 
   if (link.contentType === "text/html") {
+    const host = request.headers.get("host");
+
+    if (host !== FILE_HOST) {
+      // squish.to itself never renders third-party-controlled HTML, even
+      // transiently — hand off to the isolated subdomain, which is the only
+      // place this content actually runs. Keeps already-shared squish.to
+      // links working.
+      return NextResponse.redirect(`https://${FILE_HOST}/${link.shortCode}`, {
+        status: 307,
+      });
+    }
+
     // Vercel Blob forces Content-Disposition: attachment for text/html (to
     // stop exactly this kind of hosting abuse), so a redirect would just
     // download the file instead of rendering it. Fetch it ourselves and
-    // re-serve it under our own headers instead — crucially with a CSP that
-    // blocks script execution, since this is anonymous, unauthenticated
-    // upload hosting arbitrary HTML under our own domain.
+    // re-serve it under our own headers instead. Scripts are allowed here —
+    // this only runs on file.squish.to, isolated from squish.to's own origin
+    // — but plugin embeds, framing, base-tag hijacking, and form exfiltration
+    // stay blocked regardless, since there's no legitimate need for them.
     const blobRes = await fetch(link.destinationUrl);
     if (!blobRes.ok) notFound();
     const html = await blobRes.text();
@@ -54,7 +67,7 @@ export async function GET(
       headers: {
         "Content-Type": "text/html; charset=utf-8",
         "Content-Security-Policy":
-          "script-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';",
+          "script-src 'self' 'unsafe-inline' https:; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';",
         "X-Content-Type-Options": "nosniff",
       },
     });

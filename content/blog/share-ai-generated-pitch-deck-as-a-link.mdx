@@ -1,0 +1,90 @@
+---
+title: "Share an AI-Generated Pitch Deck as a Link (No JavaScript Needed)"
+description: "Ask your AI for a scroll-snap deck in plain HTML and CSS, upload it to squish.to, and see when your prospect opens it."
+date: "2026-10-14"
+category: "Marketing"
+tags: ["how-to", "guide", "product-update"]
+---
+
+# Share an AI-Generated Pitch Deck as a Link (No JavaScript Needed)
+
+To share an AI-generated pitch deck as a link, ask your AI tool for a single HTML file that uses only CSS, upload it at [squish.to/upload](/upload), and send the short link you get back. Each slide is a full-screen section that snaps into place as the reader scrolls or swipes. The stats page then shows when the deck was opened, from where, and from which source.
+
+The "only CSS" part matters. squish.to serves uploaded HTML as a static page with scripts switched off, and many AI-built decks rely on JavaScript for their slide controls. A deck built with plain CSS works perfectly. Here is how to get one.
+
+## Why many AI decks need a small tweak
+
+Ask an AI tool for an HTML presentation and you will often get a reveal.js style deck. Those decks load a script that handles arrow keys, transitions and the slide counter. On squish.to, the page is served with a policy that blocks all scripts, including ones loaded from a CDN. The slides would still be in the page, but the controls would not run.
+
+The fix is easy, and it also makes the deck friendlier for the person receiving it. A deck built from scroll-snap sections needs nothing to run. It works with a thumb swipe on a phone, a trackpad on a laptop, and the arrow keys or space bar in most browsers, because it is just a page that scrolls.
+
+## The prompt
+
+Paste this into Claude, ChatGPT or any AI tool, and fill in the brackets:
+
+> Create a single self-contained HTML file for a [number]-slide pitch deck for [prospect or audience]. Use only HTML and inline CSS, with no JavaScript and no external scripts. Make each slide a full-screen section using CSS scroll snap, so the page snaps from one slide to the next as you scroll. Use `scroll-snap-type: y proximity` and `min-height: 100vh` on each slide so tall content is never cut off on a phone. Slides: [title, the problem, our solution, proof, pricing, next step]. Large text, high contrast, and mobile friendly. Keep the file under 5MB.
+
+The core of what you should get back looks like this:
+
+```html
+<style>
+  html { scroll-snap-type: y proximity; }
+  section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6vw;
+  }
+</style>
+<section><h1>Acme + Globex</h1></section>
+<section><h2>The problem</h2></section>
+```
+
+We suggest `proximity` rather than `mandatory` for one practical reason. With `mandatory`, a slide that is taller than the screen can be hard to scroll through on a phone. `proximity` still snaps neatly but never traps the reader.
+
+## Upload it and send the link
+
+1. **Save the HTML as a file**, for example `acme-deck.html`.
+2. **Open [squish.to/upload](/upload)**, choose the file, and optionally pick a custom name such as `acme-deck`. Custom names use letters, numbers and hyphens, from 3 to 30 characters.
+3. **Copy the short link** and send it by email, LinkedIn message or calendar invite. A QR code comes with it, which is handy if you want the deck on a slide at an event.
+
+The file limit is 10MB, and uploaded files stay live for 30 days. That fits a typical sales cycle, and if a deal runs long you can upload again and send a fresh link.
+
+## What you will see after the deck is sent
+
+Click **View stats**, or visit squish.to/stats and enter your link name. You get total opens, opens in the last 7 days, your busiest day, a 14-day chart, and a list of recent opens with the time, country and source.
+
+Two things are worth knowing:
+
+- **It counts opens, not slides.** Stats record each time the link is opened. They cannot tell you which slide someone stopped on or how long they spent on pricing.
+- **It counts per link, not per person.** To know which prospect opened what, upload one copy per prospect: `acme-deck`, `globex-deck`. It takes seconds and keeps each set of stats tied to one conversation.
+
+Some email security tools and chat apps load links automatically to scan or preview them, which can add an open that no human made. An open within a second or two of sending is probably a preview, while one hours later is more likely a person.
+
+## Tips for decks that travel well
+
+- **Keep it short.** Six to eight slides read well as a scrolling page.
+- **Inline your styles and images.** Put CSS in the file and embed small images, so the deck is one file that travels as one link.
+- **End on one next step.** A single "Book a call" button beats five options.
+- **Want a downloadable version too?** You can upload a PDF as well. We covered that in [sending a PDF proposal as a link](/blog/send-pdf-proposal-as-link-see-when-opened).
+
+For the basics of uploading AI-written pages and reading the numbers, see our post on [hosting AI-generated HTML and tracking views](/blog/host-ai-generated-html-track-views).
+
+## FAQ
+
+**How do I share an AI-generated pitch deck as a link?**
+Ask your AI tool for a single HTML file using only CSS, with no JavaScript. Upload it at squish.to/upload and share the short link you get back.
+
+**Why do my reveal.js slides not respond to the arrow keys?**
+squish.to serves uploaded HTML as a static page with scripts blocked, so slide controls that rely on JavaScript will not run. Ask for a CSS scroll-snap deck instead.
+
+**Can I see which slide someone viewed?**
+No. Stats show opens of the link, not activity inside the page.
+
+**Can I see which person opened my deck?**
+Stats are per link, so upload one copy per prospect and send each their own link.
+
+**How long does the deck stay online?**
+Uploaded files stay live for 30 days, and the file limit is 10MB.

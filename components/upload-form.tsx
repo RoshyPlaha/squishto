@@ -120,6 +120,13 @@ export function UploadForm() {
           <div className="font-display text-4xl leading-[0.9] break-words uppercase md:text-[100px] md:leading-[0.86]">
             {shortLink}
           </div>
+          {result.isHtml && (
+            <p className="m-0 text-sm text-ink/70">
+              HTML pages run on {FILE_HOST}, kept separate from squish.to so
+              they can safely run JavaScript. Images and PDFs always stay on
+              squish.to itself.
+            </p>
+          )}
           <div className="flex flex-wrap gap-3">
             <button
               type="button"
@@ -200,10 +207,10 @@ export function UploadForm() {
         {error && <p className="text-red-400">{error}</p>}
         <p className="m-0 text-xs text-text-faint">
           Images, PDF, or a single HTML file, up to {MAX_FILE_SIZE_BYTES / 1024 / 1024}MB.
-          HTML pages run JavaScript and render at a {FILE_HOST} link, kept
-          separate from squish.to itself - relative file paths won&apos;t
-          resolve, so keep it self-contained. Links expire after{" "}
-          {FILE_EXPIRY_DAYS} days.
+          Images and PDFs open directly at your squish.to link. HTML pages
+          run JavaScript and render at a separate {FILE_HOST} link instead -
+          relative file paths won&apos;t resolve, so keep it self-contained.
+          Links expire after {FILE_EXPIRY_DAYS} days.
         </p>
       </form>
     </>

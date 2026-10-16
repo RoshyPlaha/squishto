@@ -1,0 +1,83 @@
+---
+title: "How to Put UTM Parameters in a QR Code Without Making It Unscannable"
+description: "Tag the destination with UTMs, then put the short link in the QR code. Here is the real size difference, and a naming pattern that keeps your analytics clean."
+date: "2026-10-16"
+category: "Marketing"
+tags: ["guide", "how-to"]
+---
+
+# How to Put UTM Parameters in a QR Code Without Making It Unscannable
+
+To put UTM parameters in a QR code, add them to your destination URL, shorten that tagged URL, and encode the short link in the QR code instead of the long one. The scan still lands on the tagged page, so your analytics sees the campaign. The code itself stays small and easy to scan, because it only has to carry about 30 characters.
+
+## Why long UTM URLs make bad QR codes
+
+A QR code stores your text as a grid of squares called modules. The more characters you encode, the bigger the grid gets. On a fixed printed size, a bigger grid means smaller squares, and small squares are harder for a phone camera to read on a creased flyer, a glossy menu or a poster seen from across a room.
+
+We tested this with the same QR library squish.to uses, at the default error correction level (M):
+
+- The full tagged URL, `https://www.example.com/spring-sale?utm_source=postcard&utm_medium=print&utm_campaign=spring-sale-2026&utm_content=front-qr-north-region` (136 characters) gives a version 8 code, a 49 x 49 grid of modules.
+- The short link, `https://squish.to/spring-postcard` (33 characters) gives a version 3 code, a 29 x 29 grid of modules.
+
+At the same printed size, each square in the short link's code is roughly 40 percent bigger than in the long URL's code. That is the difference between a code that scans first time and one that needs three tries.
+
+## Step by step
+
+**1. Build the tagged URL.** Add the UTM parameters to the page you want people to land on. Keep the values lowercase and consistent, because analytics tools such as GA4 treat `QR` and `qr` as two different values.
+
+**2. Paste the tagged URL into squish.to.** Go to [squish.to](/), paste the full URL and pick a name you can recognise later, like `spring-postcard`. squish.to keeps the whole destination, query string included, and sends people there when they open the short link.
+
+**3. Download the QR code.** Every link gets a QR code that encodes the short link, not your long destination. So the code stays at the small size above however many UTM parameters sit behind it. For more on the QR feature, see [every squish.to link now comes with a QR code](/blog/qr-codes-for-every-link).
+
+**4. Print a proof and scan it.** Scan it on two or three different phones. Check that you land on the right page and that the visit shows up in your analytics with the campaign values you expect. Check the destination before the print run, because you will not be able to fix a printed code.
+
+## A naming pattern that scales
+
+Keep it boring and predictable:
+
+```
+utm_source=postcard
+utm_medium=qr
+utm_campaign=spring-sale-2026
+utm_content=front-north-region
+```
+
+- `utm_medium` is the channel type. Using `qr` for every code lets you compare all your codes in one report.
+- `utm_source` is where the code physically lives: `postcard`, `menu`, `trade-show-banner`.
+- `utm_campaign` groups the pieces of one push.
+- `utm_content` tells two similar placements apart, such as two versions of the same flyer.
+
+Use hyphens, not spaces, and write everything in lowercase.
+
+## Use one short link per placement
+
+Your analytics tool sees the UTM values. squish.to sees the opens on the link itself. Together they give you two views of the same scans.
+
+The squish.to stats page shows total opens, the last 7 days, the busiest day, a 14-day chart and recent opens with the source and country. A phone camera scan usually arrives without a referring site, so expect those opens to read as direct. That is why one link per placement matters: if `spring-postcard` and `spring-menu` are separate links, their stats stay separate. If you reuse one link on both, you cannot tell them apart afterwards. For a deeper look at this habit, see [how to prove your print ads and direct mail are working](/blog/direct-ads).
+
+## What a short link does not do
+
+- It does not add UTM tags for you. Add them to the destination before you shorten it.
+- It does not change who a scan came from. Stats count opens of a link. They do not identify a person.
+- It does not replace testing. Always scan the printed proof.
+
+## Try it
+
+Take the tagged URL for your next flyer, poster or menu, paste it into [squish.to](/), and download the QR code. Print a proof and scan it before the real run.
+
+## FAQ
+
+**How do I add UTM parameters to a QR code?**
+Add the UTM parameters to the destination URL, shorten it, and generate the QR code from the short link. The scan opens the short link, which sends the visitor to the tagged page.
+
+**Do long UTM URLs make QR codes harder to scan?**
+Yes. More characters means a denser grid of smaller squares. In our test, a 136 character tagged URL produced a 49 x 49 grid, while a 33 character short link produced a 29 x 29 grid.
+
+**What should I use for utm_medium on a QR code?**
+A single consistent value such as `qr`, in lowercase. Then you can compare all your QR placements in one report, and use `utm_source` and `utm_content` for the details.
+
+**Can squish.to build the UTM parameters for me?**
+No. You add them to the destination URL yourself, then paste the full URL into squish.to. The query string is kept when the short link redirects.
+
+**How do I know which printed piece got the scan?**
+Create one short link and one QR code per placement. Each link has its own stats page, and each destination carries its own `utm_content` value.

@@ -67,7 +67,7 @@ export async function GET(
       headers: {
         "Content-Type": "text/html; charset=utf-8",
         "Content-Security-Policy":
-          "script-src 'self' 'unsafe-inline' https:; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';",
+          "script-src 'self' 'unsafe-inline' https: blob:; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';",
         "X-Content-Type-Options": "nosniff",
       },
     });

@@ -1,0 +1,100 @@
+---
+title: "Share an AI-Generated Landing Page Mockup With a Client for Review"
+description: "Built a landing page mockup with Gemini, ChatGPT, Lovable or any AI tool? Turn it into one link a client can open without a login or a deploy, and see when it's viewed."
+date: "2026-10-19"
+category: "Marketing"
+tags: ["how-to", "guide"]
+---
+
+# Share an AI-Generated Landing Page Mockup With a Client for Review
+
+To share an AI-generated landing page mockup with a client, save the page as a single `.html` file and upload it at [squish.to/upload](/upload). You get a short link that opens the page in any browser. The client needs no login, and you need no deploy, repo or hosting account. Your stats page then shows when the link was opened, so you know whether the review has started.
+
+This works with any tool that gives you HTML: Gemini, ChatGPT, Claude, Lovable, Bolt, v0, Replit, Cursor, or whatever you used last week.
+
+## Why not just deploy it?
+
+A real deploy is the right answer for a launch. For a review, it is a lot of ceremony. You need a host, a project, a build, and sometimes a domain, all to find out whether the client likes the headline.
+
+The other usual options each have a catch:
+
+- **Pasting the HTML into a message** shows the client source code instead of a page.
+- **Attaching the file** asks a non-technical reviewer to download it, find it, and open it in a browser. Many will not.
+- **The AI tool's own share link** often opens a chat or a project view, and may need the viewer to have an account. Check each tool's current sharing help, because this changes often.
+
+A short link to the finished page skips all of that. The client taps it, sees the page, and replies with feedback.
+
+## Step by step
+
+1. **Ask for one self-contained file.** Try: "Give me this page as a single HTML file with the CSS and JavaScript inline. Use no local image paths." Relative file paths will not resolve once the page is hosted, so images should be inline, or loaded from full `https://` URLs.
+2. **Copy the code and save it.** Paste it into a plain text editor and save it as, say, `acme-landing-v1.html`. If your tool exports a file directly, use that. If it exports a folder or zip with several files, ask for a single-file version instead.
+3. **Upload it.** Go to [squish.to/upload](/upload), choose the file, and optionally pick a custom link name such as `acme-landing-v1`. Names can use letters, numbers and hyphens.
+4. **Send the link.** HTML pages open at a `file.squish.to` address, which keeps hosted pages isolated from the rest of the site. You also get a QR code, handy for showing the mockup on a phone in a meeting.
+5. **Check the stats.** Use **View stats**, or visit squish.to/stats and enter your link name.
+
+Files can be up to 10MB and stay live for 30 days.
+
+## Will the interactive bits work?
+
+Yes, mostly. Hosted HTML runs with JavaScript enabled, so menus, tabs, sliders, animations and small calculators behave as they did in your AI tool. Scripts loaded from `https://` sources, such as a CDN, work too.
+
+A few things are deliberately blocked, so plan around them:
+
+- **Embedded frames**, for example a YouTube iframe, will not load.
+- **Forms cannot submit anywhere.** A signup box on the mockup will look right, but it will not send data. For a mockup that is usually what you want.
+- **Plugin embeds and base tags** are blocked.
+
+If your design depends on any of these, tell the client up front, or ask your AI tool for a version with a static placeholder.
+
+## One link per reviewer
+
+Stats are per link, not per person. If you send the same link to three stakeholders, you will see three opens but not whose they were. The simple fix is to upload once per reviewer: `acme-landing-v1-sam`, `acme-landing-v1-priya`. Same file, separate links, separate stats. There is more on this in [one link per recipient](/blog/one-link-per-recipient-track-who-opened-your-proposal).
+
+## What the stats show
+
+- Total opens
+- Opens in the last 7 days, and the busiest day
+- A 14-day chart of daily opens
+- Recent opens with time, source and country
+
+One honest caution: link previews and email security scanners sometimes load a link automatically, which can add an open no person made. An open a second or two after you send is often a preview. A later open is more likely a human. For the full picture of what is recorded, read [what a URL shortener actually logs](/blog/what-does-url-shortener-log).
+
+## When to use this, and when not to
+
+Good fit:
+
+- A first-draft landing page for a client or stakeholder to react to
+- A campaign page concept you want feedback on before it goes to the dev team
+- A quick A/B of two headlines, sent as two links
+
+Not the right tool:
+
+- A live page that needs to stay up longer than 30 days
+- Anything that must collect form submissions
+- A site made of many linked pages and local assets
+
+When the review is done and the page is approved, deploy it properly. If the deal or the review runs past 30 days, upload the file again and send the new link.
+
+## Try it
+
+Upload your mockup at [squish.to/upload](/upload). It takes under a minute, and no account is needed.
+
+## FAQ
+
+**How do I share an AI-generated landing page with a client?**
+Save the page as a single `.html` file, upload it at squish.to/upload, and send the short link you get back. The client opens it in any browser without a login.
+
+**Do I need to deploy the page first?**
+No. Uploading the HTML file is enough to get a working link, so you can show a draft without a host, a repo or a build.
+
+**Does it work with Lovable, Bolt, v0, Gemini and ChatGPT?**
+It works with any tool that can give you a single self-contained HTML file. If a tool exports a multi-file project, ask it for a single-file version.
+
+**Will JavaScript and animations work?**
+Yes, scripts run on the hosted page. Frames, form submissions, plugin embeds and base tags are blocked.
+
+**Can I see when the client opens it?**
+Yes. Stats show total opens, the last 7 days, the busiest day, a 14-day chart and recent opens with source and country. They are per link, so use one upload per reviewer to tell them apart.
+
+**How long does the link last, and what is the size limit?**
+Links last 30 days and files can be up to 10MB.

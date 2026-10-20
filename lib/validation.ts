@@ -36,3 +36,9 @@ export const apiCreateLinkSchema = z.object({
 });
 
 export type ApiCreateLinkInput = z.infer<typeof apiCreateLinkSchema>;
+
+export const feedbackSchema = z.object({
+  message: z.string().trim().min(1, "Enter a message").max(1000),
+  shortCode: z.string().max(60).optional(),
+  turnstileToken: z.string(),
+});

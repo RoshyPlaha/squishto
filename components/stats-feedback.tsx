@@ -1,0 +1,89 @@
+"use client";
+
+import { useState, FormEvent } from "react";
+import Script from "next/script";
+import { getTurnstileToken } from "@/lib/turnstile-client";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+export function StatsFeedback({ shortCode }: { shortCode: string }) {
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    if (!message.trim()) return;
+    setError(null);
+    setLoading(true);
+
+    try {
+      const turnstileToken = await getTurnstileToken(
+        TURNSTILE_SITE_KEY,
+        "feedback",
+      );
+
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, shortCode, turnstileToken }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        setError(data?.error ?? "Something went wrong");
+        return;
+      }
+
+      setSent(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="flex flex-col gap-3 rounded-[22px] bg-surface p-[22px] md:rounded-[26px] md:p-[30px]">
+      {TURNSTILE_SITE_KEY && (
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          strategy="afterInteractive"
+        />
+      )}
+      <label
+        htmlFor="stats-feedback"
+        className="font-mono text-[11px] tracking-wide text-text-dim uppercase"
+      >
+        What&apos;s missing from these stats?
+      </label>
+      {sent ? (
+        <span className="text-sm text-text md:text-[15px]">
+          Thanks, that helps.
+        </span>
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-2.5 md:flex-row"
+        >
+          <input
+            id="stats-feedback"
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            maxLength={1000}
+            placeholder="Optional, one line is plenty"
+            className="min-h-[52px] flex-1 rounded-full bg-page px-5 text-sm text-text placeholder:text-text-faint focus:outline-none md:text-base"
+          />
+          <button
+            type="submit"
+            disabled={loading || !message.trim()}
+            className="min-h-[52px] cursor-pointer rounded-full bg-ink px-6 text-base font-semibold text-brand hover:bg-ink-hover disabled:opacity-50"
+          >
+            {loading ? "Sending..." : "Send"}
+          </button>
+        </form>
+      )}
+      {error && <span className="text-sm text-text-dim">{error}</span>}
+    </div>
+  );
+}

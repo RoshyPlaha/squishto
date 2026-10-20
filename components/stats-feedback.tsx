@@ -43,7 +43,7 @@ export function StatsFeedback({ shortCode }: { shortCode: string }) {
   }
 
   return (
-    <div className="flex flex-col gap-3 rounded-[22px] bg-surface p-[22px] md:rounded-[26px] md:p-[30px]">
+    <div className="flex flex-col gap-3 rounded-[22px] bg-brand p-[22px] text-ink md:flex-row md:items-center md:gap-8 md:rounded-[26px] md:p-[26px_30px]">
       {TURNSTILE_SITE_KEY && (
         <Script
           src="https://challenges.cloudflare.com/turnstile/v0/api.js"
@@ -52,18 +52,18 @@ export function StatsFeedback({ shortCode }: { shortCode: string }) {
       )}
       <label
         htmlFor="stats-feedback"
-        className="font-mono text-[11px] tracking-wide text-text-dim uppercase"
+        className="font-display text-3xl leading-none uppercase md:w-[300px] md:shrink-0 md:text-[40px]"
       >
         What&apos;s missing from these stats?
       </label>
       {sent ? (
-        <span className="text-sm text-text md:text-[15px]">
+        <span className="text-base font-semibold md:text-lg">
           Thanks, that helps.
         </span>
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-2.5 md:flex-row"
+          className="flex flex-1 flex-col gap-2.5 md:flex-row"
         >
           <input
             id="stats-feedback"
@@ -72,7 +72,7 @@ export function StatsFeedback({ shortCode }: { shortCode: string }) {
             onChange={(e) => setMessage(e.target.value)}
             maxLength={1000}
             placeholder="Optional, one line is plenty"
-            className="min-h-[52px] flex-1 rounded-full bg-page px-5 text-sm text-text placeholder:text-text-faint focus:outline-none md:text-base"
+            className="min-h-[52px] flex-1 rounded-full bg-surface px-5 text-sm text-text placeholder:text-text-faint focus:outline-none md:text-base"
           />
           <button
             type="submit"
@@ -83,7 +83,7 @@ export function StatsFeedback({ shortCode }: { shortCode: string }) {
           </button>
         </form>
       )}
-      {error && <span className="text-sm text-text-dim">{error}</span>}
+      {error && <span className="text-sm font-medium">{error}</span>}
     </div>
   );
 }

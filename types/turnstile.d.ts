@@ -8,7 +8,6 @@ declare global {
         options: {
           sitekey: string;
           action?: string;
-          size?: "invisible" | "normal" | "compact";
           callback: (token: string) => void;
         },
       ) => string;

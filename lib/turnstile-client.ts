@@ -35,6 +35,9 @@ export async function getTurnstileToken(
   if (!ready) return "";
 
   const container = document.createElement("div");
+  // Keep the widget out of the page layout in case the site key is a
+  // non-invisible type and Cloudflare decides to show it.
+  container.style.cssText = "position:fixed;bottom:16px;left:16px;z-index:60";
   document.body.appendChild(container);
 
   try {
@@ -43,7 +46,6 @@ export async function getTurnstileToken(
       window.turnstile!.render(container, {
         sitekey: siteKey,
         action,
-        size: "invisible",
         callback: (token: string) => {
           clearTimeout(timeout);
           resolve(token);

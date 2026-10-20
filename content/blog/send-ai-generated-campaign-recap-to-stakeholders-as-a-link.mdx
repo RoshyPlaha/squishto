@@ -1,0 +1,81 @@
+---
+title: "Send an AI-Generated Campaign Recap to Stakeholders as a Link"
+description: "Turn a campaign recap from ChatGPT, Claude, Gemini or Copilot into one link, with no login for stakeholders, and see when each person opens it."
+date: "2026-10-20"
+category: "Marketing"
+tags: ["how-to", "guide"]
+---
+
+# Send an AI-Generated Campaign Recap to Stakeholders as a Link
+
+To send an AI-generated campaign recap to stakeholders as a link, save the recap as a single `.html` file or a PDF and upload it at [squish.to/upload](/upload). You get a short link that opens in any browser, with no login for the reader. Your stats page then shows when the link was opened, so you know whether the recap has landed before you chase anyone.
+
+The tool that wrote the recap does not matter. ChatGPT, Claude, Gemini, Microsoft Copilot, Perplexity, Mistral Le Chat or a page builder like v0 or Lovable can all produce a recap you can save as a file. The rest of this post covers how to ask for one, how to upload it, and how to read the opens honestly.
+
+## Why a link beats a pasted summary
+
+A recap pasted into an email loses its layout, and a slide deck attached to a thread gets buried. A link keeps the page exactly as you made it, reads well on a phone, and can be reopened whenever someone needs the numbers again. You also get a signal that attachments never give you: whether anyone looked.
+
+It works well for the people who skim. A VP who has thirty seconds can tap one link and see the headline result first.
+
+## Step 1: Ask your AI tool for a single-file recap
+
+Give the tool your campaign numbers and ask for a recap in a format you can save. A prompt that works across tools:
+
+> Write a one-page campaign recap as a single self-contained HTML file. Put the headline result first in one sentence. Then three key metrics against target, one insight about the biggest surprise, and one decision I need from the reader. Keep all CSS inside the file. Under 250 words of text.
+
+Two habits make the result easier to host:
+
+- **Ask for one file.** Inline CSS and, if you want a chart, an inline script or an `https` script from a CDN. Hosted HTML on squish.to can run scripts. Frames, forms, base tags and embedded objects are blocked, so skip those.
+- **Check every number yourself.** AI tools can slip on arithmetic and on percentages. Compare each figure with your analytics before you send.
+
+If your tool exports PDF instead, that works too. Upload the PDF the same way.
+
+## Step 2: Upload and name the link
+
+1. Open [squish.to/upload](/upload) and choose your `.html` or `.pdf` file.
+2. Pick a custom name such as `q4-launch-recap`. Names use letters, numbers and hyphens, from 3 to 30 characters.
+3. Copy the short link. You also get a QR code, handy if the recap goes on a slide in the review meeting.
+
+The limits to know: files can be up to 10MB, uploaded files stay live for 30 days, and no account is needed. HTML pages are served from a separate `file.squish.to` address, so the page runs apart from the rest of the site.
+
+## Step 3: Upload one copy per stakeholder
+
+Stats are per link, not per person. If you send one link to your CMO, the sales lead and an agency partner, you will see opens but not who made them. Upload a copy for each person with its own name, such as `q4-recap-cmo` and `q4-recap-sales`. It takes seconds, and each stats page then belongs to one person.
+
+This is the same trick covered in [one link per recipient to track who opened a proposal](/blog/one-link-per-recipient-track-who-opened-your-proposal).
+
+## What the stats show
+
+Open **View stats** or visit squish.to/stats and enter your link name. You will see total opens, opens in the last 7 days, your busiest day, a 14-day chart, and recent opens with the source (for example Slack, email or Direct) and the country.
+
+For a recap, the useful question is "has the person who needs to decide seen it?" If the link has zero opens after two days, nudge them. If it was opened once, a few seconds after you sent it, that may be a link preview or an email scanner rather than a person, so treat later opens as the better sign.
+
+## A short note to send with the link
+
+Keep the message as short as the recap:
+
+> Q4 launch recap: signups beat target by 18%, paid social was the surprise. One decision needed from you on next quarter's budget. squish.to/q4-recap-cmo
+
+Lead with the result, name the decision, and let the link carry the detail.
+
+## Try it
+
+Save your next recap as a file and upload it at [squish.to/upload](/upload). If your recap is a styled page rather than a document, [hosting AI-generated HTML and tracking views](/blog/host-ai-generated-html-track-views) covers the details.
+
+## FAQ
+
+**How do I share an AI-generated campaign recap as a link?**
+Save it as an HTML file or PDF, upload it at squish.to/upload, and send the short link. Readers open it in their browser with no login.
+
+**Can I see when a stakeholder opens the recap?**
+Yes. The stats page shows total opens, the last 7 days, a 14-day chart, and recent opens with source and country.
+
+**Can I tell which stakeholder opened it?**
+Not from one link. Stats are per link, so upload one copy per person.
+
+**Do link previews count as opens?**
+They can. Some chat apps and email scanners load links automatically, which can add an open no person made.
+
+**How long does the link last, and how big can the file be?**
+Uploaded files stay live for 30 days and can be up to 10MB.

@@ -1,0 +1,64 @@
+{
+  "account": { "name": "AWS Demo Scenarios 2", "region": "us-east-1" },
+  "nodes": [
+    { "id": "internet", "type": "internet", "name": "Internet", "props": { "description": "Anyone, anywhere" } },
+
+    { "id": "ep-8000", "type": "endpoint", "name": "http://3.91.216.125:8000", "props": { "port": 8000, "protocol": "HTTP", "auth": "none" } },
+    { "id": "ep-sse", "type": "endpoint", "name": "http://3.91.216.125:8000/sse", "props": { "port": 8000, "protocol": "HTTP (SSE)", "auth": "none" } },
+    { "id": "ep-22", "type": "endpoint", "name": "3.91.216.125:22", "props": { "port": 22, "protocol": "SSH", "auth": "key" } },
+    { "id": "ep-api", "type": "endpoint", "name": "https://api.shop.example.com", "props": { "port": 443, "protocol": "HTTPS", "auth": "cognito" } },
+
+    { "id": "ec2-mcp", "type": "ec2", "name": "my-malicious-model-demo-ec2", "props": { "instanceId": "i-0a1b2c3d4e5f60718", "instanceType": "t3.medium", "publicIp": "3.91.216.125", "os": "Ubuntu 22.04", "imdsV2": false } },
+    { "id": "lambda-api", "type": "lambda", "name": "checkout-api", "props": { "runtime": "nodejs22.x", "publicUrl": false } },
+    { "id": "ec2-batch", "type": "ec2", "name": "internal-batch-worker", "props": { "instanceId": "i-0f9e8d7c6b5a40312", "instanceType": "m6i.large", "publicIp": null, "os": "Amazon Linux 2023", "imdsV2": true } },
+
+    { "id": "tech-mcp", "type": "technology", "name": "Model Context Protocol (my-mcp)", "props": { "category": "AI / agent tooling", "version": "0.4.1" } },
+
+    { "id": "cve-53366", "type": "vulnerability", "name": "CVE-2025-53366", "props": { "severity": "critical", "cvss": 9.8, "package": "mcp-server-python", "fixAvailable": true } },
+    { "id": "cve-53365", "type": "vulnerability", "name": "CVE-2025-53365", "props": { "severity": "high", "cvss": 8.1, "package": "mcp-server-python", "fixAvailable": true } },
+    { "id": "cve-batch", "type": "vulnerability", "name": "CVE-2024-6387", "props": { "severity": "medium", "cvss": 5.9, "package": "openssh", "fixAvailable": true } },
+
+    { "id": "secret-key", "type": "secret", "name": "AWS key in ~/.aws/credentials", "props": { "kind": "AWS access key", "path": "/home/ubuntu/.aws/credentials", "lastRotated": "2023-02-11" } },
+
+    { "id": "role-admin", "type": "iam_role", "name": "DevOpsAdminRole", "props": { "policies": ["AdministratorAccess"], "trustedBy": "ec2.amazonaws.com" } },
+    { "id": "role-lambda", "type": "iam_role", "name": "CheckoutLambdaRole", "props": { "policies": ["orders-table-rw"], "trustedBy": "lambda.amazonaws.com" } },
+    { "id": "role-batch", "type": "iam_role", "name": "BatchReadOnlyRole", "props": { "policies": ["app-logs-read"], "trustedBy": "ec2.amazonaws.com" } },
+    { "id": "user-ci", "type": "iam_user", "name": "legacy-ci-user", "props": { "policies": ["s3:*"], "mfa": false } },
+
+    { "id": "s3-pii", "type": "s3", "name": "customer-pii-bucket", "props": { "dataClassification": ["PII"], "public": false, "encrypted": true, "objects": 182340 } },
+    { "id": "s3-src", "type": "s3", "name": "source-code-artifacts", "props": { "dataClassification": ["Source code"], "public": false, "encrypted": true, "objects": 9421 } },
+    { "id": "s3-finance", "type": "s3", "name": "finance-reports", "props": { "dataClassification": ["Financial"], "public": false, "encrypted": false, "objects": 3112 } },
+    { "id": "s3-marketing", "type": "s3", "name": "marketing-exports", "props": { "dataClassification": ["PII"], "public": true, "encrypted": false, "objects": 57 } },
+    { "id": "s3-logs", "type": "s3", "name": "app-logs", "props": { "dataClassification": [], "public": false, "encrypted": true, "objects": 1203394 } },
+    { "id": "s3-assets", "type": "s3", "name": "public-web-assets", "props": { "dataClassification": [], "public": true, "encrypted": false, "objects": 812 } }
+  ],
+  "edges": [
+    { "id": "e-int-8000", "from": "internet", "to": "ep-8000", "rel": "exposes" },
+    { "id": "e-int-sse", "from": "internet", "to": "ep-sse", "rel": "exposes" },
+    { "id": "e-int-22", "from": "internet", "to": "ep-22", "rel": "exposes" },
+    { "id": "e-int-api", "from": "internet", "to": "ep-api", "rel": "exposes" },
+    { "id": "e-int-marketing", "from": "internet", "to": "s3-marketing", "rel": "exposes" },
+    { "id": "e-int-assets", "from": "internet", "to": "s3-assets", "rel": "exposes" },
+
+    { "id": "e-8000-mcp", "from": "ep-8000", "to": "ec2-mcp", "rel": "routes_to" },
+    { "id": "e-sse-mcp", "from": "ep-sse", "to": "ec2-mcp", "rel": "routes_to" },
+    { "id": "e-22-mcp", "from": "ep-22", "to": "ec2-mcp", "rel": "routes_to" },
+    { "id": "e-api-lambda", "from": "ep-api", "to": "lambda-api", "rel": "routes_to" },
+
+    { "id": "e-mcp-tech", "from": "ec2-mcp", "to": "tech-mcp", "rel": "runs" },
+    { "id": "e-mcp-cve1", "from": "ec2-mcp", "to": "cve-53366", "rel": "has_finding" },
+    { "id": "e-mcp-cve2", "from": "ec2-mcp", "to": "cve-53365", "rel": "has_finding" },
+    { "id": "e-mcp-secret", "from": "ec2-mcp", "to": "secret-key", "rel": "has_finding" },
+    { "id": "e-batch-cve", "from": "ec2-batch", "to": "cve-batch", "rel": "has_finding" },
+
+    { "id": "e-mcp-admin", "from": "ec2-mcp", "to": "role-admin", "rel": "assumes" },
+    { "id": "e-lambda-role", "from": "lambda-api", "to": "role-lambda", "rel": "assumes" },
+    { "id": "e-batch-role", "from": "ec2-batch", "to": "role-batch", "rel": "assumes" },
+    { "id": "e-secret-ci", "from": "secret-key", "to": "user-ci", "rel": "grants" },
+
+    { "id": "e-admin-pii", "from": "role-admin", "to": "s3-pii", "rel": "can_access" },
+    { "id": "e-admin-src", "from": "role-admin", "to": "s3-src", "rel": "can_access" },
+    { "id": "e-ci-finance", "from": "user-ci", "to": "s3-finance", "rel": "can_access" },
+    { "id": "e-batch-logs", "from": "role-batch", "to": "s3-logs", "rel": "can_access" }
+  ]
+}

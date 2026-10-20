@@ -117,15 +117,25 @@ export default async function AdminPage({
                     ? "Hosted page"
                     : link.contentType ?? "—"}
                 </td>
-                <td className="max-w-[260px] p-4 text-text-muted">
-                  {link.recentClicks.length > 0
-                    ? link.recentClicks
-                        .map(
-                          (click) =>
-                            `${click.country ?? "—"} via ${referrerLabel(click.referrer)}`,
-                        )
-                        .join(", ")
-                    : "—"}
+                <td className="max-w-[420px] min-w-[220px] p-4 text-text-muted">
+                  {link.recentClicks.length > 0 ? (
+                    <details>
+                      <summary className="cursor-pointer select-none hover:text-text">
+                        {link.recentClicks.length} click
+                        {link.recentClicks.length === 1 ? "" : "s"}
+                      </summary>
+                      <ul className="mt-2 flex list-none flex-col gap-1 text-xs">
+                        {link.recentClicks.map((click, i) => (
+                          <li key={i}>
+                            {click.country ?? "—"} via{" "}
+                            {referrerLabel(click.referrer)}
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  ) : (
+                    "—"
+                  )}
                 </td>
                 <td className="p-4">
                   <DeleteLinkForm id={link.id} redirectTo={redirectTo} />

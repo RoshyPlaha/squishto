@@ -1,10 +1,6 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import Script from "next/script";
-import { getTurnstileToken } from "@/lib/turnstile-client";
-
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 export function StatsFeedback({ shortCode }: { shortCode: string }) {
   const [message, setMessage] = useState("");
@@ -19,15 +15,10 @@ export function StatsFeedback({ shortCode }: { shortCode: string }) {
     setLoading(true);
 
     try {
-      const turnstileToken = await getTurnstileToken(
-        TURNSTILE_SITE_KEY,
-        "feedback",
-      );
-
       const res = await fetch("/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, shortCode, turnstileToken }),
+        body: JSON.stringify({ message, shortCode }),
       });
 
       if (!res.ok) {
@@ -44,12 +35,6 @@ export function StatsFeedback({ shortCode }: { shortCode: string }) {
 
   return (
     <div className="flex flex-col gap-3 rounded-[22px] bg-brand p-[22px] text-ink md:flex-row md:items-center md:gap-8 md:rounded-[26px] md:p-[26px_30px]">
-      {TURNSTILE_SITE_KEY && (
-        <Script
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-          strategy="afterInteractive"
-        />
-      )}
       <label
         htmlFor="stats-feedback"
         className="font-display text-3xl leading-none uppercase md:w-[300px] md:shrink-0 md:text-[40px]"

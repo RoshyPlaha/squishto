@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { feedbackSchema } from "@/lib/validation";
-import { isLikelyBot } from "@/lib/turnstile";
 import { createFeedback } from "@/lib/db/queries";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { getRequestIp, hashIp } from "@/lib/ip";
@@ -16,14 +15,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { message, shortCode, turnstileToken } = parsed.data;
-
-  if (await isLikelyBot(turnstileToken)) {
-    return NextResponse.json(
-      { error: "Verification failed, please try again" },
-      { status: 400 },
-    );
-  }
+  const { message, shortCode } = parsed.data;
 
   const ip = getRequestIp(request);
   if (ip) {

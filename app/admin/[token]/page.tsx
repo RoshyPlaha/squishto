@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getAllLinks } from "@/lib/db/queries";
 import { DeleteLinkForm } from "@/components/delete-link-form";
+import { referrerLabel } from "@/lib/referrer-label";
 
 export const metadata: Metadata = {
   title: "Admin",
@@ -56,6 +57,9 @@ export default async function AdminPage({
                 Country
               </th>
               <th className="p-4 font-mono text-xs tracking-wide uppercase">
+                Creator
+              </th>
+              <th className="p-4 font-mono text-xs tracking-wide uppercase">
                 Created
               </th>
               <th className="p-4 font-mono text-xs tracking-wide uppercase">
@@ -69,6 +73,9 @@ export default async function AdminPage({
               </th>
               <th className="p-4 font-mono text-xs tracking-wide uppercase">
                 Type
+              </th>
+              <th className="p-4 font-mono text-xs tracking-wide uppercase">
+                Recent clicks
               </th>
               <th className="p-4 font-mono text-xs tracking-wide uppercase">
                 {""}
@@ -92,6 +99,9 @@ export default async function AdminPage({
                 <td className="p-4 text-text-muted">
                   {link.creatorCountry ?? "—"}
                 </td>
+                <td className="p-4 font-mono text-xs text-text-muted">
+                  {link.creatorIpHash ? link.creatorIpHash.slice(0, 8) : "—"}
+                </td>
                 <td className="p-4 whitespace-nowrap text-text-muted">
                   {formatDate(link.createdAt)}
                 </td>
@@ -107,6 +117,16 @@ export default async function AdminPage({
                     ? "Hosted page"
                     : link.contentType ?? "—"}
                 </td>
+                <td className="max-w-[260px] p-4 text-text-muted">
+                  {link.recentClicks.length > 0
+                    ? link.recentClicks
+                        .map(
+                          (click) =>
+                            `${click.country ?? "—"} via ${referrerLabel(click.referrer)}`,
+                        )
+                        .join(", ")
+                    : "—"}
+                </td>
                 <td className="p-4">
                   <DeleteLinkForm id={link.id} redirectTo={redirectTo} />
                 </td>
@@ -114,7 +134,7 @@ export default async function AdminPage({
             ))}
             {links.length === 0 && (
               <tr>
-                <td colSpan={9} className="p-4 text-text-dim">
+                <td colSpan={11} className="p-4 text-text-dim">
                   No links yet.
                 </td>
               </tr>

@@ -1,4 +1,4 @@
-import { and, desc, eq, gte, isNotNull, lte, sql } from "drizzle-orm";
+import { and, desc, eq, gte, inArray, isNotNull, lte, sql } from "drizzle-orm";
 import { del } from "@vercel/blob";
 import { db } from "./client";
 import { links, clicks, rateLimitHits } from "./schema";
@@ -217,8 +217,35 @@ export async function getAllLinks(page: number) {
     db.select({ count: sql<number>`count(*)::int` }).from(links),
   ]);
 
+  const linkIds = rows.map((row) => row.id);
+  const clickRows = linkIds.length
+    ? await db
+        .select({
+          linkId: clicks.linkId,
+          referrer: clicks.referrer,
+          country: clicks.country,
+        })
+        .from(clicks)
+        .where(inArray(clicks.linkId, linkIds))
+        .orderBy(desc(clicks.clickedAt))
+    : [];
+
+  const clicksByLink = new Map<number, { referrer: string | null; country: string | null }[]>();
+  for (const click of clickRows) {
+    const existing = clicksByLink.get(click.linkId) ?? [];
+    if (existing.length < RECENT_OPENS_LIMIT) {
+      existing.push({ referrer: click.referrer, country: click.country });
+    }
+    clicksByLink.set(click.linkId, existing);
+  }
+
+  const linksWithClicks = rows.map((row) => ({
+    ...row,
+    recentClicks: clicksByLink.get(row.id) ?? [],
+  }));
+
   return {
-    links: rows,
+    links: linksWithClicks,
     page: safePage,
     pageSize: ADMIN_PAGE_SIZE,
     totalCount: count,

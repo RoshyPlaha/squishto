@@ -1,7 +1,7 @@
 import { and, desc, eq, gte, isNotNull, lte, sql } from "drizzle-orm";
 import { del } from "@vercel/blob";
 import { db } from "./client";
-import { links, clicks, rateLimitHits } from "./schema";
+import { links, clicks, rateLimitHits, feedback } from "./schema";
 import { generateShortCode } from "../short-code";
 import { PENDING_UPLOAD_DESTINATION, isBlobUrl } from "../blob";
 
@@ -256,4 +256,16 @@ export async function deleteLink(id: number) {
   }
 
   await db.delete(links).where(eq(links.id, id));
+}
+
+export async function createFeedback(params: {
+  message: string;
+  shortCode?: string;
+  country?: string | null;
+}) {
+  await db.insert(feedback).values(params);
+}
+
+export async function getRecentFeedback(limit: number) {
+  return db.select().from(feedback).orderBy(desc(feedback.createdAt)).limit(limit);
 }

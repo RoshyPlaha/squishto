@@ -43,7 +43,6 @@ export async function getTurnstileToken(
       window.turnstile!.render(container, {
         sitekey: siteKey,
         action,
-        size: "invisible",
         callback: (token: string) => {
           clearTimeout(timeout);
           resolve(token);

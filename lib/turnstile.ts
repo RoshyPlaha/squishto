@@ -3,8 +3,15 @@ const TURNSTILE_ENDPOINT =
 
 export async function isLikelyBot(token: string): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
+  console.log(
+    "[turnstile debug] token length:",
+    token.length,
+    "prefix:",
+    token.slice(0, 12),
+  );
   if (!secret) {
     // Fail open in local/dev environments without a configured key.
+    console.log("[turnstile debug] no secret configured, failing open");
     return false;
   }
 
@@ -15,10 +22,15 @@ export async function isLikelyBot(token: string): Promise<boolean> {
   });
 
   if (!response.ok) {
+    console.log("[turnstile debug] siteverify HTTP error:", response.status);
     // Fail open on upstream errors so a Cloudflare outage doesn't take down link creation.
     return false;
   }
 
-  const data = (await response.json()) as { success: boolean };
+  const data = (await response.json()) as {
+    success: boolean;
+    "error-codes"?: string[];
+  };
+  console.log("[turnstile debug] siteverify response:", data);
   return !data.success;
 }

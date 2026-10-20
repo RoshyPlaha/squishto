@@ -1,28 +1,28 @@
 ---
-title: "Share an AI-Generated Pitch Deck as a Link (No JavaScript Needed)"
-description: "Ask your AI for a scroll-snap deck in plain HTML and CSS, upload it to squish.to, and see when your prospect opens it."
+title: "Share an AI-Generated Pitch Deck as a Link"
+description: "Ask your AI for a single-file HTML deck, upload it to squish.to, and see when your prospect opens it. A CSS scroll-snap deck is the simplest option."
 date: "2026-10-14"
 category: "Marketing"
 tags: ["how-to", "guide", "product-update"]
 ---
 
-# Share an AI-Generated Pitch Deck as a Link (No JavaScript Needed)
+# Share an AI-Generated Pitch Deck as a Link
 
-To share an AI-generated pitch deck as a link, ask your AI tool for a single HTML file that uses only CSS, upload it at [squish.to/upload](/upload), and send the short link you get back. Each slide is a full-screen section that snaps into place as the reader scrolls or swipes. The stats page then shows when the deck was opened, from where, and from which source.
+To share an AI-generated pitch deck as a link, ask your AI tool for a single HTML file, upload it at [squish.to/upload](/upload), and send the short link you get back. Each slide is a full-screen section that snaps into place as the reader scrolls or swipes. The stats page then shows when the deck was opened, from where, and from which source.
 
-The "only CSS" part matters. squish.to serves uploaded HTML as a static page with scripts switched off, and many AI-built decks rely on JavaScript for their slide controls. A deck built with plain CSS works perfectly. Here is how to get one.
+Hosted HTML on squish.to can run scripts, so a reveal.js style deck with arrow-key controls works. Even so, a plain CSS scroll-snap deck is the simplest and most reliable thing to send: it has nothing to load, and it works on any phone. Here is how to get one.
 
-## Why many AI decks need a small tweak
+## Why a scroll-snap deck is a safe default
 
-Ask an AI tool for an HTML presentation and you will often get a reveal.js style deck. Those decks load a script that handles arrow keys, transitions and the slide counter. On squish.to, the page is served with a policy that blocks all scripts, including ones loaded from a CDN. The slides would still be in the page, but the controls would not run.
+Ask an AI tool for an HTML presentation and you will often get a reveal.js style deck. Those decks load a script that handles arrow keys, transitions and the slide counter. That works on squish.to, because uploaded HTML is served from `file.squish.to` with scripts allowed. Frames, forms, base tags and embedded objects are blocked, so avoid those.
 
-The fix is easy, and it also makes the deck friendlier for the person receiving it. A deck built from scroll-snap sections needs nothing to run. It works with a thumb swipe on a phone, a trackpad on a laptop, and the arrow keys or space bar in most browsers, because it is just a page that scrolls.
+If you want the simplest possible deck, a scroll-snap build is hard to break. It needs no script and no outside file to load. It works with a thumb swipe on a phone, a trackpad on a laptop, and the arrow keys or space bar in most browsers, because it is just a page that scrolls.
 
 ## The prompt
 
 Paste this into Claude, ChatGPT or any AI tool, and fill in the brackets:
 
-> Create a single self-contained HTML file for a [number]-slide pitch deck for [prospect or audience]. Use only HTML and inline CSS, with no JavaScript and no external scripts. Make each slide a full-screen section using CSS scroll snap, so the page snaps from one slide to the next as you scroll. Use `scroll-snap-type: y proximity` and `min-height: 100vh` on each slide so tall content is never cut off on a phone. Slides: [title, the problem, our solution, proof, pricing, next step]. Large text, high contrast, and mobile friendly. Keep the file under 5MB.
+> Create a single self-contained HTML file for a [number]-slide pitch deck for [prospect or audience]. Use only HTML and inline CSS, with no external files. Make each slide a full-screen section using CSS scroll snap, so the page snaps from one slide to the next as you scroll. Use `scroll-snap-type: y proximity` and `min-height: 100vh` on each slide so tall content is never cut off on a phone. Slides: [title, the problem, our solution, proof, pricing, next step]. Large text, high contrast, and mobile friendly. Keep the file under 5MB.
 
 The core of what you should get back looks like this:
 
@@ -75,10 +75,10 @@ For the basics of uploading AI-written pages and reading the numbers, see our po
 ## FAQ
 
 **How do I share an AI-generated pitch deck as a link?**
-Ask your AI tool for a single HTML file using only CSS, with no JavaScript. Upload it at squish.to/upload and share the short link you get back.
+Ask your AI tool for a single HTML file, ideally a CSS scroll-snap deck. Upload it at squish.to/upload and share the short link you get back.
 
-**Why do my reveal.js slides not respond to the arrow keys?**
-squish.to serves uploaded HTML as a static page with scripts blocked, so slide controls that rely on JavaScript will not run. Ask for a CSS scroll-snap deck instead.
+**Do reveal.js and other JavaScript decks work?**
+Yes. Hosted HTML runs scripts, including ones loaded over https. If a deck misbehaves, ask for a self-contained CSS scroll-snap version instead.
 
 **Can I see which slide someone viewed?**
 No. Stats show opens of the link, not activity inside the page.

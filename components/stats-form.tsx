@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { QrCode } from "@/components/qr-code";
+import { StatsFeedback } from "@/components/stats-feedback";
 
 type DailyCount = { date: string; count: number };
 type RecentOpen = { clickedAt: string; source: string; country: string | null };
@@ -196,6 +197,8 @@ export function StatsForm({
             </div>
           </div>
 
+          <StatsFeedback key={stats.shortCode} shortCode={stats.shortCode} />
+
           <div className="grid grid-cols-1 gap-[10px] md:grid-cols-[1.4fr_1fr] md:gap-4">
             <div className="flex flex-col gap-4 rounded-[22px] bg-surface p-[22px] md:rounded-[26px] md:p-[30px]">
               <span className="font-mono text-[11px] tracking-wide text-text-dim uppercase">
@@ -257,8 +260,7 @@ export function StatsForm({
                 </div>
               ))}
             </div>
-          </div>
-        </>
+          </div>        </>
       )}
     </>
   );

@@ -47,3 +47,13 @@ export const rateLimitHits = pgTable(
   },
   (table) => [index("rate_limit_hits_ip_hash_idx").on(table.ipHash, table.createdAt)],
 );
+
+export const feedback = pgTable("feedback", {
+  id: serial("id").primaryKey(),
+  message: text("message").notNull(),
+  shortCode: text("short_code"),
+  country: text("country"),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});

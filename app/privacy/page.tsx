@@ -41,6 +41,13 @@ export default function Privacy() {
         .
       </p>
       <p className="mt-4 text-gray-600">
+        The stats page has an optional box for suggestions. If you send one,
+        we store the message, the short code of the stats page you were on,
+        a coarse country code and the time. We do not ask for or store your
+        name or email, so please do not include personal details in the
+        message.
+      </p>
+      <p className="mt-4 text-gray-600">
         squish.to also lets you upload a file (images or PDF, up to 10MB) and
         get a short link to it. Uploaded files are stored using Vercel Blob
         storage and are automatically deleted 30 days after upload. Treat

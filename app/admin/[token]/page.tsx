@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllLinks } from "@/lib/db/queries";
+import { getAllLinks, getRecentFeedback } from "@/lib/db/queries";
 import { DeleteLinkForm } from "@/components/delete-link-form";
 import { referrerLabel } from "@/lib/referrer-label";
 
@@ -35,6 +35,7 @@ export default async function AdminPage({
   const { page: pageParam } = await searchParams;
   const page = Math.max(1, parseInt(pageParam ?? "1", 10) || 1);
   const { links, totalCount, totalPages } = await getAllLinks(page);
+  const recentFeedback = page === 1 ? await getRecentFeedback(50) : [];
   const redirectTo = `/admin/${token}${page > 1 ? `?page=${page}` : ""}`;
 
   return (
@@ -168,6 +169,36 @@ export default async function AdminPage({
           </Link>
         )}
       </div>
+
+      {recentFeedback.length > 0 && (
+        <div className="flex flex-col rounded-[22px] bg-surface p-[22px]">
+          <h2 className="pb-2.5 font-mono text-xs tracking-wide text-text-dim uppercase">
+            Feedback ({recentFeedback.length})
+          </h2>
+          {recentFeedback.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col gap-1 border-t border-border py-3 md:flex-row md:gap-4"
+            >
+              <span className="w-[160px] shrink-0 text-xs whitespace-nowrap text-text-dim">
+                {formatDate(item.createdAt)}
+                {item.country ? ` · ${item.country}` : ""}
+              </span>
+              <span className="flex-1 text-sm break-words text-text">
+                {item.message}
+              </span>
+              {item.shortCode && (
+                <Link
+                  href={`/stats?code=${item.shortCode}`}
+                  className="text-sm text-text-muted underline"
+                >
+                  {item.shortCode}
+                </Link>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </main>
   );
 }

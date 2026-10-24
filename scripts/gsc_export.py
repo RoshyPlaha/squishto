@@ -44,6 +44,7 @@ def main():
             break
         start_row += 25000
 
+    os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["query", "page", "clicks", "impressions", "ctr", "position"])

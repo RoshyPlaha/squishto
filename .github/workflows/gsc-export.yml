@@ -1,0 +1,30 @@
+name: Search Console export
+
+on:
+  schedule:
+    - cron: "0 5 * * 1-5" # weekday mornings, before the blog research run
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install google-auth requests
+      - name: Export
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+        run: python scripts/gsc_export.py
+      - name: Commit if changed
+        run: |
+          git config user.name "gsc-export"
+          git config user.email "gsc-export@users.noreply.github.com"
+          git add data/gsc
+          git diff --cached --quiet || (git commit -m "Update Search Console export [skip ci]" && git push)

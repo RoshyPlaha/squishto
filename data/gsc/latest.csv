@@ -1,9 +1,9 @@
 query,page,clicks,impressions,ctr,position
-google drive google url shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,58,0,50.6
-google drive google url shortener integration,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,31,0,69.9
-google drive to google url shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,28,0,68.4
-google drive url shortener integration,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,27,0,67.6
-url shortener api,https://www.squish.to/blog/api-driven-url-shortener-and-analytics,0,8,0,96
+google drive google url shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,61,0,51.5
+google drive google url shortener integration,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,35,0,70.0
+google drive to google url shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,35,0,69.4
+google drive url shortener integration,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,32,0,67.8
+url shortener api,https://www.squish.to/blog/api-driven-url-shortener-and-analytics,0,10,0,95.3
 url shortener with api,https://www.squish.to/blog/api-driven-url-shortener-and-analytics,0,4,0,96.8
 drive url shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,3,0,59
 google drive short link,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,3,0,42.3
@@ -29,6 +29,7 @@ shorten google doc link,https://www.squish.to/blog/how-to-shorten-a-google-drive
 shorten google docs link,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,1,0,98
 shorten teams meeting link,https://www.squish.to/blog/how-to-shorten-a-microsoft-teams-link,0,1,0,10
 shorten url api,https://www.squish.to/blog/api-driven-url-shortener-and-analytics,0,1,0,95
+squik link,https://www.squish.to/,0,1,0,7
 url shortener service api,https://www.squish.to/blog/api-driven-url-shortener-and-analytics,0,1,0,99
 were goes,https://www.squish.to/blog/how-to-check-where-a-short-link-goes,0,1,0,47
 where does this link go,https://www.squish.to/blog/how-to-check-where-a-short-link-goes,0,1,0,88

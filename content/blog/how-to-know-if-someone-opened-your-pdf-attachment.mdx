@@ -1,0 +1,88 @@
+---
+title: "How to Know If Someone Opened Your PDF Attachment (Read Receipts vs Link Tracking)"
+description: "A plain attachment can't tell you if it was opened. Here is why read receipts fall short and how to send a link instead and see when it's opened."
+date: "2026-10-26"
+category: "Marketing"
+tags: ["how-to", "comparison"]
+---
+
+# How to Know If Someone Opened Your PDF Attachment
+
+You can't see whether a PDF attachment was opened, because once it is in someone's inbox the file has no connection back to you. The reliable fix is to send a link instead of the file. Upload the PDF at [squish.to/upload](/upload), send the short link, and the stats page shows when it was opened, from which country and via which source. No account, no signup for the reader and no tracking pixel.
+
+The rest of this post explains why the usual shortcuts (read receipts and email open tracking) answer a different question, then walks through the link method and its honest limits.
+
+## Why read receipts don't answer "did they open my PDF?"
+
+A read receipt or an email open tracker tells you something about the **email**. Neither tells you anything about the **file inside it**.
+
+- **Read receipts** depend on the recipient's setup. Outlook lets people decline to send one, some organizations block them, and Gmail only offers them on some Google Workspace accounts. Even a delivered receipt only says the message was opened in a mail client.
+- **Tracking pixels** are tiny images loaded when an email is opened. Privacy features such as Apple Mail Privacy Protection fetch images in advance, and Gmail loads them through its own proxy, so a pixel can fire when nobody has looked. If the reader's mail app blocks images, it never fires at all.
+- **Neither sees the attachment.** Someone can open the email and never touch the PDF, or save the PDF and open it later offline. Nothing is reported back.
+
+This is nobody's fault. It is simply how email works. It also means the question "was my PDF opened?" needs a different approach.
+
+## The simple fix: send a link, not a file
+
+When the PDF lives behind a link, every visit to that link can be counted. That is the whole trick, and it works in email, LinkedIn, WhatsApp, Slack or a text message.
+
+1. **Export the PDF.** Google Docs, Word, Notion and most AI assistants can download a document as a PDF.
+2. **Open [squish.to/upload](/upload)** and choose the file. Optionally pick a link name such as `acme-quote`. Custom names use letters, numbers and hyphens, from 3 to 30 characters.
+3. **Upload and copy the short link.** You also get a QR code.
+4. **Send the link** in place of the attachment. A line like "Here's the quote: squish.to/acme-quote" reads well and avoids attachment size limits.
+5. **Check the stats.** Click **View stats**, or go to squish.to/stats and enter your link name.
+
+## What the stats show
+
+- **Total opens**
+- **Opens in the last 7 days** and your **busiest day**
+- **A 14-day chart** of daily opens
+- **Recent opens**, each with the time, the country and the source (for example LinkedIn, WhatsApp, a newsletter, or Direct)
+
+That is enough to decide when to follow up. A first open an hour after you send is a good moment to stay patient. A day with no opens is a gentle nudge to check in.
+
+## Honest limits
+
+Link tracking is more direct than a pixel, but it is not magic. Worth knowing:
+
+- **Stats are per link, not per person.** If you send one link to five people, you will see opens but not who made them. Upload one copy per recipient (`acme-quote`, `globex-quote`) and each stats page belongs to one person. See [one link per recipient](/blog/one-link-per-recipient-track-who-opened-your-proposal) for a naming scheme.
+- **Not every open is a human.** Link previews in chat apps and email security scanners can load the link automatically, so an open that appears within seconds of sending may not be a person. squish.to counts every visit to the link, so a later open, hours after you sent it, is far more likely to be a real reader.
+- **An open is a visit, not a read.** squish.to does not track which pages were viewed or for how long.
+- **10MB file cap** per upload.
+- **Files stay live for 30 days.** For a longer sales cycle, upload again and send the new link.
+- **Already sent it as an attachment?** You can't check after the fact. Reply with the link version, and you will see opens from then on.
+
+## Attachment or link: which to use
+
+| | Attachment | Short link |
+|---|---|---|
+| Shows if the file was opened | No | Yes, per link |
+| Needs the reader to sign up | No | No |
+| Works if mail blocks big files | No | Yes (up to 10MB) |
+| Lives forever | In their inbox | 30 days |
+
+If the recipient needs a permanent copy, it is perfectly fine to send the link and let them download the PDF from it. For a related comparison, see [Google Drive link or uploaded file: how to send a client a PDF](/blog/google-drive-link-or-uploaded-file-send-client-a-pdf).
+
+## Try it
+
+Upload your next PDF at [squish.to/upload](/upload) and watch for the first open.
+
+## FAQ
+
+**Can I tell if someone opened my PDF attachment?**
+Not from the attachment itself. Send the PDF as a link instead, and the link's stats show each open with time, country and source.
+
+**Do read receipts show whether a PDF was opened?**
+No. A read receipt only reports that the email was opened, and recipients or their organizations can often decline to send one.
+
+**Are email tracking pixels reliable?**
+They are a hint at best. Apple Mail Privacy Protection and Gmail's image proxy can trigger them without a real open, and blocked images can hide real ones.
+
+**Do I need an account, and does my reader?**
+No account for you, and no signup for the reader. They just tap the link.
+
+**Can I see which person opened it?**
+Not directly. Stats are per link, so upload one copy per recipient to tell people apart.
+
+**How big can the file be, and how long does it stay online?**
+Up to 10MB, and uploaded files stay live for 30 days.

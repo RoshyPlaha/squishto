@@ -1,0 +1,83 @@
+---
+title: "Share a Gemini, Copilot or Grok HTML Report With a Client Without a Login"
+description: "Turn an HTML report from Gemini, Copilot, Grok or any AI tool into one link a client can open with no account, and see when it's opened."
+date: "2026-10-29"
+category: "Marketing"
+tags: ["how-to", "guide"]
+---
+
+# Share a Gemini, Copilot or Grok HTML Report With a Client Without a Login
+
+To share an AI-generated HTML report with a client who has no login, save the report as a single `.html` file and upload it at [squish.to/upload](/upload). You get a short link that opens the report in any browser. The client needs no account with the AI tool you used, and your stats page shows when the link was opened.
+
+This works with Gemini, Microsoft Copilot, Grok, Mistral Le Chat, Perplexity, ChatGPT, Claude or anything else that can hand you HTML.
+
+## Why a share button isn't always enough
+
+Most AI tools have a way to share a result. Whether it suits a client is worth checking before you send it:
+
+- **Where does the link open?** Some share links open inside the tool's own site, with its own page chrome around your report.
+- **Does the viewer need an account?** Some tools need the recipient to sign in, and some work or school setups limit sharing to people in the same organisation. For example, Microsoft's help page for Copilot Pages says sharing depends on your account type and storage. Check each tool's current help page, because this changes often.
+- **Can you see if it was opened?** A share link from a chat tool usually doesn't tell you.
+
+A plain link to a finished page avoids all three. The client taps it, reads the report, and replies.
+
+## Step by step
+
+1. **Ask for one self-contained file.** Try: "Give me this report as a single HTML file with the CSS and any JavaScript inline. Put images inline or use full https:// URLs."
+2. **Save it.** Paste the code into a plain text editor and save it as something like `q3-results-acme.html`. If the tool exports a file directly, use that. If you get a folder or zip, ask for a single-file version.
+3. **Upload it.** Go to [squish.to/upload](/upload), choose the file, and optionally pick a link name such as `q3-results-acme`. Names can use letters, numbers and hyphens.
+4. **Send the link.** HTML opens at a `file.squish.to` address, which keeps hosted pages isolated from the rest of the site. You also get a QR code for showing the report on a phone.
+5. **Check the stats.** Use **View stats**, or visit squish.to/stats and enter your link name.
+
+## Will charts and tables still work?
+
+Usually, yes. Hosted HTML runs with JavaScript enabled, so charts, sortable tables, tabs and animations behave as they did in your AI tool. Scripts loaded from `https://` sources, such as a charting library on a CDN, work too.
+
+A few things are blocked on purpose:
+
+- Embedded frames, such as a YouTube iframe
+- Form submissions, so a signup box will look right but won't send anything
+- Plugin embeds and base tags
+
+If your report relies on one of these, ask the tool for a version with a static placeholder instead.
+
+## One link per client
+
+Stats are per link, not per person. If you send one link to a client and their finance lead, you will see two opens but not whose they were. Upload once per recipient, for example `q3-results-acme-sam` and `q3-results-acme-priya`. Same file, separate links, separate stats. More on that in [one link per recipient](/blog/one-link-per-recipient-track-who-opened-your-proposal).
+
+## What the stats show
+
+- Total opens
+- Opens in the last 7 days, and the busiest day
+- A 14-day chart of daily opens
+- Recent opens with time, source and country
+
+Link previews and email security scanners sometimes load a link automatically, which can add an open no person made. An open a second or two after you send is often a preview. A later open is more likely a human.
+
+## Limits to know about
+
+- Files can be up to 10MB.
+- Links last 30 days. If a project runs longer, upload the file again and send the new link.
+- A hosted report is a snapshot. If the AI tool updates the report later, upload the new version.
+
+## Try it
+
+Upload your report at [squish.to/upload](/upload). It takes about a minute and needs no account.
+
+## FAQ
+
+**How do I share a Gemini or Copilot report with someone who has no account?**
+Save the report as a single `.html` file, upload it at squish.to/upload, and send the short link. The recipient opens it in any browser with no login.
+
+**Does this work with Grok, Perplexity, ChatGPT and Claude?**
+Yes. It works with any AI tool that can give you a single self-contained HTML file.
+
+**Will JavaScript charts work?**
+Yes, scripts run on the hosted page. Frames, form submissions, plugin embeds and base tags are blocked.
+
+**Can I see when the client opens the report?**
+Yes. Stats show total opens, the last 7 days, the busiest day, a 14-day chart and recent opens with source and country. They are per link, so use one upload per recipient.
+
+**What are the size and time limits?**
+Files can be up to 10MB and links last 30 days.

@@ -1,0 +1,29 @@
+name: Usage export
+
+on:
+  schedule:
+    - cron: "30 4 * * 1-5" # before the Search Console export and the blog research run
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pg8000
+      - name: Export
+        env:
+          USAGE_DATABASE_URL: ${{ secrets.USAGE_DATABASE_URL }}
+        run: python scripts/usage_export.py
+      - name: Commit if changed
+        run: |
+          git config user.name "usage-export"
+          git config user.email "usage-export@users.noreply.github.com"
+          git add data/usage
+          git diff --cached --quiet || (git commit -m "Update usage export [skip ci]" && git push)

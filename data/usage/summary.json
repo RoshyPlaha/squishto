@@ -1,0 +1,31 @@
+{
+  "generated": "2026-11-02T22:43:00+00:00",
+  "window_days": 28,
+  "all_time": {
+    "links": 66,
+    "clicks": 85
+  },
+  "last_28_days": {
+    "links_created": 43,
+    "uploads_created": 8,
+    "distinct_creators": 18,
+    "creators_with_3_plus_links": 7,
+    "creator_countries": 8,
+    "links_clicked_over_1h_after_creation": 14
+  },
+  "uploads_by_content_type": {
+    "text/html": 6,
+    "application/pdf": 1,
+    "image/jpeg": 1
+  },
+  "shortened_destination_hosts": {
+    "open.spotify.com": 7,
+    "drive.google.com": 3,
+    "google.com": 3,
+    "other": 22
+  },
+  "click_sources": {
+    "direct": 69,
+    "other": 1
+  }
+}

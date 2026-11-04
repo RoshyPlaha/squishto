@@ -1,14 +1,14 @@
 {
-  "generated": "2026-11-03T12:10:52+00:00",
+  "generated": "2026-11-04T12:23:39+00:00",
   "window_days": 28,
   "all_time": {
-    "links": 67,
-    "clicks": 86
+    "links": 68,
+    "clicks": 87
   },
   "last_28_days": {
-    "links_created": 42,
+    "links_created": 43,
     "uploads_created": 8,
-    "distinct_creators": 19,
+    "distinct_creators": 20,
     "creators_with_3_plus_links": 6,
     "creator_countries": 9,
     "links_clicked_over_1h_after_creation": 14
@@ -20,12 +20,12 @@
   },
   "shortened_destination_hosts": {
     "open.spotify.com": 7,
-    "drive.google.com": 4,
+    "drive.google.com": 5,
     "google.com": 3,
     "other": 20
   },
   "click_sources": {
-    "direct": 70,
+    "direct": 71,
     "other": 1
   }
 }

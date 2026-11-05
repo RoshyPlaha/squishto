@@ -1,0 +1,60 @@
+---
+title: "How to Shorten a Dropbox Link (and the Setting to Check First)"
+description: "Dropbox share links are long, and they carry a dl=0 tag that decides whether people see a preview or start a download. Here's how to shorten a Dropbox link and keep it working the way you intended."
+date: "2026-11-05"
+category: "How to"
+tags: ["how-to", "guide"]
+ogImage: "/blog/how-to-shorten-a-dropbox-link.svg"
+---
+
+To shorten a Dropbox link, create the shared link in Dropbox, copy it, and paste it into a URL shortener like [squish.to](https://squish.to). You get a short link that opens the same file or folder. Shortening only changes how the link looks. Who can open the file is still decided by your Dropbox sharing settings.
+
+The one thing worth checking before you send it is the end of the link. A Dropbox link ending in `dl=0` opens a preview page, and one ending in `dl=1` starts a download. Your short link keeps whichever one you paste in.
+
+## Step 1: Create the link in Dropbox first
+
+1. In Dropbox, find the file or folder and click **Share**.
+2. Choose how you want to share it. You can invite specific people, or create a link that anyone holding it can use. Recipients can be given **Can view** or **Can edit**, and people who are invited by name may need to sign in to a Dropbox account to open it.
+3. Click **Copy link**.
+
+On paid plans there are extra controls on the link. Dropbox's help pages say you can require a password on a shared link on Professional, Essentials, Standard, Advanced, Business, Business Plus and Enterprise plans, and set an expiry date on Professional and above. Dropbox Basic and Plus have been described as not offering expiry dates. I checked these on Dropbox's help pages on the date of this post, and plan features change, so confirm in your own account which options you see.
+
+## Step 2: Pick preview or download
+
+Most Dropbox links look something like `https://www.dropbox.com/scl/fi/.../file.pdf?rlkey=...&dl=0`. That last bit matters:
+
+- `dl=0` opens Dropbox's preview page. Good for slides, PDFs and photos you want people to look at first.
+- `dl=1` starts a download straight away. Good for a template or a zip file you want people to save.
+
+Change it before you shorten the link, then test it. If a download link doesn't behave for a particular file, Dropbox's community moderators have suggested `raw=1` for some cases. Keep the `rlkey` part of newer links as it is, because it is part of how the link is recognised.
+
+## Step 3: Paste it into squish.to and name it
+
+1. Go to [squish.to](https://squish.to) and paste your Dropbox link.
+2. Choose your own ending, such as `squish.to/menu-2026` or `squish.to/press-kit`. Custom endings run 3 to 30 characters, using letters, numbers and hyphens, and they are case-sensitive, so lowercase is the safe choice.
+3. Share it in a bio, an email, a slide or a printed flyer. Every squish.to link comes with its own [QR code](/blog/qr-codes-for-every-link).
+
+No account is needed, and each link has click stats so you can see whether it is being opened.
+
+## Does shortening change who can see my file?
+
+No. A short link is a signpost pointing at your Dropbox address. It does not add or remove access. If the Dropbox link is restricted or has expired, the short link will lead to Dropbox's own access screen. Squish.to is not connected to your Dropbox account, so it never sees your files or your sharing settings. More detail in [does shortening a link protect a sensitive URL](/blog/does-shortening-a-link-protect-it).
+
+## Small tips for smoother sharing
+
+- **Name the ending after what it is.** `squish.to/press-kit` tells people what they are about to open.
+- **Share a folder when the contents change.** The link stays the same while you add and replace files inside it.
+- **Test in a private window.** If it opens without signing in, anyone with the link can see it.
+- **Print with care.** If you put the link on paper, check the expiry date on the Dropbox side first.
+
+## Quick answers
+
+**Can I change where a short link points if I replace the Dropbox file?** If you replace the file inside the same Dropbox location, the Dropbox link usually stays the same, so the short link keeps working. A brand new Dropbox link needs a new short link.
+
+**What is the difference between dl=0 and dl=1?** `dl=0` shows a preview page and `dl=1` starts a download.
+
+**Is there a cost?** squish.to is free to use, with no account required.
+
+**Is Dropbox the only option?** No. We covered [how to shorten a Google Drive link](/blog/how-to-shorten-a-google-drive-link) too, and the steps are the same idea.
+
+Ready to try it? Paste your Dropbox link into [squish.to](https://squish.to), choose an ending you would be happy to read out loud, and share away.

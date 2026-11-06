@@ -1,20 +1,20 @@
 {
-  "generated": "2026-11-05T12:38:12+00:00",
+  "generated": "2026-11-06T12:21:09+00:00",
   "window_days": 28,
   "all_time": {
     "links": 69,
     "clicks": 91
   },
   "last_28_days": {
-    "links_created": 38,
-    "uploads_created": 3,
+    "links_created": 37,
+    "uploads_created": 2,
     "distinct_creators": 18,
     "creators_with_3_plus_links": 6,
     "creator_countries": 9,
     "links_clicked_over_1h_after_creation": 16
   },
   "uploads_by_content_type": {
-    "text/html": 3
+    "text/html": 2
   },
   "shortened_destination_hosts": {
     "open.spotify.com": 7,
@@ -23,7 +23,7 @@
     "other": 20
   },
   "click_sources": {
-    "direct": 68,
+    "direct": 67,
     "other": 2
   }
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { LiveOpensSection } from "@/components/live-opens-section";
 import { StatsPreview } from "@/components/stats-preview";
 import { SITE_URL } from "@/lib/site";
 
@@ -117,6 +118,12 @@ export default function WasItOpened() {
           Upload a file
         </Link>
       </div>
+
+      <LiveOpensSection title="See the moment it's opened">
+        Send your proposal as a squish.to link and watch the opens arrive. Each
+        one is counted and timestamped, with its source and country, so you
+        know when to follow up.
+      </LiveOpensSection>
 
       <div className="grid grid-cols-1 gap-[10px] md:grid-cols-3 md:gap-4">
         {STEPS.map((step) => (

@@ -63,6 +63,9 @@ export default function Home() {
           squish.to, for your marketing needs
         </span>
         <div className="flex-1" />
+        <Link href="/was-it-opened" className="text-sm text-text-dim">
+          Was it opened?
+        </Link>
         <Link href="/stats" className="text-sm text-text-dim">
           Stats
         </Link>

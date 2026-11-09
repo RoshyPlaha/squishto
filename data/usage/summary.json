@@ -1,29 +1,30 @@
 {
-  "generated": "2026-11-06T12:21:09+00:00",
+  "generated": "2026-11-09T13:12:07+00:00",
   "window_days": 28,
   "all_time": {
-    "links": 69,
-    "clicks": 91
+    "links": 65,
+    "clicks": 135
   },
   "last_28_days": {
-    "links_created": 37,
+    "links_created": 33,
     "uploads_created": 2,
-    "distinct_creators": 18,
-    "creators_with_3_plus_links": 6,
-    "creator_countries": 9,
-    "links_clicked_over_1h_after_creation": 16
+    "distinct_creators": 17,
+    "creators_with_3_plus_links": 5,
+    "creator_countries": 8,
+    "links_clicked_over_1h_after_creation": 15
   },
   "uploads_by_content_type": {
     "text/html": 2
   },
   "shortened_destination_hosts": {
     "open.spotify.com": 7,
-    "drive.google.com": 5,
+    "drive.google.com": 7,
     "google.com": 3,
-    "other": 20
+    "other": 14
   },
   "click_sources": {
-    "direct": 67,
-    "other": 2
+    "direct": 106,
+    "facebook.com": 4,
+    "other": 5
   }
 }

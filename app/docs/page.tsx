@@ -168,6 +168,34 @@ export default function DocsPage() {
       </Card>
 
       <Card>
+        <SectionHeading>Use it from an AI agent</SectionHeading>
+        <p className="m-0 text-base text-text-muted">
+          squish.to runs an MCP server, so agents like Claude Code can create
+          links for you directly. It uses Streamable HTTP at{" "}
+          <span className="font-mono text-text">
+            https://www.squish.to/api/mcp
+          </span>
+          , with no API key. To add it to Claude Code:
+        </p>
+        <Code>{`claude mcp add --transport http squish https://www.squish.to/api/mcp`}</Code>
+        <p className="m-0 text-base text-text-muted">
+          For other MCP clients, add the same URL as a Streamable HTTP
+          server. It has one tool,{" "}
+          <span className="font-mono text-text">create_short_link</span>,
+          which takes a <span className="font-mono">url</span> and an
+          optional <span className="font-mono">customCode</span>, and shares
+          the REST endpoint&apos;s rate limits.
+        </p>
+        <p className="m-0 text-base text-text-muted">
+          Agents reading about squish.to can start at{" "}
+          <Link href="/llms.txt" className="underline">
+            squish.to/llms.txt
+          </Link>
+          , which lists the site and every blog post as Markdown.
+        </p>
+      </Card>
+
+      <Card>
         <SectionHeading>Analytics</SectionHeading>
         <p className="m-0 text-base text-text-muted">
           This API only creates links - it doesn&apos;t return clicks or

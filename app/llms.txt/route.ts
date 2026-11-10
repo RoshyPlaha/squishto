@@ -33,7 +33,7 @@ squish.to turns long URLs into short links such as squish.to/summer-sale, and ho
 
 ## For agents
 
-- [MCP server](${SITE_URL}/api/mcp): Streamable HTTP, no authentication. Tool: create_short_link. Add it to Claude Code with \`claude mcp add --transport http squish ${SITE_URL}/api/mcp\`.
+- [MCP server](${SITE_URL}/api/mcp): Streamable HTTP, no authentication. Tools: create_short_link (make a short link) and get_link_stats (opens for a short code). Add it to Claude Code with \`claude mcp add --transport http squish ${SITE_URL}/api/mcp\`.
 - [API docs](${SITE_URL}/docs): create short links with one POST request, no API key.
 - [OpenAPI spec](${SITE_URL}/openapi.json): machine-readable description of the API.
 

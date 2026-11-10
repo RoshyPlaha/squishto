@@ -63,6 +63,8 @@ Analytics stays exactly where it already is: open [squish.to/stats](https://www.
 
 This endpoint creates links. It doesn't return clicks, referrers, or any of the stats you'd see on a link's dashboard page - that's deliberate, not a gap we haven't gotten to. Keeping the API surface to "create a link" keeps it small, predictable, and unlikely to change shape under you later.
 
+**Update, November 2026:** AI agents can now read a link's stats through the squish.to MCP server's `get_link_stats` tool, so an agent like Claude Code can tell you whether a link has been opened. The REST endpoint still only creates links. Setup is in the [API docs](https://www.squish.to/docs).
+
 ## Machine-readable spec
 
 If you'd rather point a tool at this than read prose, there's an OpenAPI description at [squish.to/openapi.json](https://www.squish.to/openapi.json) - import it into Postman, Insomnia, or whatever generates a client for you. For the full reference - every field, every error code - see the [API docs](https://www.squish.to/docs).

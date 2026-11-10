@@ -1,5 +1,4 @@
 date,links_created,uploads_created,custom_links,distinct_creators,clicks,clicks_over_1h_after_creation
-2026-08-12,0,0,0,0,0,0
 2026-08-13,0,0,0,0,0,0
 2026-08-14,0,0,0,0,0,0
 2026-08-15,0,0,0,0,0,0
@@ -88,4 +87,5 @@ date,links_created,uploads_created,custom_links,distinct_creators,clicks,clicks_
 2026-11-06,2,0,2,2,45,9
 2026-11-07,0,0,0,0,6,6
 2026-11-08,0,0,0,0,0,0
-2026-11-09,0,0,0,0,0,0
+2026-11-09,0,0,0,0,27,27
+2026-11-10,1,0,1,1,1,1

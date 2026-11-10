@@ -17,8 +17,10 @@ export const RESERVED_WORDS = new Set([
   "stats",
   "upload",
   "was-it-opened",
+  "blog-md",
   "sitemap.xml",
   "robots.txt",
+  "llms.txt",
   "favicon.ico",
   // next.js / vercel internals
   "_next",

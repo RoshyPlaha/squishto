@@ -4,6 +4,7 @@ import { createMcpHandler } from "mcp-handler";
 import { z } from "zod";
 import { createShortLinkViaApi } from "@/lib/create-link-service";
 import { getRequestIp, hashIp } from "@/lib/ip";
+import { getPublicLinkStats } from "@/lib/public-link-stats";
 
 // registerTool's callback only receives the tool's own arguments, not the
 // inbound Request — AsyncLocalStorage carries the per-request IP hash across
@@ -58,7 +59,55 @@ const mcpHandler = createMcpHandler((server) => {
       };
     },
   );
-}, { serverInfo: { name: "squish.to", version: "1.0.0" } });
+
+  server.registerTool(
+    "get_link_stats",
+    {
+      title: "Get link stats",
+      description:
+        "Get open stats for a squish.to short link: total opens, opens in the last 7 days, the busiest day, daily opens for the last 14 days, and the 6 most recent opens with their source and country. Stats are per link, not per person.",
+      inputSchema: z.object({
+        shortCode: z
+          .string()
+          .min(1)
+          .max(200)
+          .describe(
+            'The short code, such as "summer-sale" for squish.to/summer-sale. A full squish.to link also works.',
+          ),
+      }),
+    },
+    async ({ shortCode }) => {
+      // Agents often pass the whole link they were given rather than its code.
+      const code = shortCode
+        .trim()
+        .replace(/^(https?:\/\/)?(www\.)?squish\.to\//i, "")
+        .replace(/[/?#].*$/, "");
+
+      let stats;
+      try {
+        stats = await getPublicLinkStats(code);
+      } catch (error) {
+        // Keep database errors (and their SQL) out of the agent's reply.
+        console.error("get_link_stats failed", error);
+        return {
+          content: [{ type: "text", text: "Could not load stats, please try again later" }],
+          isError: true,
+        };
+      }
+
+      if (!stats) {
+        return {
+          content: [{ type: "text", text: `No squish.to link found for "${code}"` }],
+          isError: true,
+        };
+      }
+
+      return {
+        content: [{ type: "text", text: JSON.stringify(stats, null, 2) }],
+      };
+    },
+  );
+}, { serverInfo: { name: "squish.to", version: "1.1.0" } });
 
 async function handler(request: NextRequest) {
   const ip = getRequestIp(request);

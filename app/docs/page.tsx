@@ -168,15 +168,55 @@ export default function DocsPage() {
       </Card>
 
       <Card>
+        <SectionHeading>Use it from an AI agent</SectionHeading>
+        <p className="m-0 text-base text-text-muted">
+          squish.to runs an MCP server, so agents like Claude Code can create
+          links for you directly. It uses Streamable HTTP at{" "}
+          <span className="font-mono text-text">
+            https://www.squish.to/api/mcp
+          </span>
+          , with no API key. To add it to Claude Code:
+        </p>
+        <Code>{`claude mcp add --transport http squish https://www.squish.to/api/mcp`}</Code>
+        <p className="m-0 text-base text-text-muted">
+          For other MCP clients, add the same URL as a Streamable HTTP
+          server. It has two tools:
+        </p>
+        <ul className="m-0 flex flex-col gap-2 pl-5 text-base text-text-muted">
+          <li>
+            <span className="font-mono text-text">create_short_link</span>{" "}
+            takes a <span className="font-mono">url</span> and an optional{" "}
+            <span className="font-mono">customCode</span>, and shares the REST
+            endpoint&apos;s rate limits.
+          </li>
+          <li>
+            <span className="font-mono text-text">get_link_stats</span> takes a{" "}
+            <span className="font-mono">shortCode</span> (or a full squish.to
+            link) and returns the same opens you&apos;d see on its stats page,
+            so an agent can tell you whether a link has been opened.
+          </li>
+        </ul>
+        <p className="m-0 text-base text-text-muted">
+          Agents reading about squish.to can start at{" "}
+          <Link href="/llms.txt" className="underline">
+            squish.to/llms.txt
+          </Link>
+          , which lists the site and every blog post as Markdown.
+        </p>
+      </Card>
+
+      <Card>
         <SectionHeading>Analytics</SectionHeading>
         <p className="m-0 text-base text-text-muted">
-          This API only creates links - it doesn&apos;t return clicks or
-          stats. That stays on the dashboard: open{" "}
+          The REST API only creates links - it doesn&apos;t return clicks or
+          stats. To see them, open{" "}
           <Link href="/stats" className="underline">
             squish.to/stats
           </Link>{" "}
           and enter your short code to see opens, referrers, and countries for
-          any link, including ones created through the API.
+          any link, including ones created through the API. Agents can read
+          the same stats with the MCP server&apos;s{" "}
+          <span className="font-mono">get_link_stats</span> tool.
         </p>
         <p className="m-0 text-base text-text-muted">
           Want a machine-readable spec instead of this page? See{" "}

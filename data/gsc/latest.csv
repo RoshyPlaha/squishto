@@ -1,11 +1,10 @@
 query,page,clicks,impressions,ctr,position
-google drive google url shortener integration,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,64,0,59.0
-google drive google url shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,58,0,67.5
-google drive url shortener integration,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,58,0,54.0
-google drive to google url shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,56,0,69.9
+google drive google url shortener integration,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,61,0,58.8
+google drive url shortener integration,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,61,0,53.6
+google drive google url shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,56,0,67.5
+google drive to google url shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,56,0,69.8
 url shortener api,https://www.squish.to/blog/api-driven-url-shortener-and-analytics,0,10,0,95.3
 url shortener with api,https://www.squish.to/blog/api-driven-url-shortener-and-analytics,0,4,0,96.8
-drive url shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,3,0,59
 if i open a spotify link will they know,https://www.squish.to/blog/check-if-someone-on-spotify-clicked-on-your-song,0,3,0,8
 ms teams url shortener,https://www.squish.to/blog/how-to-shorten-a-microsoft-teams-link,0,3,0,44.7
 shorten google doc link,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,3,0,66
@@ -16,6 +15,7 @@ how to track if a proposal was opened,https://www.squish.to/blog/one-link-per-re
 if i open someone's spotify link will they know,https://www.squish.to/blog/check-if-someone-on-spotify-clicked-on-your-song,0,2,0,9.5
 link shortening api,https://www.squish.to/blog/api-driven-url-shortener-and-analytics,0,2,0,94.5
 share claude artifact as link,https://www.squish.to/blog/share-claude-chatgpt-artifact-as-a-link,0,2,0,90
+shorten dropbox links,https://www.squish.to/blog/how-to-shorten-a-dropbox-link,0,2,0,91.5
 shorten google,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,2,0,75.5
 shortener api,https://www.squish.to/blog/api-driven-url-shortener-and-analytics,0,2,0,81
 как сократить ссылку на гугл диск,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,2,0,35.5
@@ -24,12 +24,12 @@ google doc link shortener,https://www.squish.to/blog/how-to-shorten-a-google-dri
 google docs link shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,1,0,65
 google docs short link,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,1,0,63
 google drive link shortener,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,1,0,67
+google drive link shortener free,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,1,0,47
 how to shorten a link on google docs,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,1,0,54
 how to shorten teams meeting link,https://www.squish.to/blog/how-to-shorten-a-microsoft-teams-link,0,1,0,14
 if i click on someone's spotify link will they know,https://www.squish.to/blog/check-if-someone-on-spotify-clicked-on-your-song,0,1,0,8
 link shortener api,https://www.squish.to/blog/api-driven-url-shortener-and-analytics,0,1,0,96
 share chatgpt artifact,https://www.squish.to/blog/share-claude-chatgpt-artifact-as-a-link,0,1,0,93
-shorten dropbox links,https://www.squish.to/blog/how-to-shorten-a-dropbox-link,0,1,0,91
 shorten google docs link,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,1,0,98
 shorten google drive file links in a folder with bitly,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,1,0,35
 shorten google drive link,https://www.squish.to/blog/how-to-shorten-a-google-drive-link,0,1,0,65

@@ -1,9 +1,9 @@
 {
-  "generated": "2026-11-10T12:51:55+00:00",
+  "generated": "2026-11-11T12:00:29+00:00",
   "window_days": 28,
   "all_time": {
     "links": 66,
-    "clicks": 163
+    "clicks": 167
   },
   "last_28_days": {
     "links_created": 33,
@@ -23,7 +23,7 @@
     "other": 14
   },
   "click_sources": {
-    "direct": 128,
+    "direct": 132,
     "facebook.com": 4,
     "other": 5
   }

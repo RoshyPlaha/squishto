@@ -3,6 +3,7 @@
 import { useRef, useState, FormEvent } from "react";
 import Link from "next/link";
 import Script from "next/script";
+import { KineticHero } from "@/components/kinetic-hero";
 import { Toast } from "@/components/toast";
 import { QrCode } from "@/components/qr-code";
 import { getTurnstileToken } from "@/lib/turnstile-client";
@@ -174,19 +175,7 @@ export function HomeForm() {
           strategy="afterInteractive"
         />
       )}
-      <div className="overflow-hidden rounded-[22px] bg-brand p-[22px_20px_24px] text-ink md:rounded-[26px] md:p-[44px_40px_34px]">
-        <div className="flex items-end justify-between gap-5">
-          <h1 className="m-0 origin-bottom-left scale-x-90 pb-[0.13em] font-display text-[clamp(4rem,1.3rem+19vw,16.75rem)] leading-[0.76] uppercase">
-            Squish
-          </h1>
-          <span className="mb-6 hidden shrink-0 whitespace-nowrap font-display text-2xl uppercase md:mb-[26px] md:block md:text-[26px]">
-            Free · No account
-          </span>
-        </div>
-        <p className="mt-1 max-w-[24ch] text-[25px] leading-[1.12] font-semibold tracking-tight text-wrap-pretty md:mt-0 md:text-[40px] md:leading-[1.08]">
-          Upload any file or URL. Make links as small as possible. Track when they are opened.
-        </p>
-      </div>
+      <KineticHero />
 
       <div className="grid grid-cols-1 gap-[10px] md:grid-cols-[1.05fr_1fr] md:gap-4">
         <form

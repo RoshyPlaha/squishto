@@ -6,19 +6,12 @@ const WORDS = [
   { className: styles.w4, top: "See it", bottom: "open." },
 ];
 
-const TICKER = [
-  { link: "squish.to/proposal", opened: "was opened in London, 2 min ago" },
-  { link: "squish.to/menu", opened: "was opened in Dublin, 9 min ago" },
-  { link: "squish.to/summer-sale", opened: "was opened in Berlin, just now" },
-  { link: "squish.to/pitch-deck", opened: "was opened in New York, 1 hr ago" },
-];
-
 export function KineticHero() {
   return (
     <div
       className={`${styles.hero} overflow-hidden rounded-[22px] bg-brand text-ink md:rounded-[26px]`}
     >
-      <div className="flex items-center gap-8 p-[22px_20px_26px] md:p-[40px_40px_36px]">
+      <div className="flex items-center gap-8 p-[22px_20px_26px] md:p-10">
         <div className="flex min-w-0 flex-col gap-5 md:gap-6">
           <span className="font-display text-xl uppercase md:text-[26px]">
             Free · No account
@@ -82,21 +75,6 @@ export function KineticHero() {
               </span>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* The track is absolutely positioned so its long line of text never
-          widens the page. */}
-      <div aria-hidden="true" className="relative h-[52px] overflow-hidden bg-ink md:h-[60px]">
-        <div className={`${styles.track} absolute inset-y-0 left-0 flex items-center text-[15px] font-medium whitespace-nowrap text-border md:text-[17px]`}>
-          {[...TICKER, ...TICKER].map((item, i) => (
-            <span key={i} className="flex items-center gap-2.5 pr-10">
-              <span className="font-bold text-brand">{item.link}</span>
-              {item.opened}
-              {/* A watermelon seed between items. */}
-              <span className="ml-5 h-[11px] w-[7px] rotate-[25deg] rounded-full bg-brand" />
-            </span>
-          ))}
         </div>
       </div>
     </div>

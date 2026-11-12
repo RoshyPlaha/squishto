@@ -27,9 +27,6 @@
 .dot {
   animation: dot 1.4s ease-out infinite;
 }
-.track {
-  animation: track 24s linear infinite;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .hero * {
@@ -79,8 +76,4 @@
 @keyframes dot {
   0% { box-shadow: 0 0 0 0 rgba(30, 138, 110, 0.55); }
   100% { box-shadow: 0 0 0 10px rgba(30, 138, 110, 0); }
-}
-@keyframes track {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }

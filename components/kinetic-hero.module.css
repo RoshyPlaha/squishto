@@ -1,34 +1,28 @@
-/* One 10s loop in four beats: "Drop it." (0-24%), "Squish it." (25-49%),
-   "Send it." (50-74%) and "See it open." (75-99%), each with its own visual.
-   The static styles are the frame people who prefer reduced motion see. */
+/* One 7.5s loop in three beats: "Squish it." (0-33%), "Send it." (33-66%)
+   and "See it open." (66-99%), each with its own visual. The static styles
+   are the frame people who prefer reduced motion see. */
 
 .word {
   opacity: 0;
 }
-.w1 { animation: w1 10s ease-out infinite; }
 .w2 {
   opacity: 1;
   transform-origin: 0% 100%;
-  animation: w2 10s ease-out infinite;
+  animation: w2 7.5s ease-out infinite;
 }
-.w3 { animation: w3 10s ease-out infinite; }
-.w4 { animation: w4 10s ease-out infinite; }
+.w3 { animation: w3 7.5s ease-out infinite; }
+.w4 { animation: w4 7.5s ease-out infinite; }
 
-.v1 {
-  opacity: 0;
-  transform-origin: 50% 100%;
-  animation: v1 10s ease-out infinite;
-}
 .v2 {
   opacity: 0;
-  animation: v2 10s ease-out infinite;
+  animation: v2 7.5s ease-out infinite;
 }
 .v3 {
   opacity: 0;
-  animation: v3 10s ease-in-out infinite;
+  animation: v3 7.5s ease-in-out infinite;
 }
 .v4 {
-  animation: v4 10s ease-out infinite;
+  animation: v4 7.5s ease-out infinite;
 }
 .dot {
   animation: dot 1.4s ease-out infinite;
@@ -43,52 +37,43 @@
   }
 }
 
-@keyframes w1 {
-  0% { opacity: 0; transform: translateY(40px); }
-  3%, 21% { opacity: 1; transform: translateY(0); }
-  24%, 100% { opacity: 0; transform: translateY(-40px); }
-}
 @keyframes w2 {
-  0%, 24% { opacity: 0; transform: translateY(40px) scale(1, 1); }
-  28% { opacity: 1; transform: translateY(0) scale(1, 1); }
-  32% { opacity: 1; transform: translateY(0) scale(1.12, 0.55); }
-  36% { opacity: 1; transform: translateY(0) scale(0.96, 1.06); }
-  39%, 46% { opacity: 1; transform: translateY(0) scale(1, 1); }
-  49%, 100% { opacity: 0; transform: translateY(-40px) scale(1, 1); }
+  /* Starts visible so the hero is never blank on page load; it slides back
+     in at the end of the loop as "See it open." leaves. */
+  0%, 4% { opacity: 1; transform: translateY(0) scale(1, 1); }
+  9% { opacity: 1; transform: translateY(0) scale(1.12, 0.55); }
+  14% { opacity: 1; transform: translateY(0) scale(0.96, 1.06); }
+  18%, 30% { opacity: 1; transform: translateY(0) scale(1, 1); }
+  33%, 96% { opacity: 0; transform: translateY(-40px) scale(1, 1); }
+  97% { opacity: 0; transform: translateY(40px) scale(1, 1); }
+  100% { opacity: 1; transform: translateY(0) scale(1, 1); }
 }
 @keyframes w3 {
-  0%, 49% { opacity: 0; transform: translateY(40px); }
-  53%, 71% { opacity: 1; transform: translateY(0); }
-  74%, 100% { opacity: 0; transform: translateY(-40px); }
+  0%, 33% { opacity: 0; transform: translateY(40px); }
+  37%, 63% { opacity: 1; transform: translateY(0); }
+  66%, 100% { opacity: 0; transform: translateY(-40px); }
 }
 @keyframes w4 {
-  0%, 74% { opacity: 0; transform: translateY(40px); }
-  78%, 96% { opacity: 1; transform: translateY(0); }
+  0%, 66% { opacity: 0; transform: translateY(40px); }
+  70%, 96% { opacity: 1; transform: translateY(0); }
   99%, 100% { opacity: 0; transform: translateY(-40px); }
 }
 
-@keyframes v1 {
-  0% { opacity: 0; transform: translateY(-260px) rotate(-8deg); }
-  8% { opacity: 1; transform: translateY(0) rotate(4deg); }
-  11% { opacity: 1; transform: translateY(-14px) rotate(2deg); }
-  14%, 21% { opacity: 1; transform: translateY(0) rotate(0deg); }
-  24%, 100% { opacity: 0; transform: translateY(0) rotate(0deg); }
-}
 @keyframes v2 {
-  0%, 26% { opacity: 0; transform: scale(0.3); }
-  31% { opacity: 1; transform: scale(1.08); }
-  34%, 46% { opacity: 1; transform: scale(1); }
-  49%, 100% { opacity: 0; transform: scale(1); }
+  0%, 2% { opacity: 0; transform: scale(0.3); }
+  7% { opacity: 1; transform: scale(1.08); }
+  11%, 30% { opacity: 1; transform: scale(1); }
+  33%, 100% { opacity: 0; transform: scale(1); }
 }
 @keyframes v3 {
-  0%, 49% { opacity: 0; transform: translate(-40px, 40px); }
-  53% { opacity: 1; transform: translate(0, 0); }
-  66% { opacity: 1; transform: translate(40px, -40px); }
-  73%, 100% { opacity: 0; transform: translate(150px, -150px); }
+  0%, 33% { opacity: 0; transform: translate(-40px, 40px); }
+  37% { opacity: 1; transform: translate(0, 0); }
+  54% { opacity: 1; transform: translate(40px, -40px); }
+  63%, 100% { opacity: 0; transform: translate(150px, -150px); }
 }
 @keyframes v4 {
-  0%, 75% { opacity: 0; transform: translateY(30px); }
-  79%, 96% { opacity: 1; transform: translateY(0); }
+  0%, 66% { opacity: 0; transform: translateY(30px); }
+  70%, 96% { opacity: 1; transform: translateY(0); }
   99%, 100% { opacity: 0; transform: translateY(0); }
 }
 @keyframes dot {

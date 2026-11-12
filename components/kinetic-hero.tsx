@@ -1,7 +1,6 @@
 import styles from "./kinetic-hero.module.css";
 
 const WORDS = [
-  { className: styles.w1, top: "Drop", bottom: "it." },
   { className: styles.w2, top: "Squish", bottom: "it." },
   { className: styles.w3, top: "Send", bottom: "it." },
   { className: styles.w4, top: "See it", bottom: "open." },
@@ -47,18 +46,6 @@ export function KineticHero() {
 
         <div aria-hidden="true" className="hidden flex-1 justify-center md:flex">
           <div className="relative h-[280px] w-[240px] shrink-0 xl:scale-125">
-            <div
-              className={`${styles.v1} absolute top-[30px] left-[45px] flex h-[180px] w-[150px] flex-col justify-between rounded-[18px] bg-surface p-4 shadow-[0_18px_40px_rgba(17,17,20,0.22)]`}
-            >
-              <div className="flex h-14 w-[46px] items-end justify-center rounded-lg bg-ink pb-2 font-mono text-[11px] font-medium text-brand">
-                PDF
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-[15px] font-bold">Proposal.pdf</span>
-                <span className="font-mono text-[11px] text-text-dim">2.4 MB</span>
-              </div>
-            </div>
-
             <div
               className={`${styles.v2} absolute top-[110px] left-[5px] flex h-[58px] w-[230px] items-center justify-center rounded-full bg-ink font-mono text-[15px] font-medium text-white`}
             >

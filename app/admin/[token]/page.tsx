@@ -44,6 +44,41 @@ export default async function AdminPage({
         All links ({totalCount})
       </h1>
 
+      {page === 1 && (
+        <div className="flex flex-col rounded-[22px] bg-surface p-[22px]">
+          <h2 className="pb-2.5 font-mono text-xs tracking-wide text-text-dim uppercase">
+            Feedback from the stats page ({recentFeedback.length})
+          </h2>
+          {recentFeedback.length === 0 && (
+            <p className="m-0 border-t border-border pt-3 text-sm text-text-dim">
+              No feedback yet.
+            </p>
+          )}
+          {recentFeedback.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col gap-1 border-t border-border py-3 md:flex-row md:gap-4"
+            >
+              <span className="w-[160px] shrink-0 text-xs whitespace-nowrap text-text-dim">
+                {formatDate(item.createdAt)}
+                {item.country ? ` · ${item.country}` : ""}
+              </span>
+              <span className="flex-1 text-sm break-words text-text">
+                {item.message}
+              </span>
+              {item.shortCode && (
+                <Link
+                  href={`/stats?code=${item.shortCode}`}
+                  className="text-sm text-text-muted underline"
+                >
+                  {item.shortCode}
+                </Link>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="overflow-x-auto rounded-[22px] bg-surface">
         <table className="w-full min-w-[800px] text-left text-sm">
           <thead>
@@ -169,36 +204,6 @@ export default async function AdminPage({
           </Link>
         )}
       </div>
-
-      {recentFeedback.length > 0 && (
-        <div className="flex flex-col rounded-[22px] bg-surface p-[22px]">
-          <h2 className="pb-2.5 font-mono text-xs tracking-wide text-text-dim uppercase">
-            Feedback ({recentFeedback.length})
-          </h2>
-          {recentFeedback.map((item) => (
-            <div
-              key={item.id}
-              className="flex flex-col gap-1 border-t border-border py-3 md:flex-row md:gap-4"
-            >
-              <span className="w-[160px] shrink-0 text-xs whitespace-nowrap text-text-dim">
-                {formatDate(item.createdAt)}
-                {item.country ? ` · ${item.country}` : ""}
-              </span>
-              <span className="flex-1 text-sm break-words text-text">
-                {item.message}
-              </span>
-              {item.shortCode && (
-                <Link
-                  href={`/stats?code=${item.shortCode}`}
-                  className="text-sm text-text-muted underline"
-                >
-                  {item.shortCode}
-                </Link>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
     </main>
   );
 }

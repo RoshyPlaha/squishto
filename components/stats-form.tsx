@@ -209,16 +209,29 @@ export function StatsForm({
                   <div
                     key={d.date}
                     title={`${d.date}: ${d.count}`}
-                    className={
-                      "flex-1 rounded-md " +
-                      (d.count >= peakThreshold && d.count > 0
-                        ? "bg-brand"
-                        : "bg-accent-soft")
-                    }
-                    style={{
-                      height: `${Math.max(4, (d.count / maxDaily) * 100)}%`,
-                    }}
-                  />
+                    className="flex h-full min-w-0 flex-1 flex-col items-center justify-end gap-1"
+                  >
+                    <span
+                      className={
+                        "font-mono text-[10px] leading-[14px] whitespace-nowrap md:text-[11px] " +
+                        (d.count > 0 ? "text-text-muted" : "text-text-faint")
+                      }
+                    >
+                      {d.count.toLocaleString()}
+                    </span>
+                    <div
+                      className={
+                        "w-full rounded-md " +
+                        (d.count >= peakThreshold && d.count > 0
+                          ? "bg-brand"
+                          : "bg-accent-soft")
+                      }
+                      // 18px leaves room for the count above the tallest bar.
+                      style={{
+                        height: `max(4px, calc((100% - 18px) * ${d.count / maxDaily}))`,
+                      }}
+                    />
+                  </div>
                 ))}
               </div>
               <div className="flex justify-between">

@@ -65,7 +65,7 @@ export default function Home() {
 
       <StatsPreview />
 
-      <div className="flex items-center gap-6 px-[26px] pt-3.5 pb-1.5">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 px-[26px] pt-3.5 pb-1.5">
         <span className="text-xs tracking-wide text-text-dim">
           squish.to, for your marketing needs
         </span>
